@@ -11,16 +11,20 @@ import SwiftData
 @Model
 class Session: Identifiable {
     @Attribute(.unique) var id: String
-    var category: Category
+    var category: Category?
     var startDate: Date
     var stopDate: Date?
-    var timeGoal: Float
+    var timeGoal: Double
     
-    init(category: Category, startDate: Date, stopDate: Date? = nil, timeGoal: Float) {
+    init(category: Category, startDate: Date, stopDate: Date? = nil, timeGoal: Double) {
         self.id = UUID().uuidString
-        self.category = category
         self.startDate = startDate
         self.stopDate = stopDate
         self.timeGoal = timeGoal
+        setCategory(category)
+    }
+    
+    func setCategory(_ category: Category) {
+        self.category = category
     }
 }

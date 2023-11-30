@@ -19,20 +19,21 @@ struct Start: View {
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
                 
-                Text(isClicked ? "00:00" : "00 00")
+                Text("00:00")
                     .font(Font.custom("IntegralCF-Regular", size: 190))
                     .foregroundColor(.gray.opacity(0.4))
                     .fixedSize(horizontal: true, vertical: false)
                     .rotationEffect(Angle(degrees: -90))
                     .padding(.leading, -40)
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.black.opacity(0.0), Color.black.opacity(0.9), Color.black.opacity(0.9), Color.black.opacity(0.0)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(width: UIScreen.main.bounds.width, height: 500)
 
                 if (!isClicked) {
-                    LinearGradient(
-                                gradient: Gradient(colors: [Color.black.opacity(0.0), Color.black.opacity(0.9), Color.black.opacity(0.9), Color.black.opacity(0.0)]),
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                    .frame(width: UIScreen.main.bounds.width, height: 500)
                     Text("radical.")
                         .font(Font.custom("HelveticaNeue", size: 38))
                         .foregroundColor(.white)

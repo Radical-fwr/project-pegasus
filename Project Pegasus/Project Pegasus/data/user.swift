@@ -10,11 +10,10 @@ import SwiftData
 
 @Model
 class User: Identifiable {
-    var nome: String
-    @Attribute(.externalStorage) var avatar: Data?
+    @Attribute(.unique) var nome: String
+    @Attribute(.externalStorage) var imageData: Data?
     
-    init(nome: String, avatar: Data? = nil) {
+    init(nome: String) {
         self.nome = nome
-        self.avatar = avatar
     }
 }
