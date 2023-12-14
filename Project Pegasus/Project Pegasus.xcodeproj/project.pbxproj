@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D90582B1F9D51002D61A0 /* TopBar.swift */; };
+		1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */; };
+		1613C7D72B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */; };
+		1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */; };
 		1632847B2AFD4BF200D94C32 /* IntegralCF-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */; };
 		163284802AFD592F00D94C32 /* category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632847F2AFD592F00D94C32 /* category.swift */; };
 		163284822AFE84B900D94C32 /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163284812AFE84B900D94C32 /* AddCategory.swift */; };
+		16547B5D2B2227C100C2E67B /* timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16547B5C2B2227C100C2E67B /* timer.swift */; };
 		16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC22B03BA6E00E57C65 /* Profile.swift */; };
 		16A67EC52B03BD6B00E57C65 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC42B03BD6B00E57C65 /* user.swift */; };
 		16A67EC72B03BE3D00E57C65 /* session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC62B03BE3D00E57C65 /* session.swift */; };
@@ -21,13 +26,30 @@
 		16A9E0422AED525D000C8EA8 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0412AED525D000C8EA8 /* Start.swift */; };
 		16A9E0802AED67D1000C8EA8 /* IntegralCF-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */; };
 		16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */; };
+		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
+		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		160D90682B1FD215002D61A0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		160D90582B1F9D51002D61A0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Regular.otf"; sourceTree = "<group>"; };
 		1632847F2AFD592F00D94C32 /* category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = category.swift; sourceTree = "<group>"; };
 		163284812AFE84B900D94C32 /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
+		16547B5C2B2227C100C2E67B /* timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timer.swift; sourceTree = "<group>"; };
 		16A67EC22B03BA6E00E57C65 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		16A67EC42B03BD6B00E57C65 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		16A67EC62B03BE3D00E57C65 /* session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = session.swift; sourceTree = "<group>"; };
@@ -41,7 +63,9 @@
 		16A9E07C2AED61E7000C8EA8 /* Project-Pegasus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-Pegasus-Info.plist"; sourceTree = SOURCE_ROOT; };
 		16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Bold.ttf"; sourceTree = "<group>"; };
 		16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStyle.swift; sourceTree = "<group>"; };
+		16D6AC812B2B223100F66DB8 /* RunningTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimer.swift; sourceTree = "<group>"; };
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,12 +73,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */,
+				1613C7D72B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic in Frameworks */,
+				1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		160D90692B1FD247002D61A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1632847C2AFD549E00D94C32 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -65,11 +99,21 @@
 			path = data;
 			sourceTree = "<group>";
 		};
+		16547B5B2B213FE500C2E67B /* timer */ = {
+			isa = PBXGroup;
+			children = (
+				16547B5C2B2227C100C2E67B /* timer.swift */,
+			);
+			path = timer;
+			sourceTree = "<group>";
+		};
 		16A67EC92B0688B900E57C65 /* pages */ = {
 			isa = PBXGroup;
 			children = (
 				163284812AFE84B900D94C32 /* AddCategory.swift */,
 				16A67EC22B03BA6E00E57C65 /* Profile.swift */,
+				16EAB2732B18C99B00E2249D /* Home.swift */,
+				16D6AC812B2B223100F66DB8 /* RunningTimer.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -79,6 +123,7 @@
 			children = (
 				16A9E0302AED51AB000C8EA8 /* Project Pegasus */,
 				16A9E02F2AED51AB000C8EA8 /* Products */,
+				160D90692B1FD247002D61A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +138,7 @@
 		16A9E0302AED51AB000C8EA8 /* Project Pegasus */ = {
 			isa = PBXGroup;
 			children = (
+				16547B5B2B213FE500C2E67B /* timer */,
 				16A67EC92B0688B900E57C65 /* pages */,
 				16A9E03F2AED51F4000C8EA8 /* components */,
 				1632847C2AFD549E00D94C32 /* data */,
@@ -121,6 +167,7 @@
 				16A9E0412AED525D000C8EA8 /* Start.swift */,
 				16A67ECA2B06895900E57C65 /* CategoryWStats.swift */,
 				16EAB2712B1646D500E2249D /* CircularProgressBar.swift */,
+				160D90582B1F9D51002D61A0 /* TopBar.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -152,12 +199,18 @@
 				16A9E02A2AED51AB000C8EA8 /* Sources */,
 				16A9E02B2AED51AB000C8EA8 /* Frameworks */,
 				16A9E02C2AED51AB000C8EA8 /* Resources */,
+				160D90682B1FD215002D61A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Project Pegasus";
+			packageProductDependencies = (
+				1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */,
+				1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */,
+				1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */,
+			);
 			productName = "Project Pegasus";
 			productReference = 16A9E02E2AED51AB000C8EA8 /* Project Pegasus.app */;
 			productType = "com.apple.product-type.application";
@@ -186,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 16A9E0252AED51AA000C8EA8;
+			packageReferences = (
+				1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+			);
 			productRefGroup = 16A9E02F2AED51AB000C8EA8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -216,14 +272,18 @@
 			files = (
 				16A9E0342AED51AB000C8EA8 /* ContentView.swift in Sources */,
 				16A67EC72B03BE3D00E57C65 /* session.swift in Sources */,
+				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
 				16A9E0422AED525D000C8EA8 /* Start.swift in Sources */,
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
+				16547B5D2B2227C100C2E67B /* timer.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
+				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
 				16A9E0322AED51AB000C8EA8 /* Project_PegasusApp.swift in Sources */,
 				16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */,
+				16EAB2742B18C99B00E2249D /* Home.swift in Sources */,
 				163284822AFE84B900D94C32 /* AddCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +436,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Project-Pegasus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -408,6 +471,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Project-Pegasus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -436,6 +502,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Dynamic";
+		};
+		1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Static";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 16A9E0262AED51AA000C8EA8 /* Project object */;
 }
