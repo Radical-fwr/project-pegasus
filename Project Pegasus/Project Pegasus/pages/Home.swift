@@ -21,6 +21,14 @@ struct Home: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                
+                NavigationLink(destination: RunningTimer(), isActive: $timerIsActive) {
+                    EmptyView()
+                }
+                .hidden()
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                
                 Color.black.edgesIgnoringSafeArea(.all)
 
                 VStack {
@@ -79,6 +87,11 @@ struct Home: View {
                                 .font(Font.custom("HelveticaNeue", size: 35))
                                 .fontWeight(.bold)
                                 .tag(Double?.none)
+                        Text("ss")
+                            .foregroundColor(.white)
+                            .font(Font.custom("HelveticaNeue", size: 35))
+                            .fontWeight(.bold)
+                            .tag(Double?.some(Double(0.5)))
                             ForEach(1...59, id: \.self) { minute in
                                 Text(String(format: "%02d", minute))
                                     .foregroundColor(.white)
@@ -97,12 +110,8 @@ struct Home: View {
                     .padding()
                     Spacer()
                     HStack {
-                        Text("tempo rimanente: \(timerManager.remainingTime)")
                         Spacer()
-                        NavigationLink(destination: RunningTimer(), isActive: $timerIsActive) {
-                            EmptyView()
-                        }
-                        .hidden()
+                        
                         Button(action: {
                             let newSession = Session(
                                 category: selectedCategory,
@@ -118,11 +127,10 @@ struct Home: View {
                             }
                             timerManager.startTimer(
                                 timeInterval: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60),
-                                identifier: newSession.id,
+                                sessionIdentifier: newSession.id,
                                 contentTitle: "Test",
                                 contentBody: "Test"
                             )
-                            timerManager.startUpdatingRemainingTime()
                             timerIsActive = true
                         }) {
                             Text("Start")
@@ -147,6 +155,15 @@ struct Home: View {
         }
         .background(.black)
         .foregroundColor(.white)
+        .onAppear() {
+            
+            if timerManager.checkActiveTimerExistenceSync() {
+                let delayInSeconds: Double = 0.01
+                DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
+                    timerIsActive = true
+                }
+            }
+        }
     }
 }
 

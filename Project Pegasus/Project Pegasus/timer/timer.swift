@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 class TimerManager: ObservableObject {
     
     private let center = UNUserNotificationCenter.current()
     private var timer: Timer?
     @Published var remainingTime: Double = 0.0
-    
+    var identifier: String?
+
     init(){}
     
     func requestNotificationPermission() {
@@ -23,16 +25,17 @@ class TimerManager: ObservableObject {
         }
     }
     
-    func startTimer(timeInterval: Double, identifier: String, contentTitle: String, contentBody: String) {
+    func startTimer(timeInterval: Double, sessionIdentifier: String, contentTitle: String, contentBody: String) {
         let content = UNMutableNotificationContent()
         content.title = contentTitle
         content.body = contentBody
         content.userInfo = [
             "isTimer": true,
-            "expire": Date().addingTimeInterval(timeInterval)
+            "expire": Date().addingTimeInterval(timeInterval),
+            "sessionIdentifier": sessionIdentifier
         ]
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (timeInterval), repeats: false)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: sessionIdentifier, content: content, trigger: trigger)
         center.add(request) { (error) in
            if error != nil {
               print("ERRORE NEL SETTARE NOTIFICA")
@@ -53,7 +56,27 @@ class TimerManager: ObservableObject {
         }
     }
     
-    private func getFirstPendingTimerIdentifier(completion: @escaping (String?) -> Void) {
+    func checkActiveTimerExistenceSync() -> Bool {
+        var result: Bool = false
+        let semaphore = DispatchSemaphore(value: 0)
+
+        center.getPendingNotificationRequests { requests in
+            let activeTimerExists = requests.contains { request in
+                if let userInfo = request.content.userInfo as? [String: Any],
+                   let isTimer = userInfo["isTimer"] as? Bool, isTimer {
+                    return true
+                }
+                return false
+            }
+            result = activeTimerExists
+            semaphore.signal()
+        }
+
+        _ = semaphore.wait(timeout: .distantFuture)
+        return result
+    }
+    
+    func getFirstPendingTimerIdentifier(completion: @escaping (String?) -> Void) {
         center.getPendingNotificationRequests { requests in
             if let timerIdentifier = requests.first(where: { request in
                 if let userInfo = request.content.userInfo as? [String: Any],
@@ -91,6 +114,8 @@ class TimerManager: ObservableObject {
                 }
                 return
             }
+            
+            self.identifier = identifier
 
             // Get the time remaining for the active timer
             self.center.getPendingNotificationRequests { requests in
@@ -102,6 +127,7 @@ class TimerManager: ObservableObject {
                     }
 
                     DispatchQueue.main.sync{
+                        
                         self.remainingTime = expire.timeIntervalSinceNow
                     }
                 }

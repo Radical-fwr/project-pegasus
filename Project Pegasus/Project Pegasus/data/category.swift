@@ -19,11 +19,11 @@ class Category: Identifiable {
             var progressList: [Double] = []
             var result: Double = 0
             for session in sessions! {
-                let sessionDuration: Double = session.stopDate!.timeIntervalSince(session.startDate)
-                print("sessionDuration: \(sessionDuration)")
-                let progress: Double = sessionDuration / session.timeGoal
-                print("progress: \(progress)")
-                progressList.append(progress)
+                if let stopDate = session.stopDate {
+                    let sessionDuration: Double = stopDate.timeIntervalSince(session.startDate)
+                    let progress: Double = sessionDuration / session.timeGoal
+                    progressList.append(progress)
+                }
             }
             result = progressList.reduce(0, +) / Double(progressList.count)
             if result.isNaN {

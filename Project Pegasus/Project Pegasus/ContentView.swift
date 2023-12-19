@@ -11,9 +11,11 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var context
     @Query let categories: [Category]
+    @StateObject var timerManager = TimerManager()
     
     var body: some View {
         VStack {
+            
             Home().onAppear {
                 var isFirstLoad: Bool {
                     get {
@@ -45,18 +47,18 @@ struct ContentView: View {
                     
                     print(categories.count)
                     
-                    let twoHoursAgo: Date = Date().addingTimeInterval(-2 * 60 * 60)
-                    let oneHoursAgo: Date = Date().addingTimeInterval(-1 * 60 * 60)
-                    let session1: Session = Session(category: categories[0], startDate: twoHoursAgo, stopDate: oneHoursAgo, timeGoal: (1.5 * 60 * 60))
-                    let session2: Session = Session(category: categories[1], startDate: twoHoursAgo,stopDate: oneHoursAgo, timeGoal: (1.3 * 60 * 60))
-                    context.insert(session1)
-                    context.insert(session2)
-                    do {
-                        try context.save()
-                        print("sessioni salvate")
-                    } catch {
-                        print("Error saving context: \(error)")
-                    }
+                    //let twoHoursAgo: Date = Date().addingTimeInterval(-2 * 60 * 60)
+                    //let oneHoursAgo: Date = Date().addingTimeInterval(-1 * 60 * 60)
+                    //let session1: Session = Session(category: categories[0], startDate: twoHoursAgo, stopDate: oneHoursAgo, timeGoal: (1.5 * 60 * 60))
+                    //let session2: Session = Session(category: categories[1], startDate: twoHoursAgo,stopDate: oneHoursAgo, timeGoal: (1.3 * 60 * 60))
+                    //context.insert(session1)
+                    //context.insert(session2)
+                    //do {
+                    //    try context.save()
+                    //    print("sessioni salvate")
+                    //} catch {
+                    //    print("Error saving context: \(error)")
+                    //}
                     
                     isFirstLoad = true
                 }
