@@ -87,11 +87,11 @@ struct Home: View {
                                 .font(Font.custom("HelveticaNeue", size: 35))
                                 .fontWeight(.bold)
                                 .tag(Double?.none)
-                        Text("ss")
-                            .foregroundColor(.white)
-                            .font(Font.custom("HelveticaNeue", size: 35))
-                            .fontWeight(.bold)
-                            .tag(Double?.some(Double(0.5)))
+//                        Text("ss")
+//                            .foregroundColor(.white)
+//                            .font(Font.custom("HelveticaNeue", size: 35))
+//                            .fontWeight(.bold)
+//                            .tag(Double?.some(Double(0.3)))
                             ForEach(1...59, id: \.self) { minute in
                                 Text(String(format: "%02d", minute))
                                     .foregroundColor(.white)
@@ -128,8 +128,8 @@ struct Home: View {
                             timerManager.startTimer(
                                 timeInterval: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60),
                                 sessionIdentifier: newSession.id,
-                                contentTitle: "Test",
-                                contentBody: "Test"
+                                contentTitle: "TIMER TERMINATO!!!!",
+                                contentBody: "Sei riuscito ad arrivare alla fine della tua sessione in: \(selectedCategory!.name.uppercased())"
                             )
                             timerIsActive = true
                         }) {

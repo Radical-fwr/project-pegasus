@@ -10,7 +10,6 @@ import SwiftData
 
 @main
 struct Project_PegasusApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
     var body: some Scene {
         WindowGroup {

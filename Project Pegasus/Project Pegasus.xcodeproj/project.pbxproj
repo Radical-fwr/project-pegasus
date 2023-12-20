@@ -29,7 +29,6 @@
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
-		16EDE3DC2B31E910002AAB31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EDE3DB2B31E910002AAB31 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,7 +66,7 @@
 		16D6AC812B2B223100F66DB8 /* RunningTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimer.swift; sourceTree = "<group>"; };
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		16EDE3DB2B31E910002AAB31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +139,7 @@
 		16A9E0302AED51AB000C8EA8 /* Project Pegasus */ = {
 			isa = PBXGroup;
 			children = (
+				16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */,
 				16547B5B2B213FE500C2E67B /* timer */,
 				16A67EC92B0688B900E57C65 /* pages */,
 				16A9E03F2AED51F4000C8EA8 /* components */,
@@ -151,7 +151,6 @@
 				16A9E0332AED51AB000C8EA8 /* ContentView.swift */,
 				16A9E0352AED51AC000C8EA8 /* Assets.xcassets */,
 				16A9E0372AED51AC000C8EA8 /* Preview Content */,
-				16EDE3DB2B31E910002AAB31 /* AppDelegate.swift */,
 			);
 			path = "Project Pegasus";
 			sourceTree = "<group>";
@@ -281,7 +280,6 @@
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
 				16547B5D2B2227C100C2E67B /* timer.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
-				16EDE3DC2B31E910002AAB31 /* AppDelegate.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
@@ -419,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Project Pegasus/Project Pegasus.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Pegasus/Preview Content\"";
@@ -454,6 +453,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Project Pegasus/Project Pegasus.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Project Pegasus/Preview Content\"";
