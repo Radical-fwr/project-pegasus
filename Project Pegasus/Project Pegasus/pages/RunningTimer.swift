@@ -14,30 +14,44 @@ struct RunningTimer: View {
     @StateObject var timerManager = TimerManager()
     @State private var heartPulse: CGFloat = 1
     @Query var sessions: [Session]
+    @State private var mainColor: Color = .white
+    
+    func changeMainColor(_ color: Color) {
+        self.mainColor = color
+    }
     
     var body: some View {
         NavigationStack {
             ZStack{
                 Color.black.ignoresSafeArea()
-                FadingCircleView(size: 250)
-                    .scaleEffect(heartPulse)
-                Text("\(timerManager.remainingTime)")
                 VStack{
                     Spacer()
                     Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.yellow.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
+                        .fill(LinearGradient(gradient: Gradient(colors: [mainColor, mainColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
                         .frame(width: UIScreen.main.bounds.width, height: 100)
                         .foregroundColor(Color.blue)
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
+                VStack{
+                    Spacer()
+                    Text("\(timerManager.remainingTime)")
+                }
+                FadingCircleView(size: 250, color: mainColor)
+                    .scaleEffect(heartPulse)
             }
         }
         .onAppear() {
             self.timerManager.startUpdatingRemainingTime()
+            timerManager.getFirstPendingTimerIdentifier { identifier in
+                if let identifier = identifier {
+                    if let session = sessions.first(where: { $0.id == identifier }) {
+                        changeMainColor(Color(hex: session.category!.color))
+                    }
+                }
+            }
             withAnimation(.easeInOut(duration:3).repeatForever(autoreverses: true)) {
                 heartPulse = 1.25 * heartPulse
             }
-            print("\(timerManager.checkActiveTimerExistenceSync())")
         }
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
@@ -64,12 +78,13 @@ struct RunningTimer: View {
 
 struct FadingCircleView: View {
     var size: Double = 150
+    var color: Color = .white
     
     var body: some View {
         Circle()
             .fill(
                 RadialGradient(
-                    gradient: Gradient(colors: [Color.yellow, Color.clear]),
+                    gradient: Gradient(colors: [color, Color.clear]),
                     center: .center,
                     startRadius: 0,
                     endRadius: size/2
@@ -79,7 +94,7 @@ struct FadingCircleView: View {
         Circle()
             .fill(
                 RadialGradient(
-                    gradient: Gradient(colors: [Color.yellow, Color.clear]),
+                    gradient: Gradient(colors: [color, Color.clear]),
                     center: .center,
                     startRadius: 0,
                     endRadius: size/2
@@ -89,7 +104,7 @@ struct FadingCircleView: View {
         Circle()
             .fill(
                 RadialGradient(
-                    gradient: Gradient(colors: [Color.yellow, Color.clear]),
+                    gradient: Gradient(colors: [color, Color.clear]),
                     center: .center,
                     startRadius: 0,
                     endRadius: size/2

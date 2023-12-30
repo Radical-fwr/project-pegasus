@@ -46,7 +46,7 @@ struct ContentView: View {
                    isTimer
                 {
                     let identifier = notification.request.identifier
-                    let fetchDescriptor = FetchDescriptor<Session>()
+                    // let fetchDescriptor = FetchDescriptor<Session>()
                     do {
                         if let session = sessions.first(where: { $0.id == identifier }) {
                             if session.stopDate == nil {
@@ -74,14 +74,14 @@ struct ContentView: View {
         }
         let timerManager = TimerManager()
         timerManager.requestNotificationPermission()
-        let authCenter = AuthorizationCenter.shared
-        Task {
-            do {
-                // try await authCenter.requestAuthorization(for: .individual)
-            } catch {
-                // handle the error
-            }
-        }
+//        let authCenter = AuthorizationCenter.shared
+//        Task {
+//            do {
+//                try await authCenter.requestAuthorization(for: .individual)
+//            } catch {
+//                handle the error
+//            }
+//        }
         let testUser: User = User(nome: "Giorgio")
         let category1: Category = Category(name: "studio", color: "EC8E14")
         let category2: Category = Category(name: "lavoro", color: "F6DE00")

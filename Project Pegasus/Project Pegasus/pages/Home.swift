@@ -35,116 +35,21 @@ struct Home: View {
                     TopBar()
                     Spacer()
                     Spacer()
-                    HStack {
-                        Picker("", selection: $selectedCategory) {
-                            Text("TAG")
-                                .foregroundColor(.white)
-                                .font(Font.custom("HelveticaNeue", size: 35))
-                                .fontWeight(.bold)
-                                .tag(Category?.none)
-                            ForEach(categories) { category in
-                                Text(category.name.uppercased())
-                                    .foregroundColor(category == selectedCategory ? Color(hex: category.color) : .white)
-                                    .font(Font.custom("HelveticaNeue", size: 35))
-                                    .fontWeight(.bold)
-                                    .tag(Category?.some(category))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .frame(width: UIScreen.main.bounds.width/2)
-                        .scaleEffect(CGSize(width: 1.50, height: 1.50))
-                        .introspect(.picker(style: .wheel), on: .iOS(.v13, .v14, .v15, .v16, .v17)) { picker in
-                            picker.subviews[1].backgroundColor = UIColor.clear
-                        }
-                        
-                        Picker("", selection: $selectedHour) {
-                            Text("00")
-                                .foregroundColor(.white)
-                                .font(Font.custom("HelveticaNeue", size: 35))
-                                .fontWeight(.bold)
-                                .tag(Double?.none)
-                            ForEach(1...23, id: \.self) { hour in
-                                Text(String(format: "%02d", hour))
-                                    .foregroundColor(.white)
-                                    .font(Font.custom("HelveticaNeue", size: 35))
-                                    .fontWeight(.bold)
-                                    .tag(Double?.some(Double(hour)))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .scaleEffect(CGSize(width: 1.50, height: 1.50))
-                        .introspect(.picker(style: .wheel), on: .iOS(.v13, .v14, .v15, .v16, .v17)) { picker in
-                            picker.subviews[1].backgroundColor = UIColor.clear
-                        }
-                        
-                        Text(":")
-                            .foregroundColor(.white)
-                            .font(Font.custom("IntegralCF-Bold", size: 40))
-                        
-                        Picker("", selection: $selectedMinute) {
-                            Text("00")
-                                .foregroundColor(.white)
-                                .font(Font.custom("HelveticaNeue", size: 35))
-                                .fontWeight(.bold)
-                                .tag(Double?.none)
-//                        Text("ss")
-//                            .foregroundColor(.white)
-//                            .font(Font.custom("HelveticaNeue", size: 35))
-//                            .fontWeight(.bold)
-//                            .tag(Double?.some(Double(0.3)))
-                            ForEach(1...59, id: \.self) { minute in
-                                Text(String(format: "%02d", minute))
-                                    .foregroundColor(.white)
-                                    .font(Font.custom("HelveticaNeue", size: 35))
-                                    .fontWeight(.bold)
-                                    .tag(Double?.some(Double(minute)))
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .scaleEffect(CGSize(width: 1.50, height: 1.50))
-                        .introspect(.picker(style: .wheel), on: .iOS(.v13, .v14, .v15, .v16, .v17)) { picker in
-                            picker.subviews[1].backgroundColor = UIColor.clear
-                        }
-                    }
-                    .frame(height: 130)
-                    .padding()
+                    HomeWheelSelectors(
+                        categories: categories,
+                        selectedCategory: $selectedCategory,
+                        selectedHour: $selectedHour,
+                        selectedMinute: $selectedMinute
+                    )
                     Spacer()
                     HStack {
                         Spacer()
-                        
-                        Button(action: {
-                            let newSession = Session(
-                                category: selectedCategory,
-                                startDate: Date(),
-                                timeGoal: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60)
-                            )
-
-                            context.insert(newSession)
-                            do {
-                                try context.save()
-                            } catch {
-                                print("Error saving context: \(error)")
-                            }
-                            timerManager.startTimer(
-                                timeInterval: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60),
-                                sessionIdentifier: newSession.id,
-                                contentTitle: "TIMER TERMINATO!!!!",
-                                contentBody: "Sei riuscito ad arrivare alla fine della tua sessione in: \(selectedCategory!.name.uppercased())"
-                            )
-                            timerIsActive = true
-                        }) {
-                            Text("Start")
-                                .foregroundColor(.black)
-                                .padding()
-                                .padding()
-                                .background(Color.white)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.black, lineWidth: 2)
-                                )
-                        }
-                        .padding()
+                        StartButton(
+                            selectedCategory: $selectedCategory,
+                            selectedHour: $selectedHour,
+                            selectedMinute: $selectedMinute,
+                            timerIsActive: $timerIsActive
+                        )
                     }
                     Spacer()
                     HStack{
