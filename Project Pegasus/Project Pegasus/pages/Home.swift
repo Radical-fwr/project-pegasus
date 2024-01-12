@@ -9,19 +9,12 @@ import SwiftUI
 import SwiftData
 import SwiftUIIntrospect
 
-struct Selection {
-    var category: Category?
-    var hour: Double?
-    var minute: Double?
-}
-
 struct Home: View {
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
     @State private var selectedHour: Double?
     @State private var selectedMinute: Double?
-    @State private var selection: Selection = Selection()
     @State private var timerIsActive: Bool = false
     @StateObject var timerManager = TimerManager()
         
