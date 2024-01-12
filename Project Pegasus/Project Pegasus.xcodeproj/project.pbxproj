@@ -11,6 +11,8 @@
 		1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */; };
 		1613C7D72B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */; };
 		1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */; };
+		162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E4E2B5152C200BB9F0F /* Triangle.swift */; };
+		162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E502B51532000BB9F0F /* DelimitationBars.swift */; };
 		1632847B2AFD4BF200D94C32 /* IntegralCF-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */; };
 		163284802AFD592F00D94C32 /* category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632847F2AFD592F00D94C32 /* category.swift */; };
 		163284822AFE84B900D94C32 /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163284812AFE84B900D94C32 /* AddCategory.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		160D90582B1F9D51002D61A0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		162E6E4E2B5152C200BB9F0F /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		162E6E502B51532000BB9F0F /* DelimitationBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimitationBars.swift; sourceTree = "<group>"; };
 		1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Regular.otf"; sourceTree = "<group>"; };
 		1632847F2AFD592F00D94C32 /* category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = category.swift; sourceTree = "<group>"; };
 		163284812AFE84B900D94C32 /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				160D90582B1F9D51002D61A0 /* TopBar.swift */,
 				168C06452B407D7500BEE44F /* StartButton.swift */,
 				168C06472B40807600BEE44F /* HomeWheelSelectors.swift */,
+				162E6E4E2B5152C200BB9F0F /* Triangle.swift */,
+				162E6E502B51532000BB9F0F /* DelimitationBars.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -281,6 +287,7 @@
 				16A9E0342AED51AB000C8EA8 /* ContentView.swift in Sources */,
 				16A67EC72B03BE3D00E57C65 /* session.swift in Sources */,
 				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
+				162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
 				16A9E0422AED525D000C8EA8 /* Start.swift in Sources */,
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
@@ -289,6 +296,7 @@
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
+				162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
 				16A9E0322AED51AB000C8EA8 /* Project_PegasusApp.swift in Sources */,
 				16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */,

@@ -9,12 +9,19 @@ import SwiftUI
 import SwiftData
 import SwiftUIIntrospect
 
+struct Selection {
+    var category: Category?
+    var hour: Double?
+    var minute: Double?
+}
+
 struct Home: View {
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
     @State private var selectedHour: Double?
     @State private var selectedMinute: Double?
+    @State private var selection: Selection = Selection()
     @State private var timerIsActive: Bool = false
     @StateObject var timerManager = TimerManager()
         
@@ -30,17 +37,21 @@ struct Home: View {
                 .navigationBarBackButtonHidden(true)
                 
                 Color.black.edgesIgnoringSafeArea(.all)
+                
 
                 VStack {
                     TopBar()
                     Spacer()
                     Spacer()
-                    HomeWheelSelectors(
-                        categories: categories,
-                        selectedCategory: $selectedCategory,
-                        selectedHour: $selectedHour,
-                        selectedMinute: $selectedMinute
-                    )
+                    ZStack{
+                        HomeWheelSelectors(
+                            categories: categories,
+                            selectedCategory: $selectedCategory,
+                            selectedHour: $selectedHour,
+                            selectedMinute: $selectedMinute
+                        )
+                        DelimitationBars()
+                    }
                     Spacer()
                     HStack {
                         Spacer()
@@ -85,3 +96,4 @@ struct Home: View {
     return Home()
         .modelContainer(container)
 }
+
