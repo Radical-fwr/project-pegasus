@@ -47,6 +47,10 @@ struct Home: View {
                     }
                     Spacer()
                     HStack {
+                        SubCategoriesDisplay(category: selectedCategory)
+                            .padding()
+                            .padding()
+                            
                         Spacer()
                         StartButton(
                             selectedCategory: $selectedCategory,
@@ -54,6 +58,7 @@ struct Home: View {
                             selectedMinute: $selectedMinute,
                             timerIsActive: $timerIsActive
                         )
+                        .scaledToFill()
                     }
                     Spacer()
                     HStack{
@@ -77,7 +82,7 @@ struct Home: View {
 }
 
 #Preview{
-    let container = try! ModelContainer(for: Category.self, User.self, Session.self)
+    let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)
     let testUser: User = User(nome: "Giorgio")
     let category1: Category = Category(name: "study", color: "EC8E14")
     let category2: Category = Category(name: "work", color: "F6DE00")

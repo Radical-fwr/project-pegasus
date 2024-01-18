@@ -17,6 +17,11 @@ struct Project_PegasusApp: App {
                 .background(.black)
                 .foregroundColor(.white)
         }
-        .modelContainer(for: [Category.self, User.self, Session.self])
+        .modelContainer(for: [
+            Category.self,
+            User.self,
+            Session.self,
+            SubCategory.self
+        ])
     }
 }

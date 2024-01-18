@@ -21,10 +21,10 @@ struct ContentView: View {
             Home().onAppear {
                 var isFirstLoad: Bool {
                     get {
-                        UserDefaults.standard.bool(forKey: "isFirstLoad")
+                        UserDefaults.standard.bool(forKey: "notFirstLoad")
                     }
                     set {
-                        UserDefaults.standard.set(newValue, forKey: "isFirstLoad")
+                        UserDefaults.standard.set(newValue, forKey: "notFirstLoad")
                     }
                 }
                 if !isFirstLoad {
@@ -66,10 +66,10 @@ struct ContentView: View {
     func initApp() {
         var isFirstLoad: Bool {
             get {
-                UserDefaults.standard.bool(forKey: "isFirstLoad")
+                UserDefaults.standard.bool(forKey: "notFirstLoad")
             }
             set {
-                UserDefaults.standard.set(newValue, forKey: "isFirstLoad")
+                UserDefaults.standard.set(newValue, forKey: "notFirstLoad")
             }
         }
         let timerManager = TimerManager()
@@ -99,7 +99,13 @@ struct ContentView: View {
             print("Error saving context: \(error)")
         }
         
-        print(categories.count)
+        let subCategory1: SubCategory = SubCategory(name: "Fotocopie", parentCategory: categories[1])
+        context.insert(subCategory1)
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context: \(error)")
+        }
         
         //let twoHoursAgo: Date = Date().addingTimeInterval(-2 * 60 * 60)
         //let oneHoursAgo: Date = Date().addingTimeInterval(-1 * 60 * 60)
@@ -118,6 +124,3 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}

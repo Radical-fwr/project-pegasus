@@ -27,7 +27,7 @@ struct Start: View {
                     .padding(.leading, -40)
                 
                 LinearGradient(
-                    gradient: Gradient(colors: [Color.black.opacity(0.0), Color.black.opacity(0.9), Color.black.opacity(0.9), Color.black.opacity(0.0)]),
+                    gradient: Gradient(colors: [Color.black.opacity(0.0), Color.black.opacity(1), Color.black.opacity(1), Color.black.opacity(0.0)]),
                     startPoint: .top,
                     endPoint: .bottom
                 )
