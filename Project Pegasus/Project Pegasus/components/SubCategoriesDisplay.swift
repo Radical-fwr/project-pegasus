@@ -12,69 +12,101 @@ struct SubCategoriesDisplay: View {
     @Environment(\.modelContext) private var context
     var category: Category?
     @State private var opened: Bool = false
+    @State private var showAlert: Bool = false
+    @State private var newSubcategoryName: String = ""
     @Query var subCategories: [SubCategory]
     @State var selectedSubCategory: SubCategory?
     
     var body: some View {
         if let category = category {
-            VStack {
+            ZStack {
                 SubCategoriesButton(category: category, opened: $opened)
-                    .overlay {
-                        if opened {
-                            ZStack {
-                                ZStack {
-                                    ScrollView {
-                                        VStack {
-                                            Spacer()
-                                            HStack {
-                                                Text("ALL")
-                                                    .font(Font.custom("HelveticaNeue", size: 15))
-                                            }
-                                            Rectangle()
-                                                .frame(width: 170, height: 1)
-                                                .background(Color(hex: category.color))
-                                                .border(Color(hex: category.color))
-                                            ForEach(subCategories) { subCategory in
-                                                if subCategory.parentCategory!.id == category.id {
-                                                    Spacer()
-                                                    HStack {
-                                                        Text(subCategory.name)
-                                                            .font(Font.custom("HelveticaNeue", size: 15))
-                                                            
-                                                        Spacer()
-                                                    }
-                                                    .padding(.leading, 15)
-                                                    Rectangle()
-                                                        .frame(width: 170, height: 1)
-                                                        .background(Color(hex: category.color))
-                                                        .border(Color(hex: category.color))
-                                                }
-                                            }
-                                            Spacer()
-                                            HStack {
-                                                Text("+")
-                                                    .font(Font.custom("HelveticaNeue", size: 20))
-                                                    .padding(.leading, 15)
-                                            }
-                                        }
-                                    }
-                                    .frame(width: 200, height: 90)
+               
+                ZStack {
+                    ZStack {
+                        ScrollView {
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    Text("ALL")
+                                        .font(Font.custom("HelveticaNeue", size: 15))
                                 }
-                                .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
-                                .frame(width: 200, height: 90)
-                                .cornerRadius(5)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color(hex: category.color), lineWidth: 1)
-                                )
+                                Rectangle()
+                                    .frame(width: 170, height: 1)
+                                    .background(Color(hex: category.color))
+                                    .border(Color(hex: category.color))
+                                ForEach(subCategories) { subCategory in
+                                    if subCategory.parentCategory!.id == category.id {
+                                        Spacer()
+                                        HStack {
+                                            Text(subCategory.name)
+                                                .font(Font.custom("HelveticaNeue", size: 15))
+                                                
+                                            Spacer()
+                                        }
+                                        .padding(.leading, 15)
+                                        .onTapGesture{
+                                            selectedSubCategory = subCategory
+                                        }
+                                        Rectangle()
+                                            .frame(width: 170, height: 1)
+                                            .background(Color(hex: category.color))
+                                            .border(Color(hex: category.color))
+                                    }
+                                }
+                                Spacer()
+                                HStack {
+                                    Text("+")
+                                        .font(Font.custom("HelveticaNeue", size: 20))
+                                        .padding(.leading, 15)
+                                        .onTapGesture{
+                                            showAlert.toggle()
+                                        }
+                                        .alert("Nuova sottocategoria", isPresented: $showAlert) {
+                                            TextField("Nome", text: $newSubcategoryName).foregroundColor(.black)
+                                            Button("Conferma", action: {
+                                                do {
+                                                    let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
+                                                    try context.save()
+                                                    newSubcategoryName = ""
+                                                } catch {
+                                                    // Handle the error here
+                                                    print("Error saving context: \(error)")
+                                                    // You might want to present an alert to the user or take other appropriate actions
+                                                }
+                                            }).disabled(newSubcategoryName.isEmpty)
+                                            Button("Annulla", role: .cancel) { }
+                                        } message: {
+                                            Text("Stai creando una nuova sottocategoria della categoria principale: " + category.name.uppercased() + ". Come la vuoi chiamare?")
+                                        }
+                                }
                             }
-                            .offset(y: 76)
                         }
+                        .frame(width: 200, height: 90)
                     }
+                    .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                    .frame(width: 200, height: 90)
+                    .cornerRadius(5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color(hex: category.color), lineWidth: 1)
+                    )
+                }
+                .offset(y: 70)
+                .opacity(opened ? 1.00 : 0.00)
             }
 
         } else {
-            SubCategoriesButton(category: category, opened: $opened)
+            ZStack {
+                SubCategoriesButton(category: category, opened: $opened)
+                
+                ZStack {
+                    EmptyView()
+                }
+                .frame(width: 200, height: 90)
+                .offset(y: 70)
+            }
+            
         }
     }
 }

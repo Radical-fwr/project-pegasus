@@ -99,13 +99,13 @@ struct ContentView: View {
             print("Error saving context: \(error)")
         }
         
-        let subCategory1: SubCategory = SubCategory(name: "Fotocopie", parentCategory: categories[1])
-        context.insert(subCategory1)
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context: \(error)")
-        }
+//        let subCategory1: SubCategory = SubCategory(name: "Fotocopie", parentCategory: categories[1])
+//        context.insert(subCategory1)
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Error saving context: \(error)")
+//        }
         
         //let twoHoursAgo: Date = Date().addingTimeInterval(-2 * 60 * 60)
         //let oneHoursAgo: Date = Date().addingTimeInterval(-1 * 60 * 60)

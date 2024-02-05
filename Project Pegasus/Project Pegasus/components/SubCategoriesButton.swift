@@ -16,7 +16,7 @@ struct SubCategoriesButton: View {
     var body: some View {
         if let category = category {
             Button(action: {
-                opened = !opened
+                opened.toggle()
             }) {
                 ZStack{
                     HStack{
