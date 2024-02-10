@@ -65,15 +65,15 @@ struct SubCategoriesDisplay: View {
                                         .alert("Nuova sottocategoria", isPresented: $showAlert) {
                                             TextField("Nome", text: $newSubcategoryName).foregroundColor(.black)
                                             Button("Conferma", action: {
-                                                do {
-                                                    let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
-                                                    try context.save()
-                                                    newSubcategoryName = ""
-                                                } catch {
-                                                    // Handle the error here
-                                                    print("Error saving context: \(error)")
-                                                    // You might want to present an alert to the user or take other appropriate actions
-                                                }
+//                                                do {
+//                                                    let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
+//                                                    try context.save()
+//                                                    newSubcategoryName = ""
+//                                                } catch {
+//                                                    // Handle the error here
+//                                                    print("Error saving context: \(error)")
+//                                                    // You might want to present an alert to the user or take other appropriate actions
+//                                                }
                                             }).disabled(newSubcategoryName.isEmpty)
                                             Button("Annulla", role: .cancel) { }
                                         } message: {
