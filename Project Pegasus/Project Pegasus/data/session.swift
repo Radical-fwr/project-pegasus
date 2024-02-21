@@ -20,7 +20,7 @@ class Session: Identifiable {
         self.id = UUID().uuidString
         self.startDate = startDate
         self.stopDate = stopDate
-        self.timeGoal = timeGoal
+        self.timeGoal = timeGoal //secondi dell'obiettivo
         if let category = category {
             setCategory(category)
         }

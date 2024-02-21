@@ -13,79 +13,58 @@ struct Profile: View {
     @Query var users: [User]
     @Query var categories: [Category]
     @State private var isSheetPresented: Bool = false
+    //@Query var sessions: [Session] 
+    let sessions : [Session]
+    
+    init() {
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone.current
+
+            let today = Date()
+            let twoDaysBeforeToday = calendar.date(byAdding: .day, value: -2, to: today)!
+            let oneDayBeforeToday = calendar.date(byAdding: .day, value: -1, to: today)!
+            let oneDayAfterToday = calendar.date(byAdding: .day, value: +1, to: today)!
+            let twoDayAfterToday = calendar.date(byAdding: .day, value: +2, to: today)!
+        
+            self.sessions = [
+                Session(startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600),
+                Session(startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600),
+                Session(startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000),
+                Session(startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0.5), timeGoal: 10),
+                Session(startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0.5), timeGoal: 10),
+            ]
+        }
     
     var body: some View {
         NavigationStack {
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
-                
                 VStack {
-                    if let user = users.first {
-                        let fallback =
-                        Text(user.nome.prefix(2).description.uppercased())
-                            .font(Font.custom("HelveticaNeue", size: 50))
-                            .foregroundColor(Color.black)
-                            .frame(width: 120, height: 120)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                        if let imageData = user.imageData {
-                            if let uiImage = UIImage(data: imageData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 120, height: 120)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                                    .padding()
-                            } else {
-                                fallback
-                            }
-                        } else {
-                            fallback
-                        }
-                        Text(user.nome)
-                            .font(Font.custom("HelveticaNeue", size: 30))
-                            .fontWeight(.bold)
-                            .padding()
-                        ScrollView{
-                            ForEach(categories) { category in
-                                CategoryWStats(
-                                    name: category.name.uppercased(),
-                                    color: Color(hex: category.color),
-                                    progress: category.progress
-                                )
-                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
-                                .padding(5)
-                            }
-                        }
-                        Spacer()
-                        Text("+ Nuovo Tag")
-                            .font(Font.custom("", size: 30))
-                            .padding()
-                            .onTapGesture {
-                                isSheetPresented = true
-                            }
-                    } else {
-                        Text("US")
-                            .font(Font.custom("HelveticaNeue", size: 50))
-                            .foregroundColor(Color.black)
-                            .frame(width: 120, height: 120)
-                            .background(Color.white)
-                            .clipShape(Circle())
-                        Text("Error")
-                            .font(Font.custom("HelveticaNeue", size: 30))
-                            .fontWeight(.bold)
-                            .padding()
-                        CategoryWStats(name: "Test", color: .blue, progress: 0.70)
+                    Text("Efficienza")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    CustomHistogramView(sessions: sessions)
+                        .frame(maxWidth: UIScreen.main.bounds.size.width*0.70)
+                        .padding(10)
+                    
+                    ScrollView{
+                        ForEach(categories) { category in
+                            CategoryWStats(
+                                name: category.name.uppercased(),
+                                color: Color(hex: category.color),
+                                progress: category.progress
+                            )
                             .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
-                        Spacer()
-                        Text("+ Nuovo Tag")
-                            .font(Font.custom("", size: 30))
-                            .padding()
-                            .onTapGesture {
-                                isSheetPresented = true
-                            }
+                            .padding(5)
+                        }
                     }
+                    Spacer()
+                    Text("+ Nuovo Tag")
+                        .font(Font.custom("", size: 30))
+                        .padding()
+                        .onTapGesture {
+                            isSheetPresented = true
+                        }
                 }
             }
         }
@@ -96,6 +75,8 @@ struct Profile: View {
         })
     }
 }
+
+
 
 #Preview {
     Profile()
