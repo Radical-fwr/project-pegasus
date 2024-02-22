@@ -1,5 +1,5 @@
 //
-//  Istogram.swift
+//  Histogram.swift
 //  Project Pegasus
 //
 //  Created by Giovanni Ercolano on 17/02/24.
@@ -23,7 +23,7 @@ struct CustomHistogramView: View {
     /// Calcola l'efficienza totale giornaliera facendo una media tra l'efficienza delle varie sessioni del giorno - By Gio
     private func dailyEfficiency() -> [Date: Double] {
         let groupedSessions = Dictionary(grouping: sessions) { session -> Date in
-            return Calendar.current.startOfDay(for: session.startDate)
+            Calendar.current.startOfDay(for: session.startDate)
         }
         
         var dailyEfficiency: [Date: Double] = [:]
@@ -32,6 +32,17 @@ struct CustomHistogramView: View {
             let efficiencies = sessionsForDay.compactMap { calculateEfficiency(for: $0) }
             let averageEfficiency = efficiencies.isEmpty ? 0 : efficiencies.reduce(0, +) / Double(efficiencies.count)
             dailyEfficiency[date] = averageEfficiency
+        }
+        
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let dateIntervals = [-2, -1, 0, 1, 2] 
+        
+        for dayOffset in dateIntervals {
+            let targetDate = calendar.date(byAdding: .day, value: dayOffset, to: today)!
+            if dailyEfficiency[targetDate] == nil || dailyEfficiency[targetDate] == 0 {
+                dailyEfficiency[targetDate] = 0.05
+            }
         }
         
         return dailyEfficiency

@@ -13,27 +13,8 @@ struct Profile: View {
     @Query var users: [User]
     @Query var categories: [Category]
     @State private var isSheetPresented: Bool = false
-    //@Query var sessions: [Session] 
-    let sessions : [Session]
+    @Query var sessions: [Session]
     
-    init() {
-            var calendar = Calendar.current
-            calendar.timeZone = TimeZone.current
-
-            let today = Date()
-            let twoDaysBeforeToday = calendar.date(byAdding: .day, value: -2, to: today)!
-            let oneDayBeforeToday = calendar.date(byAdding: .day, value: -1, to: today)!
-            let oneDayAfterToday = calendar.date(byAdding: .day, value: +1, to: today)!
-            let twoDayAfterToday = calendar.date(byAdding: .day, value: +2, to: today)!
-        
-            self.sessions = [
-                Session(startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600),
-                Session(startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600),
-                Session(startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000),
-                Session(startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0.5), timeGoal: 10),
-                Session(startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0.5), timeGoal: 10),
-            ]
-        }
     
     var body: some View {
         NavigationStack {
@@ -79,5 +60,5 @@ struct Profile: View {
 
 
 #Preview {
-    Profile()
+    return Profile()
 }

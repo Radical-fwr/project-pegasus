@@ -74,14 +74,14 @@ struct ContentView: View {
         }
         let timerManager = TimerManager()
         timerManager.requestNotificationPermission()
-//        let authCenter = AuthorizationCenter.shared
-//        Task {
-//            do {
-//                try await authCenter.requestAuthorization(for: .individual)
-//            } catch {
-//                handle the error
-//            }
-//        }
+        //        let authCenter = AuthorizationCenter.shared
+        //        Task {
+        //            do {
+        //                try await authCenter.requestAuthorization(for: .individual)
+        //            } catch {
+        //                handle the error
+        //            }
+        //        }
         let testUser: User = User(nome: "Giorgio")
         let category1: Category = Category(name: "studio", color: "EC8E14")
         let category2: Category = Category(name: "lavoro", color: "F6DE00")
@@ -99,26 +99,42 @@ struct ContentView: View {
             print("Error saving context: \(error)")
         }
         
-//        let subCategory1: SubCategory = SubCategory(name: "Fotocopie", parentCategory: categories[1])
-//        context.insert(subCategory1)
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Error saving context: \(error)")
-//        }
+        //        let subCategory1: SubCategory = SubCategory(name: "Fotocopie", parentCategory: categories[1])
+        //        context.insert(subCategory1)
+        //        do {
+        //            try context.save()
+        //        } catch {
+        //            print("Error saving context: \(error)")
+        //        }
         
-        //let twoHoursAgo: Date = Date().addingTimeInterval(-2 * 60 * 60)
-        //let oneHoursAgo: Date = Date().addingTimeInterval(-1 * 60 * 60)
-        //let session1: Session = Session(category: categories[0], startDate: twoHoursAgo, stopDate: oneHoursAgo, timeGoal: (1.5 * 60 * 60))
-        //let session2: Session = Session(category: categories[1], startDate: twoHoursAgo,stopDate: oneHoursAgo, timeGoal: (1.3 * 60 * 60))
-        //context.insert(session1)
-        //context.insert(session2)
-        //do {
-        //    try context.save()
-        //    print("sessioni salvate")
-        //} catch {
-        //    print("Error saving context: \(error)")
-        //}
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        
+        let today = Date()
+        let twoDaysBeforeToday = calendar.date(byAdding: .day, value: -2, to: today)!
+        let oneDayBeforeToday = calendar.date(byAdding: .day, value: -1, to: today)!
+        let oneDayAfterToday = calendar.date(byAdding: .day, value: +1, to: today)!
+        let twoDayAfterToday = calendar.date(byAdding: .day, value: +2, to: today)!
+        
+        
+        let session1 : Session = Session(category: categories[0],startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600)
+        let session2 : Session = Session(category: categories[1],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)
+        let session3 : Session = Session(category: categories[2],startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000)
+        let session4 : Session = Session(category: categories[3],startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0), timeGoal: 10)
+        let session5 : Session = Session(category: categories[0],startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0), timeGoal: 10)
+        
+        
+        context.insert(session1)
+        context.insert(session2)
+        context.insert(session3)
+        context.insert(session4)
+        context.insert(session5)
+        do {
+            try context.save()
+            print("sessioni salvate")
+        } catch {
+            print("Error saving context: \(error)")
+        }
         
         isFirstLoad = true
     }

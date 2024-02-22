@@ -30,3 +30,5 @@ class Session: Identifiable {
         self.category = category
     }
 }
+
+
