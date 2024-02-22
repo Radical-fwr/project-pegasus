@@ -16,6 +16,28 @@ struct Profile: View {
     @Query var sessions: [Session]
     
     
+    private func daysSelected() -> String? {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let dateIntervals = [-2, -1, 0, 1, 2]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM"
+        
+        let dates = dateIntervals.map { daysOffset in
+            calendar.date(byAdding: .day, value: daysOffset, to: today)!
+        }
+        
+        let formattedDates = dates.map { dateFormatter.string(from: $0) }
+        
+        if let firstDate = formattedDates.first, let lastDate = formattedDates.last {
+            let resultString = "\(firstDate)-\(lastDate)"
+            return resultString // Ritorna la stringa dell'intervallo di date.
+        }
+        
+        return nil // Ritorna nil se non è possibile calcolare l'intervallo.
+    }
+    
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -24,11 +46,33 @@ struct Profile: View {
                     Text("Efficienza")
                         .font(.title)
                         .fontWeight(.bold)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding([.leading])
+                    
+                    Text(daysSelected() ?? "Data non disponibile")
+                        .font(.callout)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding([.leading])
+                    
                     CustomHistogramView(sessions: sessions)
-                        .frame(maxWidth: UIScreen.main.bounds.size.width*0.70)
+                        .frame(maxWidth: UIScreen.main.bounds.size.width*0.90)
                         .padding(10)
                     
+                    Spacer(minLength: 30)
+                    
+                    Text("Categorie")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .padding([.leading])
+                    Spacer()
+                    
                     ScrollView{
+                        Spacer()
+                        //categoria di test
+                        CategoryWStats(name: "Test", color: .blue, progress: 0.70)
+                            .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
+                        Spacer()
                         ForEach(categories) { category in
                             CategoryWStats(
                                 name: category.name.uppercased(),
