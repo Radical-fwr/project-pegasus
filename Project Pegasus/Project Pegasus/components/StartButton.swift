@@ -11,6 +11,7 @@ import SwiftData
 struct StartButton: View {
     @Environment(\.modelContext) private var context
     @Binding var selectedCategory: Category?
+    @Binding var selectedSubCategory: SubCategory?
     @Binding var selectedHour: Double?
     @Binding var selectedMinute: Double?
     @Binding var timerIsActive: Bool

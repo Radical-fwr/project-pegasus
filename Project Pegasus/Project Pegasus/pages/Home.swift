@@ -13,6 +13,7 @@ struct Home: View {
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
+    @State private var selectedSubCategory: SubCategory?
     @State private var selectedHour: Double?
     @State private var selectedMinute: Double?
     @State private var timerIsActive: Bool = false
@@ -47,13 +48,14 @@ struct Home: View {
                     }
                     Spacer()
                     HStack {
-                        SubCategoriesDisplay(category: selectedCategory)
+                        SubCategoriesDisplay(category: selectedCategory, selectedSubCategory: $selectedSubCategory)
                             .padding()
                             .padding()
                             
                         Spacer()
                         StartButton(
                             selectedCategory: $selectedCategory,
+                            selectedSubCategory: $selectedSubCategory,
                             selectedHour: $selectedHour,
                             selectedMinute: $selectedMinute,
                             timerIsActive: $timerIsActive

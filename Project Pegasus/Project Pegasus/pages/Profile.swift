@@ -69,9 +69,6 @@ struct Profile: View {
                     
                     ScrollView{
                         Spacer()
-                        //categoria di test
-                        CategoryWStats(name: "Test", color: .blue, progress: 0.70)
-                            .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
                         Spacer()
                         ForEach(categories) { category in
                             CategoryWStats(

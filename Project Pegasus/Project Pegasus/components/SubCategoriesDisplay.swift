@@ -15,7 +15,20 @@ struct SubCategoriesDisplay: View {
     @State private var showAlert: Bool = false
     @State private var newSubcategoryName: String = ""
     @Query var subCategories: [SubCategory]
-    @State var selectedSubCategory: SubCategory?
+    @Binding var selectedSubCategory: SubCategory?
+    
+    func createNewSubCategory() {
+        do {
+            let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
+            context.insert(newSubCategory)
+            try context.save()
+            newSubcategoryName = ""
+        } catch {
+            // Handle the error here
+            print("Error saving context: \(error)")
+            // You might want to present an alert to the user or take other appropriate actions
+        }
+    }
     
     var body: some View {
         if let category = category {
@@ -64,20 +77,12 @@ struct SubCategoriesDisplay: View {
                                         }
                                         .alert("Nuova sottocategoria", isPresented: $showAlert) {
                                             TextField("Nome", text: $newSubcategoryName).foregroundColor(.black)
-                                            Button("Conferma", action: {
-//                                                do {
-//                                                    let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
-//                                                    try context.save()
-//                                                    newSubcategoryName = ""
-//                                                } catch {
-//                                                    // Handle the error here
-//                                                    print("Error saving context: \(error)")
-//                                                    // You might want to present an alert to the user or take other appropriate actions
-//                                                }
-                                            }).disabled(newSubcategoryName.isEmpty)
+                                            Button("Conferma"){
+                                                createNewSubCategory()
+                                            }.disabled(newSubcategoryName.isEmpty)
                                             Button("Annulla", role: .cancel) { }
                                         } message: {
-                                            Text("Stai creando una nuova sottocategoria della categoria principale: " + category.name.uppercased() + ". Come la vuoi chiamare?")
+                                            Text("Stai creando una nuova sottocategoria della categoria: " + category.name.uppercased() + ". Come la vuoi chiamare?")
                                         }
                                 }
                             }

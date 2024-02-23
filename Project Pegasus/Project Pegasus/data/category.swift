@@ -20,9 +20,9 @@ class Category: Identifiable {
             var progressList: [Double] = []
             var result: Double = 0
             var calcSessions = sessions!
-            for subCategory in subCategories! {
-                calcSessions += subCategory.sessions!
-            }
+//            for subCategory in subCategories! {
+//                calcSessions += subCategory.sessions!
+//            }
             for session in calcSessions {
                 if let stopDate = session.stopDate {
                     let sessionDuration: Double = stopDate.timeIntervalSince(session.startDate)
