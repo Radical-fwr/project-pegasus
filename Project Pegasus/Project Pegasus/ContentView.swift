@@ -13,6 +13,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var context
     @Query let categories: [Category]
     @Query let sessions: [Session]
+    @Query let subCategories: [SubCategory]
     @StateObject var timerManager = TimerManager()
     
     var body: some View {
@@ -133,6 +134,36 @@ struct ContentView: View {
         } catch {
             print("Error saving context: \(error)")
         }
+        
+        // Dati di test per SubCategory
+        let testSubCategories = [
+            SubCategory(name: "Analisi Matematica", parentCategory: categories[0]),
+            SubCategory(name: "Algebra Lineare", parentCategory: categories[0]),
+            SubCategory(name: "Programmazione", parentCategory: categories[0]),
+            SubCategory(name: "Basi di Dati", parentCategory: categories[0]),
+            SubCategory(name: "Reti di Computer", parentCategory: categories[0])
+        ]
+        
+        // Assumi che ogni SubCategory abbia un metodo per aggiungere delle Session con dati di test
+        for subCategory in testSubCategories {
+            // Assumi che esista un metodo per aggiungere Session
+            // Puoi aggiungere sessioni con dettagli specifici se necessario
+            
+            subCategory.sessions?.append(sessions[0])
+            subCategory.sessions?.append(sessions[1])
+            context.insert(subCategory)
+        }
+        do {
+            try context.save()
+            print("sessioni salvate")
+            for subCategory in testSubCategories {
+                print("Nome sottocategoria: " + subCategory.name)
+            }
+        } catch {
+            print("Error saving context: \(error)")
+        }
+        
+        
         
         isFirstLoad = true
     }

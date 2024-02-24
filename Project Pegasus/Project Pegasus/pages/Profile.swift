@@ -71,15 +71,19 @@ struct Profile: View {
                         Spacer()
                         Spacer()
                         ForEach(categories) { category in
-                            CategoryWStats(
-                                name: category.name.uppercased(),
-                                color: Color(hex: category.color),
-                                progress: category.progress
-                            )
-                            .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
-                            .padding(5)
+                            // al click della categoria vai alla pagina dettaglio categoria
+                            NavigationLink(destination: CategoryDetail(categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
+                                CategoryWStats(
+                                    name: category.name.uppercased(),
+                                    color: Color(hex: category.color),
+                                    progress: category.progress
+                                )
+                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
+                                .padding(5)
+                            }
                         }
                     }
+                    
                     Spacer()
                     Text("+ Nuovo Tag")
                         .font(Font.custom("", size: 30))

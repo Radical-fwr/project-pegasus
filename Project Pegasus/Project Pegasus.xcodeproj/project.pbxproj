@@ -38,6 +38,7 @@
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
+		E69AEC562B8A084300452FC2 /* CategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69AEC552B8A084300452FC2 /* CategoryDetail.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +87,7 @@
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
+		E69AEC552B8A084300452FC2 /* CategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetail.swift; sourceTree = "<group>"; };
 		E6F595E32B80CD1B004897E0 /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +138,7 @@
 				16A67EC22B03BA6E00E57C65 /* Profile.swift */,
 				16EAB2732B18C99B00E2249D /* Home.swift */,
 				16D6AC812B2B223100F66DB8 /* RunningTimer.swift */,
+				E69AEC552B8A084300452FC2 /* CategoryDetail.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				162E6E5B2B5568CF00BB9F0F /* subcategory.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
 				16A9E0422AED525D000C8EA8 /* Start.swift in Sources */,
+				E69AEC562B8A084300452FC2 /* CategoryDetail.swift in Sources */,
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
 				168C06462B407D7500BEE44F /* StartButton.swift in Sources */,
 				16547B5D2B2227C100C2E67B /* timer.swift in Sources */,
