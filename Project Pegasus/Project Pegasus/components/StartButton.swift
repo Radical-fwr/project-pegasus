@@ -41,6 +41,8 @@ struct StartButton: View {
                 timerIsActive = true
             }) {
                 Text("Start")
+                    .font(Font.custom("HelveticaNeue", size: 27))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundColor(.black)
                     .padding()
                     .padding()
@@ -55,6 +57,8 @@ struct StartButton: View {
         } else {
             Button(action: {}) {
                 Text("Start")
+                    .font(Font.custom("HelveticaNeue", size: 27))
+                    .fontWeight(.bold)
                     .foregroundColor(.black)
                     .padding()
                     .padding()

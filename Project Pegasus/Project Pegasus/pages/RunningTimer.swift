@@ -15,9 +15,34 @@ struct RunningTimer: View {
     @State private var degrees: Double = 0
     @Query var sessions: [Session]
     @State private var mainColor: Color = .white
+    @State private var categoryName: String = ""
+    @State private var stopped = false
+    
+    @GestureState private var isHoldingCircle = false
+    @State private var timer: Timer?
+    @State private var remainingTime: Double = 10
+    @State private var progress: Double = 0
+    
+    func changeCategoryName(_ categoryName: String) {
+        self.categoryName = categoryName
+    }
     
     func changeMainColor(_ color: Color) {
         self.mainColor = color
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            remainingTime-=1
+            progress = 10 - remainingTime
+        }
+    }
+
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+        remainingTime=10
+        progress=0
     }
     
     var body: some View {
@@ -34,29 +59,17 @@ struct RunningTimer: View {
                 }.ignoresSafeArea()
                 ZStack {
                     FadingCircleView(size: UIScreen.main.bounds.width * 0.7, color: mainColor)
-                        //.animation(nil)
-                    CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
-                    CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80, wait: 1)
-                    CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120, wait: 2)
-                        .rotationEffect(.degrees(70))
-                    CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80, wait: 3)
-                        .rotationEffect(Angle(degrees: 200))
-                    CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110, wait: 4)
-                        .rotationEffect(Angle(degrees: 270))
-                    
-//                    ZStack {
-//                        FadingCircleView(size: 270, color: mainColor)
-//                            //.animation(nil)
-//                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
-//                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80)
-//                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120)
-//                            .rotationEffect(.degrees(70))
-//                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80)
-//                            .rotationEffect(Angle(degrees: 200))
-//                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110)
-//                            .rotationEffect(Angle(degrees: 270))
-//                    }
-//                    .rotationEffect(.degrees(90))
+                    ZStack {
+                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
+                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80, wait: 1)
+                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120, wait: 2)
+                            .rotationEffect(.degrees(70))
+                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80, wait: 3)
+                            .rotationEffect(Angle(degrees: 200))
+                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110, wait: 4)
+                            .rotationEffect(Angle(degrees: 270))
+                    }
+                    .opacity(isHoldingCircle ? 0 : 1)
                 }
                 .rotationEffect(.degrees(degrees))
                 .onAppear {
@@ -64,6 +77,65 @@ struct RunningTimer: View {
                         degrees = 360
                     }
                 }
+                .gesture(
+                    LongPressGesture(minimumDuration: 11)
+                        .updating($isHoldingCircle) { value, state, transaction in
+                            state = value
+                        }
+                        .onEnded { finished in
+                            stopped = true
+                            if let identifier = timerManager.identifier {
+                                if let session = sessions.first(where: { $0.id == identifier }) {
+                                    session.stopDate = Date()
+                                    print(Date())
+                                    do {
+                                        try context.save()
+                                        timerManager.deleteFirstPendingTimer(completion: { _ in })
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    } catch {
+                                        print("Error saving context: \(error)")
+                                    }
+                                } else {
+                                    print("errore nell'aggiornare la sessione")
+                                }
+                            }
+                        }
+                )
+                .onChange(of: isHoldingCircle) {
+                    if isHoldingCircle {
+                        startTimer()
+                    } else {
+                        stopTimer()
+                    }
+                }
+                
+                ZStack {
+                    VStack{
+                        Text(".radical")
+                            .font(Font.custom("HelveticaNeue", size: 36))
+                            .fontWeight(.bold)
+                            .animation(nil)
+                        Spacer().animation(nil)
+                        Text("Hai già finito?")
+                            .font(Font.custom("Montserrat", size: 36))
+                            .fontWeight(.bold)
+                            .textCase(.uppercase)
+                            .animation(nil)
+                        Text("Solleva il dito per riprendere:")
+                            .animation(nil)
+                        Spacer().animation(nil)
+                        LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                        Spacer().animation(nil)
+                        Text("\(categoryName)")
+                            .font(Font.custom("HelveticaNeue", size: 36))
+                            .fontWeight(.bold)
+                            .textCase(.uppercase)
+                            .animation(nil)
+                        Spacer().animation(nil)
+                        Spacer().animation(nil)
+                    }
+                }
+                .opacity(isHoldingCircle ? 1 : 0)
             }
         }
         .onAppear() {
@@ -72,6 +144,7 @@ struct RunningTimer: View {
                 if let identifier = identifier {
                     if let session = sessions.first(where: { $0.id == identifier }) {
                         changeMainColor(Color(hex: session.category!.color))
+                        changeCategoryName(session.category!.name)
                     }
                 }
             }
@@ -80,20 +153,23 @@ struct RunningTimer: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .onChange(of: timerManager.remainingTime) {
-            if timerManager.remainingTime == 0 {
-                if let identifier = timerManager.identifier {
-                    if let session = sessions.first(where: { $0.id == identifier }) {
-                        session.stopDate = session.startDate.addingTimeInterval(session.timeGoal)
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Error saving context: \(error)")
+            if(!stopped) {
+                if timerManager.remainingTime == 0 {
+                    if let identifier = timerManager.identifier {
+                        if let session = sessions.first(where: { $0.id == identifier }) {
+                            session.stopDate = session.startDate.addingTimeInterval(session.timeGoal)
+                            do {
+                                try context.save()
+                            } catch {
+                                print("Error saving context: \(error)")
+                            }
+                        } else {
+                            print("errore nell'aggiornare la sessione")
                         }
-                    } else {
-                        print("errore nell'aggiornare la sessione")
                     }
+                    self.presentationMode.wrappedValue.dismiss()
                 }
-                self.presentationMode.wrappedValue.dismiss()
+
             }
         }
     }

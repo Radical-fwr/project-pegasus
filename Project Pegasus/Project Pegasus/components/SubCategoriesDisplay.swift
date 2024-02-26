@@ -18,15 +18,14 @@ struct SubCategoriesDisplay: View {
     @Binding var selectedSubCategory: SubCategory?
     
     func createNewSubCategory() {
+        print("test")
+        let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
+        context.insert(newSubCategory)
         do {
-            let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
-            context.insert(newSubCategory)
             try context.save()
             newSubcategoryName = ""
         } catch {
-            // Handle the error here
             print("Error saving context: \(error)")
-            // You might want to present an alert to the user or take other appropriate actions
         }
     }
     
@@ -77,9 +76,7 @@ struct SubCategoriesDisplay: View {
                                         }
                                         .alert("Nuova sottocategoria", isPresented: $showAlert) {
                                             TextField("Nome", text: $newSubcategoryName).foregroundColor(.black)
-                                            Button("Conferma"){
-                                                createNewSubCategory()
-                                            }.disabled(newSubcategoryName.isEmpty)
+                                            Button("Conferma") { createNewSubCategory() }.disabled(newSubcategoryName.isEmpty)
                                             Button("Annulla", role: .cancel) { }
                                         } message: {
                                             Text("Stai creando una nuova sottocategoria della categoria: " + category.name.uppercased() + ". Come la vuoi chiamare?")
@@ -100,6 +97,7 @@ struct SubCategoriesDisplay: View {
                 .offset(y: 70)
                 .opacity(opened ? 1.00 : 0.00)
             }
+            
 
         } else {
             ZStack {

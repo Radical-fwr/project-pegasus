@@ -92,6 +92,23 @@ class TimerManager: ObservableObject {
         }
     }
     
+    func deleteNotification(withIdentifier identifier: String, completion: @escaping (Error?) -> Void) {
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+        completion(nil)
+    }
+
+    
+    func deleteFirstPendingTimer(completion: @escaping (Error?) -> Void) {
+        getFirstPendingTimerIdentifier { identifier in
+            if let identifier = identifier {
+                self.deleteNotification(withIdentifier: identifier, completion: completion)
+            } else {
+                completion(nil) // Notify that no timer was found
+            }
+        }
+    }
+
+    
     func startUpdatingRemainingTime() {
         // Invalidate existing timer to avoid multiple timers
         timer?.invalidate()

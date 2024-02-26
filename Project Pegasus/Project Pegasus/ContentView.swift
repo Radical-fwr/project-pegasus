@@ -115,24 +115,24 @@ struct ContentView: View {
         let twoDayAfterToday = calendar.date(byAdding: .day, value: +2, to: today)!
         
         
-        let session1 : Session = Session(category: categories[0],startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600)
-        let session2 : Session = Session(category: categories[1],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)
-        let session3 : Session = Session(category: categories[2],startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000)
-        let session4 : Session = Session(category: categories[3],startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0), timeGoal: 10)
-        let session5 : Session = Session(category: categories[0],startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0), timeGoal: 10)
-        
-        
-        context.insert(session1)
-        context.insert(session2)
-        context.insert(session3)
-        context.insert(session4)
-        context.insert(session5)
-        do {
-            try context.save()
-            print("sessioni salvate")
-        } catch {
-            print("Error saving context: \(error)")
-        }
+//        let session1 : Session = Session(category: categories[0],startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600)
+//        let session2 : Session = Session(category: categories[1],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)
+//        let session3 : Session = Session(category: categories[2],startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000)
+//        let session4 : Session = Session(category: categories[3],startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0), timeGoal: 10)
+//        let session5 : Session = Session(category: categories[0],startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0), timeGoal: 10)
+//        
+//        
+//        context.insert(session1)
+//        context.insert(session2)
+//        context.insert(session3)
+//        context.insert(session4)
+//        context.insert(session5)
+//        do {
+//            try context.save()
+//            print("sessioni salvate")
+//        } catch {
+//            print("Error saving context: \(error)")
+//        }
         
         isFirstLoad = true
     }

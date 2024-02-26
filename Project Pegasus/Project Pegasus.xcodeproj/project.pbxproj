@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		160B01052B8A4B960041C29D /* Montserrat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 160B01042B8A4B960041C29D /* Montserrat.ttf */; };
 		160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160D90582B1F9D51002D61A0 /* TopBar.swift */; };
 		1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */; };
-		1613C7D72B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */; };
 		1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = 1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */; };
 		162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E4E2B5152C200BB9F0F /* Triangle.swift */; };
 		162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E502B51532000BB9F0F /* DelimitationBars.swift */; };
@@ -35,6 +35,8 @@
 		16A9E0422AED525D000C8EA8 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0412AED525D000C8EA8 /* Start.swift */; };
 		16A9E0802AED67D1000C8EA8 /* IntegralCF-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */; };
 		16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */; };
+		16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE43D22B8A506600DD6761 /* LiquidCircle.swift */; };
+		16BE43D52B8A52A400DD6761 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */; };
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
@@ -55,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		160B01042B8A4B960041C29D /* Montserrat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat.ttf; sourceTree = "<group>"; };
 		160D90582B1F9D51002D61A0 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		162E6E4E2B5152C200BB9F0F /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		162E6E502B51532000BB9F0F /* DelimitationBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelimitationBars.swift; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 		16A9E07C2AED61E7000C8EA8 /* Project-Pegasus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-Pegasus-Info.plist"; sourceTree = SOURCE_ROOT; };
 		16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Bold.ttf"; sourceTree = "<group>"; };
 		16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStyle.swift; sourceTree = "<group>"; };
+		16BE43D22B8A506600DD6761 /* LiquidCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCircle.swift; sourceTree = "<group>"; };
+		16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		16D6AC812B2B223100F66DB8 /* RunningTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimer.swift; sourceTree = "<group>"; };
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -95,7 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */,
-				1613C7D72B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic in Frameworks */,
 				1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,6 +204,8 @@
 				162E6E582B55659C00BB9F0F /* SubCategoriesButton.swift */,
 				162E6E5C2B557E5200BB9F0F /* SubCategoriesDisplay.swift */,
 				E6F595E32B80CD1B004897E0 /* Histogram.swift */,
+				16BE43D22B8A506600DD6761 /* LiquidCircle.swift */,
+				16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -207,6 +213,7 @@
 		16A9E0792AED6009000C8EA8 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				160B01042B8A4B960041C29D /* Montserrat.ttf */,
 				1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */,
 				16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */,
 			);
@@ -240,7 +247,6 @@
 			name = "Project Pegasus";
 			packageProductDependencies = (
 				1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */,
-				1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */,
 				1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */,
 			);
 			productName = "Project Pegasus";
@@ -289,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A9E0392AED51AC000C8EA8 /* Preview Assets.xcassets in Resources */,
+				160B01052B8A4B960041C29D /* Montserrat.ttf in Resources */,
 				16A9E0802AED67D1000C8EA8 /* IntegralCF-Bold.ttf in Resources */,
 				16A9E0362AED51AC000C8EA8 /* Assets.xcassets in Resources */,
 				1632847B2AFD4BF200D94C32 /* IntegralCF-Regular.otf in Resources */,
@@ -309,6 +316,7 @@
 				162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */,
 				162E6E5B2B5568CF00BB9F0F /* subcategory.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
+				16BE43D52B8A52A400DD6761 /* WaveAnimation.swift in Sources */,
 				16A9E0422AED525D000C8EA8 /* Start.swift in Sources */,
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
 				168C06462B407D7500BEE44F /* StartButton.swift in Sources */,
@@ -317,6 +325,7 @@
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
+				16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */,
 				162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
 				16A9E0322AED51AB000C8EA8 /* Project_PegasusApp.swift in Sources */,
@@ -563,11 +572,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
-		};
-		1613C7D62B2130C1008F6C21 /* SwiftUIIntrospect-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
-			productName = "SwiftUIIntrospect-Dynamic";
 		};
 		1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */ = {
 			isa = XCSwiftPackageProductDependency;

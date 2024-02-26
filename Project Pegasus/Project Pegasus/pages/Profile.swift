@@ -43,7 +43,7 @@ struct Profile: View {
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack {
-                    Text("Efficienza")
+                    Text("Efficienza".uppercased())
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity,alignment: .leading)
@@ -60,7 +60,7 @@ struct Profile: View {
                     
                     Spacer(minLength: 30)
                     
-                    Text("Categorie")
+                    Text("Categorie".uppercased())
                         .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity,alignment: .leading)
