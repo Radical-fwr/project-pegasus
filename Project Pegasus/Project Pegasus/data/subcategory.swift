@@ -32,6 +32,9 @@ class SubCategory: Identifiable {
             return result
         }
     }
+    var mostRecentSessionDate: Date? {
+            sessions?.compactMap { $0.stopDate ?? $0.startDate }.max()
+        }
     
     init(name: String, parentCategory: Category? = nil) {
         self.id = UUID().uuidString

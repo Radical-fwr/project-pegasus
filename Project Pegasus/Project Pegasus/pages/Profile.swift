@@ -72,7 +72,7 @@ struct Profile: View {
                         Spacer()
                         ForEach(categories) { category in
                             // al click della categoria vai alla pagina dettaglio categoria
-                            NavigationLink(destination: CategoryDetail(categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
+                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
                                 CategoryWStats(
                                     name: category.name.uppercased(),
                                     color: Color(hex: category.color),

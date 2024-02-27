@@ -117,10 +117,10 @@ struct ContentView: View {
         
         
         let session1 : Session = Session(category: categories[0],startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600)
-        let session2 : Session = Session(category: categories[1],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)
-        let session3 : Session = Session(category: categories[2],startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000)
+        let session2 : Session = Session(category: categories[0],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)
+        let session3 : Session = Session(category: categories[0],startDate: today, stopDate: today.addingTimeInterval(36000), timeGoal: 36000)
         let session4 : Session = Session(category: categories[3],startDate: oneDayAfterToday, stopDate: oneDayAfterToday.addingTimeInterval(0), timeGoal: 10)
-        let session5 : Session = Session(category: categories[0],startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0), timeGoal: 10)
+        let session5 : Session = Session(category: categories[2],startDate: twoDayAfterToday, stopDate: twoDayAfterToday.addingTimeInterval(0), timeGoal: 10)
         
         
         context.insert(session1)
@@ -136,29 +136,29 @@ struct ContentView: View {
         }
         
         // Dati di test per SubCategory
-        let testSubCategories = [
-            SubCategory(name: "Analisi Matematica", parentCategory: categories[0]),
-            SubCategory(name: "Algebra Lineare", parentCategory: categories[0]),
-            SubCategory(name: "Programmazione", parentCategory: categories[0]),
-            SubCategory(name: "Basi di Dati", parentCategory: categories[0]),
-            SubCategory(name: "Reti di Computer", parentCategory: categories[0])
-        ]
         
-        // Assumi che ogni SubCategory abbia un metodo per aggiungere delle Session con dati di test
-        for subCategory in testSubCategories {
-            // Assumi che esista un metodo per aggiungere Session
-            // Puoi aggiungere sessioni con dettagli specifici se necessario
-            
-            subCategory.sessions?.append(sessions[0])
-            subCategory.sessions?.append(sessions[1])
-            context.insert(subCategory)
-        }
+        let subC1 = SubCategory(name: "Analisi Matematica", parentCategory: categories[0])
+        let subC2 = SubCategory(name: "Algebra Lineare", parentCategory: categories[0])
+        let subC3 = SubCategory(name: "Programmazione", parentCategory: categories[0])
+        let subC4 = SubCategory(name: "Basi di Dati", parentCategory: categories[2])
+        let subC5 = SubCategory(name: "Reti di Computer", parentCategory: categories[3])
+        
+        
+        subC1.sessions?.append(sessions[0])
+        subC2.sessions?.append(sessions[2])
+        subC3.sessions?.append(sessions[1])
+        subC4.sessions?.append(sessions[3])
+        subC5.sessions?.append(sessions[4])
+        
+        context.insert(subC1)
+        context.insert(subC2)
+        context.insert(subC3)
+        context.insert(subC4)
+        context.insert(subC5)
+        
         do {
             try context.save()
             print("sessioni salvate")
-            for subCategory in testSubCategories {
-                print("Nome sottocategoria: " + subCategory.name)
-            }
         } catch {
             print("Error saving context: \(error)")
         }
