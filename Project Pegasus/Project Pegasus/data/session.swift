@@ -16,6 +16,7 @@ class Session: Identifiable {
     var startDate: Date
     var stopDate: Date?
     var timeGoal: Double
+    var rating: Int = 0
     
     init(category: Category? = nil, subCategory: SubCategory? = nil, startDate: Date, stopDate: Date? = nil, timeGoal: Double) {
         self.id = UUID().uuidString

@@ -23,6 +23,9 @@ struct RunningTimer: View {
     @State private var remainingTime: Double = 10
     @State private var progress: Double = 0
     
+    @State private var activeSession: Session?
+    @State private var isSessionFinished: Bool = false
+    
     func changeCategoryName(_ categoryName: String) {
         self.categoryName = categoryName
     }
@@ -48,6 +51,15 @@ struct RunningTimer: View {
     var body: some View {
         NavigationStack {
             ZStack{
+                
+                NavigationLink(destination: EndOFSession(session: activeSession), isActive: $isSessionFinished) {
+                    EmptyView()
+                }
+                .hidden()
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                .animation(nil)
+                
                 Color.black.ignoresSafeArea()
                 VStack{
                     Spacer()
@@ -86,12 +98,13 @@ struct RunningTimer: View {
                             stopped = true
                             if let identifier = timerManager.identifier {
                                 if let session = sessions.first(where: { $0.id == identifier }) {
+                                    activeSession = session
                                     session.stopDate = Date()
                                     print(Date())
                                     do {
                                         try context.save()
                                         timerManager.deleteFirstPendingTimer(completion: { _ in })
-                                        self.presentationMode.wrappedValue.dismiss()
+                                        isSessionFinished = true
                                     } catch {
                                         print("Error saving context: \(error)")
                                     }
@@ -157,6 +170,7 @@ struct RunningTimer: View {
                 if timerManager.remainingTime == 0 {
                     if let identifier = timerManager.identifier {
                         if let session = sessions.first(where: { $0.id == identifier }) {
+                            activeSession = session
                             session.stopDate = session.startDate.addingTimeInterval(session.timeGoal)
                             do {
                                 try context.save()
@@ -167,7 +181,7 @@ struct RunningTimer: View {
                             print("errore nell'aggiornare la sessione")
                         }
                     }
-                    self.presentationMode.wrappedValue.dismiss()
+                    isSessionFinished = true
                 }
 
             }

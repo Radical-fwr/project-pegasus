@@ -85,11 +85,9 @@ struct Home: View {
 
 #Preview{
     let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)
-    let testUser: User = User(nome: "Giorgio")
     let category1: Category = Category(name: "study", color: "EC8E14")
     let category2: Category = Category(name: "work", color: "F6DE00")
     let category3: Category = Category(name: "detox", color: "F9DEFF")
-    container.mainContext.insert(testUser)
     container.mainContext.insert(category1)
     container.mainContext.insert(category2)
     container.mainContext.insert(category3)
