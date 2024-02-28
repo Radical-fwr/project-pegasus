@@ -18,6 +18,8 @@ struct Home: View {
     @State private var selectedMinute: Double?
     @State private var timerIsActive: Bool = false
     @StateObject var timerManager = TimerManager()
+    @State var isSubCategoriesDisplayExpanded : Bool = false
+    @State var streakPosition: Double = 0
         
     var body: some View {
         NavigationStack {
@@ -31,7 +33,6 @@ struct Home: View {
                 .navigationBarBackButtonHidden(true)
                 
                 Color.black.edgesIgnoringSafeArea(.all)
-                
 
                 VStack {
                     TopBar()
@@ -48,7 +49,7 @@ struct Home: View {
                     }
                     Spacer()
                     HStack {
-                        SubCategoriesDisplay(category: selectedCategory, selectedSubCategory: $selectedSubCategory)
+                        SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
                             .padding()
                             .padding()
                             
@@ -63,10 +64,10 @@ struct Home: View {
                         .scaledToFill()
                     }
                     Spacer()
-                    HStack{
-                        //bottom bar
-                    }
+                    
                 }
+                
+                Streak().ignoresSafeArea()
             }
         }
         .background(.black)

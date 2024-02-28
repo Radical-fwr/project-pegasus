@@ -90,7 +90,7 @@ struct RunningTimer: View {
                     }
                 }
                 .gesture(
-                    LongPressGesture(minimumDuration: 11)
+                    LongPressGesture(minimumDuration: 10)
                         .updating($isHoldingCircle) { value, state, transaction in
                             state = value
                         }
@@ -128,23 +128,33 @@ struct RunningTimer: View {
                             .font(Font.custom("HelveticaNeue", size: 36))
                             .fontWeight(.bold)
                             .animation(nil)
+                        
                         Spacer().animation(nil)
+                        
                         Text("Hai già finito?")
                             .font(Font.custom("Montserrat", size: 36))
                             .fontWeight(.bold)
                             .textCase(.uppercase)
                             .animation(nil)
+                        
                         Text("Solleva il dito per riprendere:")
+                            .font(Font.custom("HelveticaNeue", size: 20))
                             .animation(nil)
+                        
                         Spacer().animation(nil)
+                        
                         LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                        
                         Spacer().animation(nil)
+                        
                         Text("\(categoryName)")
                             .font(Font.custom("HelveticaNeue", size: 36))
                             .fontWeight(.bold)
                             .textCase(.uppercase)
                             .animation(nil)
+                        
                         Spacer().animation(nil)
+                        
                         Spacer().animation(nil)
                     }
                 }

@@ -72,6 +72,7 @@ struct EndOFSession: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(25)
+                            .foregroundColor(.black)
                             
                     }
                     .background(.white)

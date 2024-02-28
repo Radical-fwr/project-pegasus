@@ -11,7 +11,7 @@ import SwiftData
 struct SubCategoriesDisplay: View {
     @Environment(\.modelContext) private var context
     var category: Category?
-    @State private var opened: Bool = false
+    @Binding var opened: Bool
     @State private var showAlert: Bool = false
     @State private var newSubcategoryName: String = ""
     @Query var subCategories: [SubCategory]

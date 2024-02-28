@@ -17,6 +17,16 @@ class Session: Identifiable {
     var stopDate: Date?
     var timeGoal: Double
     var rating: Int = 0
+    var progress: Double {
+        get {
+            var progressCalc: Double = 0
+            if let stopDate = stopDate {
+                let sessionDuration: Double = stopDate.timeIntervalSince(startDate)
+                progressCalc = sessionDuration / timeGoal
+            }
+            return progressCalc
+        }
+    }
     
     init(category: Category? = nil, subCategory: SubCategory? = nil, startDate: Date, stopDate: Date? = nil, timeGoal: Double) {
         self.id = UUID().uuidString
