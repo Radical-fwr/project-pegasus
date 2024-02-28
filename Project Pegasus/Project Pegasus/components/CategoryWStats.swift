@@ -22,15 +22,17 @@ struct CategoryWStats: View {
     
     var body: some View {
         HStack {
-            Text(name)
+            Text(name.capitalized)
                 .padding()
                 //.background(gradient)
                 .foregroundColor(.white)
                 .cornerRadius(200)
                 .frame(height: 40)
+                .font(Font.custom("HelveticaNeue", size: 24).weight(.bold))
             Spacer()
             Text("\(Int(progress * 100))%")
                 .foregroundColor(.white)
+                .opacity(0)
             
             CircularProgressView(progress: progress, color: .white)
                 .frame(width: 20)

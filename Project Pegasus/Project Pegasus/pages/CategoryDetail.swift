@@ -18,24 +18,24 @@ struct CategoryDetail: View {
     let categoryName: String
     let categoryColor: Color!
     let gradient = LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
-    @Query var subCategories : [SubCategory]
+    @Query var sessions : [Session]
     @State private var showingFilter = false
     @State private var selectedFilter: FilterType = .null
     
     /// permette di applicare il filtro selezionato, di default è impostato .null ovvero la lista di sottocategorie così come viene ottenuta da @Query
-    private var filteredSubCategories: [SubCategory] {
+    private var filteredSessions: [Session] {
         
         switch selectedFilter {
         case .alphabetical:
-            return subCategories.sorted(by: { $0.name < $1.name })
+            return sessions.sorted(by: { $0.subCategory!.name < $1.subCategory!.name })
         case .efficiency:
-            return subCategories.sorted(by: { $0.progress > $1.progress })
+            return sessions.sorted(by: { $0.progress > $1.progress })
         case .date:
-            return subCategories.sorted(by: {
-                $0.mostRecentSessionDate ?? Date.distantPast > $1.mostRecentSessionDate ?? Date.distantPast
+            return sessions.sorted(by: {
+                $0.startDate > $1.startDate
             })
         case .null:
-            return subCategories
+            return sessions
         }
     }
     
@@ -78,15 +78,14 @@ struct CategoryDetail: View {
                         )
                     }*/
                     
-                    ForEach(filteredSubCategories){ _subCategory in
-                        if _subCategory.parentCategory!.id == categoryId {
+                    ForEach(filteredSessions){ session in
                             CategoryWStats(
-                                name: _subCategory.name.uppercased(),
+                                name: session.subCategory != nil ? session.subCategory!.name.uppercased() : "Nessuna sottocategoria",
                                 color: categoryColor,
-                                progress: _subCategory.progress,
+                                progress: session.progress,
                                 gradient: gradient
                             )
-                        }
+                        
                     }
                 }
             })

@@ -71,17 +71,19 @@ struct RunningTimer: View {
                 }.ignoresSafeArea()
                 ZStack {
                     FadingCircleView(size: UIScreen.main.bounds.width * 0.7, color: mainColor)
-                    ZStack {
-                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
-                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80, wait: 1)
-                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120, wait: 2)
-                            .rotationEffect(.degrees(70))
-                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80, wait: 3)
-                            .rotationEffect(Angle(degrees: 200))
-                        CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110, wait: 4)
-                            .rotationEffect(Angle(degrees: 270))
+                    if (!isHoldingCircle) {
+                        ZStack {
+                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
+                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80, wait: 1)
+                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120, wait: 2)
+                                .rotationEffect(.degrees(70))
+                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80, wait: 3)
+                                .rotationEffect(Angle(degrees: 200))
+                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110, wait: 4)
+                                .rotationEffect(Angle(degrees: 270))
+                        }
+                        .opacity(isHoldingCircle ? 0 : 1)
                     }
-                    .opacity(isHoldingCircle ? 0 : 1)
                 }
                 .rotationEffect(.degrees(degrees))
                 .onAppear {

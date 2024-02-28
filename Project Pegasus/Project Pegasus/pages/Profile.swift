@@ -44,13 +44,14 @@ struct Profile: View {
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack {
                     Text("Efficienza".uppercased())
-                        .font(.title)
+                        .font(Font.custom("Montserrat", size: 32).weight(.bold))
                         .fontWeight(.bold)
-                        .frame(maxWidth: .infinity,alignment: .leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading])
                     
                     Text(daysSelected() ?? "Data non disponibile")
-                        .font(.callout)
+                        .font(Font.custom("HelveticaNeue", size: 16))
+                        .foregroundColor(.white.opacity(0.5))
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
                     
@@ -61,7 +62,7 @@ struct Profile: View {
                     Spacer(minLength: 30)
                     
                     Text("Categorie".uppercased())
-                        .font(.title)
+                        .font(Font.custom("Montserrat", size: 32).weight(.bold))
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
@@ -78,7 +79,7 @@ struct Profile: View {
                                     color: Color(hex: category.color),
                                     progress: category.progress
                                 )
-                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.75)
+                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.85)
                                 .padding(5)
                             }
                         }
@@ -86,7 +87,8 @@ struct Profile: View {
                     
                     Spacer()
                     Text("+ Nuovo Tag")
-                        .font(Font.custom("", size: 30))
+                        .font(Font.custom("HelveticaNeue", size: 24))
+                        .foregroundColor(.white.opacity(0.5))
                         .padding()
                         .onTapGesture {
                             isSheetPresented = true

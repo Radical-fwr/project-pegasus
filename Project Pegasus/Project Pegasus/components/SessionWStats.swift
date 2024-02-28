@@ -28,7 +28,7 @@ struct SessionWStats: View {
                 .frame(height: 40)
                 .font(Font.custom("HelveticaNeue", size: 18).weight(.light))
             Spacer()
-            Text("\(Int(session.progress * 100))%")
+            
             CircularProgressView(progress: session.progress, color: .white)
                 .frame(width: 20)
                 .padding(.trailing)

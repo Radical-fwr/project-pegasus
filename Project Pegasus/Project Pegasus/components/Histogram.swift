@@ -58,13 +58,13 @@ struct CustomHistogramView: View {
             let calendar = Calendar.current
             let dayOfWeek = calendar.component(.weekday, from: date)
             switch dayOfWeek {
-            case 1: return "D"
-            case 2: return "L"
-            case 3: return "M"
-            case 4: return "M"
-            case 5: return "G"
-            case 6: return "V"
-            case 7: return "S"
+            case 1: return "d"
+            case 2: return "l"
+            case 3: return "m"
+            case 4: return "m"
+            case 5: return "g"
+            case 6: return "v"
+            case 7: return "s"
             default: return ""
             }
         }
