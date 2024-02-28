@@ -14,11 +14,6 @@ struct CircularProgressView: View {
     
     var body: some View {
         ZStack {
-            //Circle()
-            //    .stroke(
-            //        Color.pink.opacity(0.5),
-            //        lineWidth: 30
-            //   )
             Circle()
                 .trim(from: 0, to: progress)
                 .stroke(
