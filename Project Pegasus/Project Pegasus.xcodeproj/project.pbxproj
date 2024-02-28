@@ -39,6 +39,7 @@
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
 		E61B9EC52B8E7DCC0012EBF5 /* FilterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B9EC42B8E7DCC0012EBF5 /* FilterSheetView.swift */; };
+		E67F67A22B8F934100960EDD /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67F67A12B8F934100960EDD /* FilterButton.swift */; };
 		E69AEC562B8A084300452FC2 /* CategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69AEC552B8A084300452FC2 /* CategoryDetail.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
 		E61B9EC42B8E7DCC0012EBF5 /* FilterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheetView.swift; sourceTree = "<group>"; };
+		E67F67A12B8F934100960EDD /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		E69AEC552B8A084300452FC2 /* CategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetail.swift; sourceTree = "<group>"; };
 		E6F595E32B80CD1B004897E0 /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +208,7 @@
 				162E6E5C2B557E5200BB9F0F /* SubCategoriesDisplay.swift */,
 				E6F595E32B80CD1B004897E0 /* Histogram.swift */,
 				E61B9EC42B8E7DCC0012EBF5 /* FilterSheetView.swift */,
+				E67F67A12B8F934100960EDD /* FilterButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				163284822AFE84B900D94C32 /* AddCategory.swift in Sources */,
 				162E6E552B516A8A00BB9F0F /* FadingCircleView.swift in Sources */,
 				162E6E572B5182D600BB9F0F /* CircleMovingLine.swift in Sources */,
+				E67F67A22B8F934100960EDD /* FilterButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

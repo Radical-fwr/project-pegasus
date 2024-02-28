@@ -11,40 +11,14 @@ struct FilterSheetView: View {
     @Binding var selectedFilter: FilterType
     @Environment(\.presentationMode) var presentationMode
     
-    let gradient = LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
+    let gradient = LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.8)]), startPoint: .leading, endPoint: .trailing )
     
     var body: some View {
         VStack(spacing: 0) {
             
-            Button(action: {
-                selectedFilter = .date
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("DATA")
-                    .font(.title2.bold())
-                    .padding(.top,15)
-                    .foregroundColor(selectedFilter == .date ? .white : .gray)
-            }
-            
-            Button(action: {
-                selectedFilter = .alphabetical
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("A-Z")
-                    .font(.title2.bold())
-                    .padding(.top,15)
-                    .foregroundColor(selectedFilter == .alphabetical ? .white : .gray)
-            }
-            
-            Button(action: {
-                selectedFilter = .efficiency
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Text("EFFICIENZA")
-                    .font(.title2.bold())
-                    .padding(.top,15)
-                    .foregroundColor(selectedFilter == .efficiency ? .white : .gray)
-            }
+            FilterButton(title: "DATA", filterType: .date, selectedFilter: $selectedFilter)
+            FilterButton(title: "A-Z", filterType: .alphabetical, selectedFilter: $selectedFilter)
+            FilterButton(title: "EFFICIENZA", filterType: .efficiency, selectedFilter: $selectedFilter)
             
             Button(action: {
                 presentationMode.wrappedValue.dismiss()
@@ -52,7 +26,7 @@ struct FilterSheetView: View {
                 Text("Annulla")
                     .font(.callout.bold())
                     .padding(.top,15)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.white.opacity(0.5))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -64,3 +38,7 @@ struct FilterSheetView: View {
 
 
 
+#Preview {
+    
+    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange)
+}
