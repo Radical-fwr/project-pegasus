@@ -20,13 +20,18 @@ struct SessionWStats: View {
                 .font(Font.custom("HelveticaNeue", size: 18).weight(.light))
             
             Spacer()
+            Spacer()
+            Spacer()
             
-            Text(session.category!.name.uppercased())
-                .foregroundColor(Color(hex: session.category!.color))
-                .padding()
-                .cornerRadius(200)
-                .frame(height: 40)
-                .font(Font.custom("HelveticaNeue", size: 18).weight(.light))
+            HStack{
+                Text(session.category!.name.uppercased())
+                    .foregroundColor(Color(hex: session.category!.color))
+                    .padding()
+                    .cornerRadius(200)
+                    .frame(height: 40)
+                    .font(Font.custom("HelveticaNeue", size: 18).weight(.light))
+                Spacer()
+            }.frame(width: UIScreen.main.bounds.width * 0.3)
             Spacer()
             
             CircularProgressView(progress: session.progress, color: .white)

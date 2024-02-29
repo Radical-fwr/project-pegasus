@@ -53,7 +53,7 @@ struct CustomHistogramView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         if dateFormatter.string(from: Date()) == dateFormatter.string(from: date) {
-            return "Oggi"
+            return "oggi"
         } else {
             let calendar = Calendar.current
             let dayOfWeek = calendar.component(.weekday, from: date)
@@ -101,6 +101,7 @@ struct CustomHistogramView: View {
                 ForEach(dailyEfficiency().keys.sorted(), id: \.self) { key in
                     Text(dayLabel(for: key))
                         .frame(maxWidth: .infinity)
+                        .font(Font.custom("Helvetica Neue", size: 22).weight(dayLabel(for: key) == "oggi" ? .bold : .regular))
                 }
             }
         }

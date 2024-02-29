@@ -18,6 +18,9 @@ struct LiquidCircle: View {
         ZStack {
             WaveAnimation(color: color)
                 .offset(y: offset)
+                .clipped()
+                .contentShape(Circle())
+                .border(.red)
 //            HStack{
 //                Button("increase") {
 //                    progress += 1
@@ -41,6 +44,7 @@ struct LiquidCircle: View {
         .clipShape(Circle())
         .clipped()
         .blur(radius: 20)
+        //.border(.red)
 
     }
     

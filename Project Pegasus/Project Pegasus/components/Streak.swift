@@ -24,6 +24,18 @@ struct Streak: View {
                 Spacer()
                 Spacer()
                 Spacer()
+                
+                if (textVisible) {
+                    HStack{
+                        Text("STREAK")
+                        .font(Font.custom("Montserrat", size: 36).weight(.bold))
+                        .foregroundColor(.white)
+                        
+                        Spacer()
+                    }.padding()
+                    
+                }
+                
                 Image("arrow-up-large")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -51,17 +63,15 @@ struct Streak: View {
                         }
                     }
                 
-                if (textVisible) {
-                    Text("STREAK")
-                    .font(Font.custom("Montserrat", size: 36).weight(.bold))
-                    .foregroundColor(.white)
-                }
+                
                 
                 ScrollView{
                     ForEach(sessions) { session in
                         SessionWStats(session: session)
                     }
-                }.padding()
+                }
+                .padding()
+                .scrollIndicators(.hidden)
             }
             .frame(width: UIScreen.main.bounds.width)
             .background(

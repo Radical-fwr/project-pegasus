@@ -70,7 +70,7 @@ struct RunningTimer: View {
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
                 ZStack {
-                    FadingCircleView(size: UIScreen.main.bounds.width * 0.7, color: mainColor)
+                    FadingCircleView(size: UIScreen.main.bounds.width * 0.7, color: mainColor).animation(nil)
                     if (!isHoldingCircle) {
                         ZStack {
                             CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
@@ -145,7 +145,9 @@ struct RunningTimer: View {
                         
                         Spacer().animation(nil)
                         
-                        LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                        Spacer().animation(nil)
+                        Spacer().animation(nil)
+                        Spacer().animation(nil)
                         
                         Spacer().animation(nil)
                         
@@ -159,8 +161,13 @@ struct RunningTimer: View {
                         
                         Spacer().animation(nil)
                     }
+                    
+                    LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                    
                 }
                 .opacity(isHoldingCircle ? 1 : 0)
+                
+                
             }
         }
         .onAppear() {

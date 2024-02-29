@@ -46,7 +46,7 @@ struct StartButton: View {
                     .foregroundColor(.black)
                     .padding()
                     .padding()
-                    .background(Color.white)
+                    .background(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0.7)]), startPoint: .leading, endPoint: .trailing))
                     .clipShape(Circle())
                     .overlay(
                         Circle()

@@ -50,8 +50,9 @@ struct Home: View {
                     Spacer()
                     HStack {
                         SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
-                            .padding()
-                            .padding()
+                            //.padding()
+                            .padding(.leading, 50)
+                            //.padding()
                             
                         Spacer()
                         StartButton(

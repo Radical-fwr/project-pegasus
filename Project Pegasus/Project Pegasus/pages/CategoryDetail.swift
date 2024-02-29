@@ -27,22 +27,20 @@ struct CategoryDetail: View {
         
         switch selectedFilter {
         case .alphabetical:
-            return sessions.sorted(by: { $0.subCategory!.name < $1.subCategory!.name })
+            return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.subCategory!.name < $1.subCategory!.name })
         case .efficiency:
-            return sessions.sorted(by: { $0.progress > $1.progress })
+            return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.progress > $1.progress })
         case .date:
-            return sessions.sorted(by: {
-                $0.startDate > $1.startDate
-            })
+            return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.startDate > $1.startDate })
         case .null:
-            return sessions
+            return sessions.filter{ session in session.category!.id == categoryId }
         }
     }
     
     var body: some View {
         
         ZStack {
-            VStack(alignment: .center, content: {
+            VStack(alignment: .center) {
                 HStack {
                     Text(categoryName)
                         .font(.title.bold())
@@ -65,30 +63,50 @@ struct CategoryDetail: View {
                 }
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.bottom)
                 
                 ScrollView(showsIndicators: false){
                     
                     /// codice di test
-                    /*ForEach(0..<15) { _ in
-                        CategoryWStats(
-                            name: "Analisi 2",
-                            color: categoryColor,
-                            progress: 0.6,
-                            gradient: gradient
-                        )
-                    }*/
+//                    ForEach(0..<15) { _ in
+//                        CategoryWStats(
+//                            name: "Analisi 2",
+//                            color: categoryColor,
+//                            progress: 0.6,
+//                            gradient: gradient
+//                        )
+//                    }
                     
                     ForEach(filteredSessions){ session in
-                            CategoryWStats(
+                            CategoryDetailSession(
                                 name: session.subCategory != nil ? session.subCategory!.name.uppercased() : "Nessuna sottocategoria",
                                 color: categoryColor,
                                 progress: session.progress,
                                 gradient: gradient
                             )
-                        
                     }
+                    
+                    VStack{
+                        Spacer()
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
+                            .frame(height: 150)
+                            .foregroundColor(Color.blue)
+                            .ignoresSafeArea()
+                    }
+                    .offset(y: -150)
+                    
+                    
+                    Image("trash")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.black)
+                        .frame(width: 30)
+                        .offset(y: -100)
+                    
+                    
                 }
-            })
+            }
             .padding(.horizontal,25)
             .background(categoryColor.edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $showingFilter) {
@@ -96,16 +114,15 @@ struct CategoryDetail: View {
                     .presentationDetents([.height(240)])
                     .presentationBackground(Color(categoryColor))
             }
-            VStack {
+            
+            VStack{
                 Spacer()
                 Rectangle()
-                    .fill(LinearGradient(
-                        gradient: Gradient(colors: [Color(.white).opacity(0.0), categoryColor]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ))
-                    .frame(height: 150)
-            }.edgesIgnoringSafeArea(.all)
+                    .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
+                    .frame(width: UIScreen.main.bounds.width, height: 150)
+                    .foregroundColor(Color.blue)
+                    .ignoresSafeArea()
+            }.ignoresSafeArea()
             
         }
     }

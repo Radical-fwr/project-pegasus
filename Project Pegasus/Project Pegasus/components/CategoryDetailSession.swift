@@ -1,13 +1,13 @@
 //
-//  CategoryWStats.swift
+//  CategoryDetailSession.swift
 //  Project Pegasus
 //
-//  Created by Lorenzo Vecchio on 16/11/23.
+//  Created by Lorenzo Vecchio on 29/02/24.
 //
 
 import SwiftUI
 
-struct CategoryWStats: View {
+struct CategoryDetailSession: View {
     private var name: String
     private var color: Color
     private var progress: Double
@@ -28,13 +28,10 @@ struct CategoryWStats: View {
                 .foregroundColor(.white)
                 .cornerRadius(200)
                 .frame(height: 40)
-                .font(Font.custom("Helvetica Neue", size: 24).weight(.semibold))
-            
+                .font(Font.custom("Helvetica Neue", size: 18).weight(.regular))
             Spacer()
-            
-//            Text("\(Int(progress * 100))%")
-//                .foregroundColor(.white)
-                
+            Text("\(Int(progress * 100))%")
+                .foregroundColor(.white)
             
             CircularProgressView(progress: progress, color: .white)
                 .frame(width: 20)
