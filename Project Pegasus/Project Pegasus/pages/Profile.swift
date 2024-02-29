@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct Profile: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.modelContext) private var context
     @Query var users: [User]
     @Query var categories: [Category]
@@ -30,7 +31,7 @@ struct Profile: View {
         let formattedDates = dates.map { dateFormatter.string(from: $0) }
         
         if let firstDate = formattedDates.first, let lastDate = formattedDates.last {
-            let resultString = "\(firstDate)-\(lastDate)"
+            let resultString = "\(firstDate) - \(lastDate)"
             return resultString // Ritorna la stringa dell'intervallo di date.
         }
         
@@ -43,6 +44,18 @@ struct Profile: View {
             ZStack{
                 Color.black.edgesIgnoringSafeArea(.all)
                 VStack {
+                    Spacer().frame(height: 10)
+                    HStack {
+                        R_button()
+                            .foregroundColor(.white)
+                            .onTapGesture {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
+                        Spacer()
+                    }.padding(.leading)
+                    Spacer().frame(height: 30)
+                    
+                    
                     Text("Efficienza".uppercased())
                         .font(Font.custom("Montserrat", size: 32).weight(.bold))
                         .fontWeight(.bold)
@@ -55,9 +68,17 @@ struct Profile: View {
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
                     
-                    CustomHistogramView(sessions: sessions)
-                        .frame(maxWidth: UIScreen.main.bounds.size.width*0.90)
-                        .padding(10)
+                    ZStack {
+                        CustomHistogramView(sessions: sessions)
+                            .frame(maxWidth: UIScreen.main.bounds.size.width*0.90)
+                            .padding(10)
+                        
+                        Rectangle()
+                            .fill(
+                                LinearGradient(colors: [.black.opacity(1), .black.opacity(0.3), .clear, .black.opacity(0.3), .black.opacity(1)], startPoint: .leading, endPoint: .trailing)
+                            )
+                        
+                    }
                     
                     Spacer(minLength: 30)
                     
@@ -66,11 +87,9 @@ struct Profile: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
-                    Spacer()
+                        .frame(height: 33)
                     
                     ScrollView{
-                        Spacer()
-                        Spacer()
                         ForEach(categories) { category in
                             // al click della categoria vai alla pagina dettaglio categoria
                             NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
@@ -101,6 +120,9 @@ struct Profile: View {
         .sheet(isPresented: $isSheetPresented, onDismiss: {isSheetPresented = false}, content: {
             AddCategory(isPresented: $isSheetPresented).background(.black)
         })
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 

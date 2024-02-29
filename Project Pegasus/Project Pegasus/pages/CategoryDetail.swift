@@ -14,6 +14,7 @@ enum FilterType {
 }
 
 struct CategoryDetail: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let categoryId: String
     let categoryName: String
     let categoryColor: Color!
@@ -38,93 +39,109 @@ struct CategoryDetail: View {
     }
     
     var body: some View {
-        
-        ZStack {
-            VStack(alignment: .center) {
-                HStack {
-                    Text(categoryName)
-                        .font(.title.bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.black)
+        NavigationView {
+            ZStack {
+                VStack(alignment: .center) {
                     
-                    Spacer()
-                    Circle()
-                        .strokeBorder(Color.black, lineWidth: 3)
-                        .frame(width: 28, height: 28)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                
-                Button(action: {
-                    showingFilter = true
-                }) {
-                    Text("Ordina per")
-                    Image(systemName: "arrow.up.arrow.down")
-                        .font(.caption)
-                }
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.bottom)
-                
-                ScrollView(showsIndicators: false){
-                    
-                    /// codice di test
-//                    ForEach(0..<15) { _ in
-//                        CategoryWStats(
-//                            name: "Analisi 2",
-//                            color: categoryColor,
-//                            progress: 0.6,
-//                            gradient: gradient
-//                        )
-//                    }
-                    
-                    ForEach(filteredSessions){ session in
-                            CategoryDetailSession(
-                                name: session.subCategory != nil ? session.subCategory!.name.uppercased() : "Nessuna sottocategoria",
-                                color: categoryColor,
-                                progress: session.progress,
-                                gradient: gradient
-                            )
-                    }
-                    
-                    VStack{
+                    Spacer().frame(height: 30)
+                    HStack {
+                        R_button()
+                            .foregroundColor(.black)
+                            .onTapGesture {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         Spacer()
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
-                            .frame(height: 150)
-                            .foregroundColor(Color.blue)
-                            .ignoresSafeArea()
                     }
-                    .offset(y: -150)
+                    Spacer().frame(height: 30)
                     
+                    HStack {
+                        Text(categoryName)
+                            .font(.title.bold())
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(.black)
+                        
+                        Spacer()
+                        Circle()
+                            .strokeBorder(Color.black, lineWidth: 3)
+                            .frame(width: 28, height: 28)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
                     
-                    Image("trash")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .foregroundColor(.black)
-                        .frame(width: 30)
-                        .offset(y: -100)
+                    Button(action: {
+                        showingFilter = true
+                    }) {
+                        Text("Ordina per")
+                        Image(systemName: "arrow.up.arrow.down")
+                            .font(.caption)
+                    }
+                    .foregroundColor(.black)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom)
                     
-                    
+                    ScrollView(showsIndicators: false){
+                        
+                        /// codice di test
+    //                    ForEach(0..<15) { _ in
+    //                        CategoryWStats(
+    //                            name: "Analisi 2",
+    //                            color: categoryColor,
+    //                            progress: 0.6,
+    //                            gradient: gradient
+    //                        )
+    //                    }
+                        
+                        ForEach(filteredSessions){ session in
+                                CategoryDetailSession(
+                                    name: session.subCategory != nil ? session.subCategory!.name.uppercased() : "Nessuna sottocategoria",
+                                    color: categoryColor,
+                                    progress: session.progress,
+                                    gradient: gradient
+                                )
+                        }
+                        
+                        VStack{
+                            Spacer()
+                            Rectangle()
+                                .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
+                                .frame(height: 150)
+                                .foregroundColor(Color.blue)
+                                .ignoresSafeArea()
+                        }
+                        .offset(y: -150)
+                        
+                        
+                        Image("trash")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.black)
+                            .frame(width: 30)
+                            .offset(y: -100)
+                        
+                        
+                    }
                 }
+                .padding(.horizontal,25)
+                .background(categoryColor.edgesIgnoringSafeArea(.all))
+                .sheet(isPresented: $showingFilter) {
+                    FilterSheetView(selectedFilter: $selectedFilter)
+                        .presentationDetents([.height(240)])
+                        .presentationBackground(Color(categoryColor))
+                }
+                
+                VStack{
+                    Spacer()
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
+                        .frame(width: UIScreen.main.bounds.width, height: 150)
+                        .foregroundColor(Color.blue)
+                        .ignoresSafeArea()
+                }.ignoresSafeArea()
+                
             }
-            .padding(.horizontal,25)
-            .background(categoryColor.edgesIgnoringSafeArea(.all))
-            .sheet(isPresented: $showingFilter) {
-                FilterSheetView(selectedFilter: $selectedFilter)
-                    .presentationDetents([.height(240)])
-                    .presentationBackground(Color(categoryColor))
-            }
-            
-            VStack{
-                Spacer()
-                Rectangle()
-                    .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
-                    .frame(width: UIScreen.main.bounds.width, height: 150)
-                    .foregroundColor(Color.blue)
-                    .ignoresSafeArea()
-            }.ignoresSafeArea()
-            
         }
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 

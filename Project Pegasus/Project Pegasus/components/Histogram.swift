@@ -93,7 +93,7 @@ struct CustomHistogramView: View {
                     path.move(to: CGPoint(x: 0, y: y))
                     path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                 }
-                .stroke(LinearGradient(gradient: Gradient(colors: [.black, .white, .black]), startPoint: .leading, endPoint: .trailing), lineWidth: 2)
+                .stroke(LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white.opacity(0.5), .white.opacity(0.7), .white.opacity(0.5), .white.opacity(0.1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
             }
             .frame(height: 200)
             
@@ -103,7 +103,7 @@ struct CustomHistogramView: View {
                         .frame(maxWidth: .infinity)
                         .font(Font.custom("Helvetica Neue", size: 22).weight(dayLabel(for: key) == "oggi" ? .bold : .regular))
                 }
-            }
+            }.offset(y: -20)
         }
     }
 }
