@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryWStats: View {
+    @Environment(\.colorScheme) var colorScheme
     private var name: String
     private var color: Color
     private var progress: Double
@@ -25,7 +26,7 @@ struct CategoryWStats: View {
             Text(name.capitalized)
                 .padding()
                 //.background(gradient)
-                .foregroundColor(.white)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
                 .cornerRadius(200)
                 .frame(height: 40)
                 .font(Font.custom("Helvetica Neue", size: 24).weight(.semibold))
@@ -36,7 +37,7 @@ struct CategoryWStats: View {
 //                .foregroundColor(.white)
                 
             
-            CircularProgressView(progress: progress, color: .white)
+            CircularProgressView(progress: progress, color: colorScheme == .dark ? .white : .black)
                 .frame(width: 20)
                 .padding(.trailing)
         }

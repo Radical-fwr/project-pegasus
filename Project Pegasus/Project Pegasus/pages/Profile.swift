@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct Profile: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.modelContext) private var context
     @Query var users: [User]
@@ -42,17 +43,20 @@ struct Profile: View {
     var body: some View {
         NavigationStack {
             ZStack{
-                Color.black.edgesIgnoringSafeArea(.all)
+                
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                
                 VStack {
                     Spacer().frame(height: 10)
                     HStack {
                         R_button()
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .onTapGesture {
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                         Spacer()
                     }.padding(.leading)
+                    
                     Spacer().frame(height: 30)
                     
                     
@@ -61,10 +65,11 @@ struct Profile: View {
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading])
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     
                     Text(daysSelected() ?? "Data non disponibile")
                         .font(Font.custom("HelveticaNeue", size: 16))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
                     
@@ -75,7 +80,13 @@ struct Profile: View {
                         
                         Rectangle()
                             .fill(
-                                LinearGradient(colors: [.black.opacity(1), .black.opacity(0.3), .clear, .black.opacity(0.3), .black.opacity(1)], startPoint: .leading, endPoint: .trailing)
+                                LinearGradient(colors: [
+                                    colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
+                                    colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
+                                    .clear,
+                                    colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
+                                    colorScheme == .dark ? .black : Color(hex: "F2EFE9")
+                                ], startPoint: .leading, endPoint: .trailing)
                             )
                         
                     }
@@ -88,6 +99,7 @@ struct Profile: View {
                         .frame(maxWidth: .infinity,alignment: .leading)
                         .padding([.leading])
                         .frame(height: 33)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     
                     ScrollView{
                         ForEach(categories) { category in
@@ -107,7 +119,7 @@ struct Profile: View {
                     Spacer()
                     Text("+ Nuovo Tag")
                         .font(Font.custom("HelveticaNeue", size: 24))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
                         .padding()
                         .onTapGesture {
                             isSheetPresented = true

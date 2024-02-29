@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct Streak: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     @Query var sessions: [Session]
     @State private var rotation: Double = 180
@@ -29,7 +30,7 @@ struct Streak: View {
                     HStack{
                         Text("STREAK")
                         .font(Font.custom("Montserrat", size: 36).weight(.bold))
-                        .foregroundColor(.white)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         
                         Spacer()
                     }.padding()
@@ -39,7 +40,7 @@ struct Streak: View {
                 Image("arrow-up-large")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .frame(width: 50)
                     .rotationEffect(Angle(degrees: rotation))
                     .onTapGesture {
@@ -53,14 +54,16 @@ struct Streak: View {
                                 position = 25
                                 rotation = 0
                                 opened = true
-                            }
-                        } completion: {
-                            withAnimation(.easeInOut) {
-                                if (opened) {
-                                    textVisible = true
-                                }
+                                textVisible = true
                             }
                         }
+//                        completion: {
+//                            withAnimation(.easeInOut) {
+//                                if (opened) {
+//                                    textVisible = true
+//                                }
+//                            }
+//                        }
                     }
                 
                 
@@ -69,13 +72,24 @@ struct Streak: View {
                     ForEach(sessions) { session in
                         SessionWStats(session: session)
                     }
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(height: 100)
+                        
                 }
                 .padding()
                 .scrollIndicators(.hidden)
             }
             .frame(width: UIScreen.main.bounds.width)
             .background(
-                LinearGradient(gradient: Gradient(colors: [opened ? .black : .clear, opened ? .white : .black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [
+                    opened ?
+                    colorScheme == .dark ? .black : Color(hex: "F2EFE9") :
+                        .clear,
+                    opened ?
+                    colorScheme == .dark ? .white : Color(hex: "F2EFE9") :
+                    colorScheme == .dark ? .black.opacity(0.5) : Color(hex: "F2EFE9").opacity(0.5)
+                ]), startPoint: .top, endPoint: .bottom)
             )
             .padding(.top, position)
             
@@ -83,13 +97,40 @@ struct Streak: View {
             
         }
         
+        if (opened) {
+            VStack{
+                Spacer()
+                Rectangle()
+                    .fill(LinearGradient(gradient: Gradient(colors: [
+                        .white,
+                        .white.opacity(0.4),
+                        .clear
+                    ]), startPoint: .bottom, endPoint: .top))
+                    .frame(width: UIScreen.main.bounds.width, height: 150)
+                    //.foregroundColor(Color.blue)
+                    .ignoresSafeArea()
+            }.ignoresSafeArea()
+        }
+        if (!opened) {
+            VStack{
+                Spacer()
+                Rectangle()
+                    .fill(LinearGradient(gradient: Gradient(colors: [
+                        colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
+                        colorScheme == .dark ? .black.opacity(0.4) : Color(hex: "F2EFE9").opacity(0.4),
+                        .clear
+                    ]), startPoint: .bottom, endPoint: .top))
+                    .frame(width: UIScreen.main.bounds.width, height: 50)
+                    //.foregroundColor(Color.blue)
+                    .ignoresSafeArea()
+            }.ignoresSafeArea()
+        }
+        
     }
 }
 
 #Preview {
     ZStack{
-        Color.black.ignoresSafeArea()
-        Text("ciao")
         Streak()
     }
 }

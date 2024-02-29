@@ -8,8 +8,10 @@
 import SwiftUI
 import SwiftData
 import SwiftUIIntrospect
+import NavigationTransitions
 
 struct Home: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
@@ -20,6 +22,9 @@ struct Home: View {
     @StateObject var timerManager = TimerManager()
     @State var isSubCategoriesDisplayExpanded : Bool = false
     @State var streakPosition: Double = 0
+    @State var slideReverse: Bool = false
+    @State var navToSettings: Bool = false
+    @State var navToProfile: Bool = false
         
     var body: some View {
         NavigationStack {
@@ -32,10 +37,10 @@ struct Home: View {
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
                 
-                Color.black.edgesIgnoringSafeArea(.all)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
 
                 VStack {
-                    TopBar()
+                    TopBar(navToSettings: $navToSettings, navToProfile: $navToProfile)
                     Spacer()
                     Spacer()
                     ZStack{
@@ -68,11 +73,19 @@ struct Home: View {
                     
                 }
                 
-                Streak().ignoresSafeArea()
+                Streak()
+                    .ignoresSafeArea()
+                    .opacity(isSubCategoriesDisplayExpanded ? 0 : 1)
             }
         }
-        .background(.black)
-        .foregroundColor(.white)
+        .navigationTransition(slideReverse ? .reverseSlide(axis: .horizontal) : .slide(axis: .horizontal))
+        .onChange(of: navToProfile) {
+            slideReverse = false
+        }
+        .onChange(of: navToSettings) {
+            slideReverse = true
+        }
+        .background(colorScheme == .dark ? .black : Color(hex: "F2EFE9"))
         .onAppear() {
             
             if timerManager.checkActiveTimerExistenceSync() {

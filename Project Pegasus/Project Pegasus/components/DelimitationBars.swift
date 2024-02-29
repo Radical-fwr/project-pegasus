@@ -20,20 +20,23 @@ struct DelimitationBars: View {
 }
 
 struct SingleBar: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack{
             Rectangle()
                 .frame(width: UIScreen.main.bounds.width * 0.94, height: 0.6)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
             HStack{
                 Triangle()
                     .frame(width: 8, height: 6)
                     .rotationEffect(.degrees(90))
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.8))
                 Spacer()
                 Triangle()
                     .frame(width: 8, height: 6)
                     .rotationEffect(.degrees(270))
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.8))
             }
         }
     }

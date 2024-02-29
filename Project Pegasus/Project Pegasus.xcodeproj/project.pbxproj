@@ -31,6 +31,9 @@
 		1680A6B62B8FD18B00C95B0C /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B52B8FD18B00C95B0C /* FilterButton.swift */; };
 		1680A6B82B908F6400C95B0C /* CategoryDetailSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B72B908F6400C95B0C /* CategoryDetailSession.swift */; };
 		1680A6BA2B90909700C95B0C /* R_button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B92B90909700C95B0C /* R_button.swift */; };
+		1680A6BD2B90C2CB00C95B0C /* NavigationTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 1680A6BC2B90C2CB00C95B0C /* NavigationTransitions */; };
+		1680A6C02B90C6E800C95B0C /* ReverseSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6BF2B90C6E800C95B0C /* ReverseSlide.swift */; };
+		1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6C12B90CCC400C95B0C /* Settings.swift */; };
 		168C06462B407D7500BEE44F /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168C06452B407D7500BEE44F /* StartButton.swift */; };
 		168C06482B40807600BEE44F /* HomeWheelSelectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168C06472B40807600BEE44F /* HomeWheelSelectors.swift */; };
 		16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC22B03BA6E00E57C65 /* Profile.swift */; };
@@ -88,6 +91,8 @@
 		1680A6B52B8FD18B00C95B0C /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		1680A6B72B908F6400C95B0C /* CategoryDetailSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailSession.swift; sourceTree = "<group>"; };
 		1680A6B92B90909700C95B0C /* R_button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R_button.swift; sourceTree = "<group>"; };
+		1680A6BF2B90C6E800C95B0C /* ReverseSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseSlide.swift; sourceTree = "<group>"; };
+		1680A6C12B90CCC400C95B0C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		168C06452B407D7500BEE44F /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		168C06472B40807600BEE44F /* HomeWheelSelectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWheelSelectors.swift; sourceTree = "<group>"; };
 		16A67EC22B03BA6E00E57C65 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -118,6 +123,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1613C7D52B2130C1008F6C21 /* SwiftUIIntrospect in Frameworks */,
+				1680A6BD2B90C2CB00C95B0C /* NavigationTransitions in Frameworks */,
 				1613C7D92B2130C2008F6C21 /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +157,14 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
+		1680A6BE2B90C6D300C95B0C /* transitions */ = {
+			isa = PBXGroup;
+			children = (
+				1680A6BF2B90C6E800C95B0C /* ReverseSlide.swift */,
+			);
+			path = transitions;
+			sourceTree = "<group>";
+		};
 		16A67EC92B0688B900E57C65 /* pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +174,7 @@
 				16D6AC812B2B223100F66DB8 /* RunningTimer.swift */,
 				160F33092B8F35260053EF6E /* EndOFSession.swift */,
 				1680A6B12B8FD13B00C95B0C /* CategoryDetail.swift */,
+				1680A6C12B90CCC400C95B0C /* Settings.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -184,6 +199,7 @@
 		16A9E0302AED51AB000C8EA8 /* Project Pegasus */ = {
 			isa = PBXGroup;
 			children = (
+				1680A6BE2B90C6D300C95B0C /* transitions */,
 				16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */,
 				16547B5B2B213FE500C2E67B /* timer */,
 				16A67EC92B0688B900E57C65 /* pages */,
@@ -275,6 +291,7 @@
 			packageProductDependencies = (
 				1613C7D42B2130C1008F6C21 /* SwiftUIIntrospect */,
 				1613C7D82B2130C2008F6C21 /* SwiftUIIntrospect-Static */,
+				1680A6BC2B90C2CB00C95B0C /* NavigationTransitions */,
 			);
 			productName = "Project Pegasus";
 			productReference = 16A9E02E2AED51AB000C8EA8 /* Project Pegasus.app */;
@@ -306,6 +323,7 @@
 			mainGroup = 16A9E0252AED51AA000C8EA8;
 			packageReferences = (
 				1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				1680A6BB2B90C2CB00C95B0C /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */,
 			);
 			productRefGroup = 16A9E02F2AED51AB000C8EA8 /* Products */;
 			projectDirPath = "";
@@ -346,6 +364,7 @@
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
 				16BE43D52B8A52A400DD6761 /* WaveAnimation.swift in Sources */,
 				160F330C2B8F68060053EF6E /* RatingSelector.swift in Sources */,
+				1680A6C02B90C6E800C95B0C /* ReverseSlide.swift in Sources */,
 				16A9E0422AED525D000C8EA8 /* Start.swift in Sources */,
 				16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */,
 				168C06462B407D7500BEE44F /* StartButton.swift in Sources */,
@@ -353,6 +372,7 @@
 				1680A6BA2B90909700C95B0C /* R_button.swift in Sources */,
 				162E6E5D2B557E5200BB9F0F /* SubCategoriesDisplay.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
+				1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
 				16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */,
@@ -601,6 +621,14 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		1680A6BB2B90C2CB00C95B0C /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davdroman/swiftui-navigation-transitions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.13.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -613,6 +641,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1613C7D32B2130C1008F6C21 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = "SwiftUIIntrospect-Static";
+		};
+		1680A6BC2B90C2CB00C95B0C /* NavigationTransitions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1680A6BB2B90C2CB00C95B0C /* XCRemoteSwiftPackageReference "swiftui-navigation-transitions" */;
+			productName = NavigationTransitions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

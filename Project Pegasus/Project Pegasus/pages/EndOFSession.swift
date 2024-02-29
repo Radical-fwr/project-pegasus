@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct EndOFSession: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     var session: Session?
     @State var rating: Int = 1
@@ -26,21 +27,25 @@ struct EndOFSession: View {
                 .navigationBarBackButtonHidden(true)
                 .animation(nil)
                 
-                Color.black.edgesIgnoringSafeArea(.all)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
+                
                 VStack{
                     Text("radical.")
                     .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
-                    .foregroundColor(.white)
+                    
                     
                     Spacer()
                     
                     Text("COM’É ANDATA?")
                     .font(Font.custom("Montserrat", size: 36).weight(.bold))
-                    .foregroundColor(.white)
+                    
                     
                     Text("Lascia una valutazione:")
                     .font(Font.custom("HelveticaNeue", size: 20).weight(.light))
-                    .foregroundColor(.white)
+                    
+                    
+                    Spacer()
+                    
                     
                     RatingSelector(rating: $rating, borderColor: Color(hex: session!.category!.color))
                     
@@ -49,12 +54,12 @@ struct EndOFSession: View {
                     Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
                         .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+                    
                     
                     Text(session!.category!.name.uppercased())
                         .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+                    
                     
                     Spacer()
                     
@@ -72,10 +77,10 @@ struct EndOFSession: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(25)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
                             
                     }
-                    .background(.white)
+                    .background(colorScheme == .dark ? .white : .black)
                     .frame(width: 80)
                     .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     

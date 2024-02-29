@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SubCategoriesDisplay: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     var category: Category?
     @Binding var opened: Bool
@@ -42,17 +43,19 @@ struct SubCategoriesDisplay: View {
                                 HStack {
                                     Text("ALL")
                                         .font(Font.custom("HelveticaNeue", size: 15))
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
                                 }
                                 Rectangle()
                                     .frame(width: 170, height: 1)
                                     .background(Color(hex: category.color))
-                                    .border(Color(hex: category.color))
+                                    .border(Color(hex: category.color).opacity(0.6))
                                 ForEach(subCategories) { subCategory in
                                     if subCategory.parentCategory!.id == category.id {
                                         Spacer()
                                         HStack {
                                             Text(subCategory.name)
                                                 .font(Font.custom("HelveticaNeue", size: 15))
+                                                .foregroundColor(colorScheme == .dark ? .white : .black)
                                                 
                                             Spacer()
                                         }
@@ -63,12 +66,13 @@ struct SubCategoriesDisplay: View {
                                         Rectangle()
                                             .frame(width: 170, height: 1)
                                             .background(Color(hex: category.color))
-                                            .border(Color(hex: category.color))
+                                            .border(Color(hex: category.color).opacity(0.6))
                                     }
                                 }
                                 Spacer()
                                 HStack {
                                     Text("+")
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
                                         .font(Font.custom("HelveticaNeue", size: 20))
                                         .padding(.leading, 15)
                                         .onTapGesture{
@@ -84,14 +88,14 @@ struct SubCategoriesDisplay: View {
                                 }
                             }
                         }
-                        .frame(width: 200, height: 90)
+                        .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
                     }
                     .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
-                    .frame(width: 200, height: 90)
+                    .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
                     .cornerRadius(5)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color(hex: category.color), lineWidth: 1)
+                            .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
                     )
                 }
                 .offset(y: 70)
@@ -106,7 +110,7 @@ struct SubCategoriesDisplay: View {
                 ZStack {
                     EmptyView()
                 }
-                .frame(width: 200, height: 90)
+                .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
                 .offset(y: 70)
             }
             

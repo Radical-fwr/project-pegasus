@@ -133,7 +133,6 @@ struct CategoryDetail: View {
                     Rectangle()
                         .fill(LinearGradient(gradient: Gradient(colors: [categoryColor, categoryColor.opacity(0.4), Color.clear]), startPoint: .bottom, endPoint: .top))
                         .frame(width: UIScreen.main.bounds.width, height: 150)
-                        .foregroundColor(Color.blue)
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
                 

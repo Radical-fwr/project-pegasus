@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftData
-// import FamilyControls
+import FamilyControls
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
@@ -74,14 +74,14 @@ struct ContentView: View {
         }
         let timerManager = TimerManager()
         timerManager.requestNotificationPermission()
-        //        let authCenter = AuthorizationCenter.shared
-        //        Task {
-        //            do {
-        //                try await authCenter.requestAuthorization(for: .individual)
-        //            } catch {
-        //                handle the error
-        //            }
-        //        }
+        let authCenter = AuthorizationCenter.shared
+        Task {
+            do {
+                try await authCenter.requestAuthorization(for: .individual)
+            } catch {
+                print("error")
+            }
+        }
         let category1: Category = Category(name: "studio", color: "EC8E14")
         let category2: Category = Category(name: "lavoro", color: "F6DE00")
         let category3: Category = Category(name: "detox", color: "67CD67")

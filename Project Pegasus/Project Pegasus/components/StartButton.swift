@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct StartButton: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     @Binding var selectedCategory: Category?
     @Binding var selectedSubCategory: SubCategory?
@@ -42,15 +43,18 @@ struct StartButton: View {
             }) {
                 Text("Start")
                     .font(Font.custom("HelveticaNeue", size: 27))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .padding()
                     .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0.7)]), startPoint: .leading, endPoint: .trailing))
+                    .background(LinearGradient(gradient: Gradient(colors: [
+                        colorScheme == .dark ? .white : .black,
+                        colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7)
+                    ]), startPoint: .leading, endPoint: .trailing))
                     .clipShape(Circle())
                     .overlay(
                         Circle()
-                            .stroke(Color.black, lineWidth: 2)
+                            .stroke(colorScheme == .dark ? Color.black : Color(hex: "F2EFE9"), lineWidth: 2)
                     )
             }
             .padding()
@@ -59,14 +63,14 @@ struct StartButton: View {
                 Text("Start")
                     .font(Font.custom("HelveticaNeue", size: 27))
                     .fontWeight(.bold)
-                    .foregroundColor(.black)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                     .padding()
                     .padding()
-                    .background(Color.gray)
+                    .background(colorScheme == .dark ? Color.gray : Color.black.opacity(0.7))
                     .clipShape(Circle())
                     .overlay(
                         Circle()
-                            .stroke(Color.black, lineWidth: 2)
+                            .stroke(colorScheme == .dark ? Color.black : Color(hex: "F2EFE9"), lineWidth: 2)
                     )
             }
             .padding()

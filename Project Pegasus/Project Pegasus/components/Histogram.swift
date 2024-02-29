@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomHistogramView: View {
+    @Environment(\.colorScheme) var colorScheme
     let sessions: [Session]
     
     /// Calcola l'efficienza per sessione e restituisce l'efficienza in valore assoluto - By Gio
@@ -81,7 +82,10 @@ struct CustomHistogramView: View {
                     let barHeight = maxHeight * CGFloat(element.value)
                     
                     Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [.black, .white]), startPoint: .bottom, endPoint: .top))
+                        .fill(LinearGradient(gradient: Gradient(colors: [
+                            colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
+                            colorScheme == .dark ? Color(hex: "F2EFE9") : .black
+                        ]), startPoint: .bottom, endPoint: .top))
                         .frame(width: width, height: barHeight)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .offset(x: CGFloat(index) * (width + 8), y: maxHeight - barHeight)
@@ -93,7 +97,13 @@ struct CustomHistogramView: View {
                     path.move(to: CGPoint(x: 0, y: y))
                     path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                 }
-                .stroke(LinearGradient(gradient: Gradient(colors: [.white.opacity(0.1), .white.opacity(0.5), .white.opacity(0.7), .white.opacity(0.5), .white.opacity(0.1)]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                .stroke(LinearGradient(gradient: Gradient(colors: [
+                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1),
+                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
+                    colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7),
+                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
+                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1)
+                ]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
             }
             .frame(height: 200)
             
@@ -102,6 +112,7 @@ struct CustomHistogramView: View {
                     Text(dayLabel(for: key))
                         .frame(maxWidth: .infinity)
                         .font(Font.custom("Helvetica Neue", size: 22).weight(dayLabel(for: key) == "oggi" ? .bold : .regular))
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                 }
             }.offset(y: -20)
         }

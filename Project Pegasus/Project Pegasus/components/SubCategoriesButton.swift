@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SubCategoriesButton: View {
+    @Environment(\.colorScheme) var colorScheme
     var category: Category?
     @Binding var opened: Bool
     @State private var chevronRotation: Double = 0
@@ -33,6 +34,7 @@ struct SubCategoriesButton: View {
                             if !opened {
                                 Text("All")
                                     .font(Font.custom("HelveticaNeue", size: 22))
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                             }
                             Image(systemName: "chevron.right")
                                 .rotationEffect(Angle(degrees: chevronRotation))
@@ -47,35 +49,35 @@ struct SubCategoriesButton: View {
                                     }
                                 }
                         }
-                        .foregroundColor(.white)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .padding()
                     }
                     HStack{
                         
                     }
-                    .frame(width: 200, height: 40)
+                    .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
                     .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 }
-                .frame(width: 200, height: 40)
+                .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
                 .cornerRadius(5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(hex: category.color), lineWidth: 1)
+                        .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
                 )
             }
         } else {
             HStack {
                 Text("Select a category")
                     .font(Font.custom("HelveticaNeue", size: 22))
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .fontWeight(.light)
                     .padding()
             }
-            .frame(width: 200, height: 40)
+            .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(.white, lineWidth: 1)
+                    .stroke(colorScheme == .dark ? .white : .black, lineWidth: 1)
             )
         }
     }

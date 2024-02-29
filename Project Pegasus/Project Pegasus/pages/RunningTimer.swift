@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct RunningTimer: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var timerManager = TimerManager()
@@ -60,7 +61,8 @@ struct RunningTimer: View {
                 .navigationBarBackButtonHidden(true)
                 .animation(nil)
                 
-                Color.black.ignoresSafeArea()
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
+                
                 VStack{
                     Spacer()
                     Rectangle()

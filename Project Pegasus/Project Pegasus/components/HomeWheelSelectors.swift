@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeWheelSelectors: View {
+    @Environment(\.colorScheme) var colorScheme
     var categories: [Category]
     @Binding var selectedCategory: Category?
     @Binding var selectedHour: Double?
@@ -18,13 +19,13 @@ struct HomeWheelSelectors: View {
             HStack {
                 Picker("", selection: $selectedCategory) {
                     Text("TAG")
-                        .foregroundColor(.white)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .font(Font.custom("HelveticaNeue", size: 35))
                         .fontWeight(.bold)
                         .tag(Category?.none)
                     ForEach(categories) { category in
                         Text(category.name.uppercased())
-                            .foregroundColor(category == selectedCategory ? Color(hex: category.color) : .white)
+                            .foregroundColor(category == selectedCategory ? Color(hex: category.color) : colorScheme == .dark ? .white : .black)
                             .font(Font.custom("HelveticaNeue", size: 35))
                             .fontWeight(.bold)
                             .tag(Category?.some(category))
@@ -39,13 +40,13 @@ struct HomeWheelSelectors: View {
                 
                 Picker("", selection: $selectedHour) {
                     Text("00")
-                        .foregroundColor(.white)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .font(Font.custom("HelveticaNeue", size: 35))
                         .fontWeight(.bold)
                         .tag(Double?.none)
                     ForEach(1...23, id: \.self) { hour in
                         Text(String(format: "%02d", hour))
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .font(Font.custom("HelveticaNeue", size: 35))
                             .fontWeight(.bold)
                             .tag(Double?.some(Double(hour)))
@@ -58,12 +59,12 @@ struct HomeWheelSelectors: View {
                 }
                 
                 Text(":")
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
                     .font(Font.custom("IntegralCF-Bold", size: 40))
                 
                 Picker("", selection: $selectedMinute) {
                     Text("00")
-                        .foregroundColor(.white)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                         .font(Font.custom("HelveticaNeue", size: 35))
                         .fontWeight(.bold)
                         .tag(Double?.none)
@@ -74,7 +75,7 @@ struct HomeWheelSelectors: View {
     //                            .tag(Double?.some(Double(0.3)))
                     ForEach(1...59, id: \.self) { minute in
                         Text(String(format: "%02d", minute))
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .font(Font.custom("HelveticaNeue", size: 35))
                             .fontWeight(.bold)
                             .tag(Double?.some(Double(minute)))

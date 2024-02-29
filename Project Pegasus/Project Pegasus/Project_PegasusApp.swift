@@ -10,12 +10,13 @@ import SwiftData
 
 @main
 struct Project_PegasusApp: App {
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .background(.black)
-                .foregroundColor(.white)
+                .background(colorScheme == .dark ? .black : Color(hex: "F2EFE9"))
+                //.foregroundColor(colorScheme == .dark ? .white : .black)
         }
         .modelContainer(for: [
             Category.self,
