@@ -117,13 +117,21 @@ struct Profile: View {
                     }
                     
                     Spacer()
-                    Text("+ Nuovo Tag")
-                        .font(Font.custom("HelveticaNeue", size: 24))
-                        .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                        .padding()
-                        .onTapGesture {
-                            isSheetPresented = true
-                        }
+                    /*
+                     Text("+ Nuovo Tag")
+                     .font(Font.custom("HelveticaNeue", size: 24))
+                     .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                     .padding()
+                     .onTapGesture {
+                     isSheetPresented = true
+                     }*/
+                    NavigationLink(destination: AddNewCategory()) {
+                        Text("+ Nuovo Tag")
+                            .font(Font.custom("HelveticaNeue", size: 24))
+                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                            .padding()
+                    }
+                    
                 }
             }
         }

@@ -75,7 +75,7 @@ struct CustomHistogramView: View {
         VStack {
             GeometryReader { geometry in
                 let data = dailyEfficiency().sorted(by: { $0.key < $1.key })
-                let width = geometry.size.width / CGFloat(data.count) - 8
+                let width = geometry.size.width / CGFloat(data.count) - 12
                 let maxHeight = geometry.size.height - 20
                 
                 ForEach(Array(data.enumerated()), id: \.element.key) { index, element in
@@ -88,7 +88,7 @@ struct CustomHistogramView: View {
                         ]), startPoint: .bottom, endPoint: .top))
                         .frame(width: width, height: barHeight)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .offset(x: CGFloat(index) * (width + 8), y: maxHeight - barHeight)
+                        .offset(x: CGFloat(index) * (width + 15), y: maxHeight - barHeight)
                 }
 
                 

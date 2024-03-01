@@ -52,6 +52,9 @@
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
+		E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6347A322B9130AD00C51E6C /* AddNewCategory.swift */; };
+		E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */; };
+		E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +117,9 @@
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
+		E6347A322B9130AD00C51E6C /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
+		E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChoseColorButton.swift; sourceTree = "<group>"; };
 		E6F595E32B80CD1B004897E0 /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +181,7 @@
 				160F33092B8F35260053EF6E /* EndOFSession.swift */,
 				1680A6B12B8FD13B00C95B0C /* CategoryDetail.swift */,
 				1680A6C12B90CCC400C95B0C /* Settings.swift */,
+				E6347A322B9130AD00C51E6C /* AddNewCategory.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -249,6 +256,8 @@
 				1680A6B52B8FD18B00C95B0C /* FilterButton.swift */,
 				1680A6B72B908F6400C95B0C /* CategoryDetailSession.swift */,
 				1680A6B92B90909700C95B0C /* R_button.swift */,
+				E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */,
+				E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -359,7 +368,9 @@
 				16A9E0342AED51AB000C8EA8 /* ContentView.swift in Sources */,
 				16A67EC72B03BE3D00E57C65 /* session.swift in Sources */,
 				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
+				E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */,
 				162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */,
+				E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */,
 				162E6E5B2B5568CF00BB9F0F /* subcategory.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,
 				16BE43D52B8A52A400DD6761 /* WaveAnimation.swift in Sources */,
@@ -377,6 +388,7 @@
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
 				16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */,
 				162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */,
+				E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */,
 				1680A6B82B908F6400C95B0C /* CategoryDetailSession.swift in Sources */,
 				160F33112B8F959B0053EF6E /* Streak.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
