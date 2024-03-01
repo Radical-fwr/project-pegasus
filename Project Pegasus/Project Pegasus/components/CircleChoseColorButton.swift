@@ -13,7 +13,7 @@ struct CircleChoseColorButton: View {
     
     var body: some View {
         Circle()
-            .strokeBorder(colorScheme == .dark ? .white : .black, lineWidth: 3)
+            .strokeBorder(colorScheme == .dark ? .black : .white, lineWidth: 3)
             .frame(width: 30, height: 30)
             .onTapGesture {
                 withAnimation {

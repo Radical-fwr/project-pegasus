@@ -10,7 +10,8 @@ import SwiftUI
 struct AddNewCategory: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var categoryName: String = ""
+    @Environment(\.modelContext) private var context
+    @State private var categoryName: String = "CATEGORIA"
     @State private var showColorPicker: Bool = false
     @State private var selectedColor: Color = .gray
     
@@ -21,39 +22,43 @@ struct AddNewCategory: View {
                 VStack {
                     HStack {
                         R_button()
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .foregroundColor(colorScheme == .dark ? .black : .white)
                             .onTapGesture {
+                                //saveCategory()
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                         Spacer()
                     }
                     
-                    HStack {
-                        TextField("", text: $categoryName, prompt: Text("CATEGORIA")
-                            .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
-                            .underline()
-                            .font(Font.custom("HelveticaNeue", size: 30)))
-                        .font(Font.custom("HelveticaNeue", size: 30))
-                        .multilineTextAlignment(.leading)
-                        Spacer()
-                        
-                        CircleChoseColorButton(showColorPicker: $showColorPicker)
-                    }
-                    
-                    Spacer().frame(height: 20)
-                    if showColorPicker {
-                        ColorPickerView(selectedColor: $selectedColor)
-                    }
+                    CategoryNameAndColor(categoryName: $categoryName, showColorPicker: $showColorPicker, selectedColor: $selectedColor)
+                        .onSubmit {
+                            saveCategory()
+                            
+                        }
                     Spacer()
+                    
                 }.padding(25)
-            }.background(selectedColor.edgesIgnoringSafeArea(.all))
+            }.background(Color(selectedColor).edgesIgnoringSafeArea(.all))
         }
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
-}
+    
+    func saveCategory() {
+        if(categoryName != "CATEGORIA" && selectedColor != .gray){
+            do {
+                
+                let newCategory = Category(name:categoryName , color: try selectedColor.toHex())
+                context.insert(newCategory)
+                try context.save()
+            } catch {
+                print("Error saving context: \(error)")
+            }
+        }
+    }
 
+}
 
 
 

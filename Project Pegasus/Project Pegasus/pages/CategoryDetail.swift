@@ -16,12 +16,13 @@ enum FilterType {
 struct CategoryDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     let categoryId: String
-    let categoryName: String
-    let categoryColor: Color!
+    @State var categoryName: String
+    @State var categoryColor: Color
     let gradient = LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
     @Query var sessions : [Session]
     @State private var showingFilter = false
     @State private var selectedFilter: FilterType = .null
+    @State private var showColorPicker: Bool = false
     
     /// permette di applicare il filtro selezionato, di default è impostato .null ovvero la lista di sottocategorie così come viene ottenuta da @Query
     private var filteredSessions: [Session] {
@@ -54,6 +55,7 @@ struct CategoryDetail: View {
                     }
                     Spacer().frame(height: 30)
                     
+                    /*
                     HStack {
                         Text(categoryName)
                             .font(.title.bold())
@@ -65,7 +67,9 @@ struct CategoryDetail: View {
                             .strokeBorder(Color.black, lineWidth: 3)
                             .frame(width: 28, height: 28)
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
+                    }*/
+                    
+                    CategoryNameAndColor(categoryName: $categoryName, showColorPicker: $showColorPicker, selectedColor: $categoryColor)
                     
                     Button(action: {
                         showingFilter = true

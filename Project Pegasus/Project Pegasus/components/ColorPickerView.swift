@@ -33,7 +33,7 @@ struct ColorPickerView: View {
         }
         .padding(.vertical,30)
         .padding(.horizontal,25)
-        .background(RoundedRectangle(cornerRadius: 25).fill(Color(colorScheme == .dark ? .white : .black)))
+        .background(RoundedRectangle(cornerRadius: 25).fill(Color(colorScheme == .dark ? .black : .white)))
     }
 }
 

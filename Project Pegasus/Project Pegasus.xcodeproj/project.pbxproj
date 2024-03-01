@@ -55,6 +55,7 @@
 		E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6347A322B9130AD00C51E6C /* AddNewCategory.swift */; };
 		E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */; };
 		E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */; };
+		E6A9C2602B92226200EC13B5 /* CategoryNameAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,7 @@
 		E6347A322B9130AD00C51E6C /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
 		E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChoseColorButton.swift; sourceTree = "<group>"; };
+		E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameAndColor.swift; sourceTree = "<group>"; };
 		E6F595E32B80CD1B004897E0 /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -258,6 +260,7 @@
 				1680A6B92B90909700C95B0C /* R_button.swift */,
 				E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */,
 				E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */,
+				E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				160F33112B8F959B0053EF6E /* Streak.swift in Sources */,
 				16A67EC52B03BD6B00E57C65 /* user.swift in Sources */,
 				16A9E0322AED51AB000C8EA8 /* Project_PegasusApp.swift in Sources */,
+				E6A9C2602B92226200EC13B5 /* CategoryNameAndColor.swift in Sources */,
 				16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */,
 				E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */,
 				1680A6B62B8FD18B00C95B0C /* FilterButton.swift in Sources */,
