@@ -18,7 +18,15 @@ struct AddNewCategory: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                
+                if showColorPicker{
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation {
+                                showColorPicker = false
+                            }
+                        }
+                }
                 VStack {
                     HStack {
                         R_button()
@@ -57,7 +65,7 @@ struct AddNewCategory: View {
             }
         }
     }
-
+    
 }
 
 

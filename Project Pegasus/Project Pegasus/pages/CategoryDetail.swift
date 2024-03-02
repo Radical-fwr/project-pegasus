@@ -15,11 +15,13 @@ enum FilterType {
 
 struct CategoryDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.modelContext) private var context
     let categoryId: String
     @State var categoryName: String
     @State var categoryColor: Color
     let gradient = LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.5)]), startPoint: .leading, endPoint: .trailing)
     @Query var sessions : [Session]
+    let category: Category?
     @State private var showingFilter = false
     @State private var selectedFilter: FilterType = .null
     @State private var showColorPicker: Bool = false
@@ -42,6 +44,18 @@ struct CategoryDetail: View {
     var body: some View {
         NavigationView {
             ZStack {
+                //se la possibilità di cambiare colore è attiva allora al tap dello schermo il componente si chiude
+                if showColorPicker{
+                    Color.clear
+                        .edgesIgnoringSafeArea(.all)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation {
+                                showColorPicker = false
+                            }
+                        }
+                    
+                }
                 VStack(alignment: .center) {
                     
                     Spacer().frame(height: 30)
@@ -50,49 +64,41 @@ struct CategoryDetail: View {
                             .foregroundColor(.black)
                             .onTapGesture {
                                 self.presentationMode.wrappedValue.dismiss()
+                                updateCategory()
                             }
                         Spacer()
                     }
                     Spacer().frame(height: 30)
                     
-                    /*
-                    HStack {
-                        Text(categoryName)
-                            .font(.title.bold())
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(.black)
-                        
-                        Spacer()
-                        Circle()
-                            .strokeBorder(Color.black, lineWidth: 3)
-                            .frame(width: 28, height: 28)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }*/
-                    
                     CategoryNameAndColor(categoryName: $categoryName, showColorPicker: $showColorPicker, selectedColor: $categoryColor)
-                    
-                    Button(action: {
-                        showingFilter = true
-                    }) {
-                        Text("Ordina per")
-                        Image(systemName: "arrow.up.arrow.down")
-                            .font(.caption)
+                        .onSubmit {
+                            updateCategory()
+                        }
+
+                    //compare solo quando la possibilità di cambiare colore della categoria è disabilitata
+                    if showColorPicker == false{
+                        Button(action: {
+                            showingFilter = true
+                        }) {
+                            Text("Ordina per")
+                            Image(systemName: "arrow.up.arrow.down")
+                                .font(.caption)
+                        }
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom)
                     
                     ScrollView(showsIndicators: false){
                         
                         /// codice di test
-    //                    ForEach(0..<15) { _ in
-    //                        CategoryWStats(
-    //                            name: "Analisi 2",
-    //                            color: categoryColor,
-    //                            progress: 0.6,
-    //                            gradient: gradient
-    //                        )
-    //                    }
+                        ForEach(0..<15) { _ in
+                            CategoryWStats(
+                                name: "Analisi 2",
+                                color: categoryColor,
+                                progress: 0.6,
+                                gradient: gradient
+                            )
+                        }
                         
                         ForEach(filteredSessions){ session in
                                 CategoryDetailSession(
@@ -123,6 +129,7 @@ struct CategoryDetail: View {
                         
                         
                     }
+                    .padding(.top,20)
                 }
                 .padding(.horizontal,25)
                 .background(categoryColor.edgesIgnoringSafeArea(.all))
@@ -146,10 +153,21 @@ struct CategoryDetail: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
+    /// Permette di salvare le modifiche apportare alla categoria aperta dall'utente
+    func updateCategory() {
+        if let category{
+            if category.name != categoryName{
+                category.name = categoryName
+            }
+            if category.color != (try! categoryColor.toHex()){
+                category.color = try! categoryColor.toHex()
+            }
+        }
+    }
 }
 
 
 #Preview {
     
-    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange)
+    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange, category: Category(name: "Prova", color: "FFFFFF"))
 }

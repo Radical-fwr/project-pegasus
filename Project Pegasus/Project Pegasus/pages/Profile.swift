@@ -104,7 +104,7 @@ struct Profile: View {
                     ScrollView{
                         ForEach(categories) { category in
                             // al click della categoria vai alla pagina dettaglio categoria
-                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
+                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category)) {
                                 CategoryWStats(
                                     name: category.name.uppercased(),
                                     color: Color(hex: category.color),
