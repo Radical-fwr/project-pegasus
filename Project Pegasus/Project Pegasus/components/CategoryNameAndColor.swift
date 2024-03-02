@@ -17,10 +17,10 @@ struct CategoryNameAndColor: View {
         HStack {
             TextField("", text: $categoryName, prompt: Text(categoryName)
                 .foregroundStyle(Color(colorScheme == .dark ? .black : .white))
-                .underline()
                 .font(Font.custom("HelveticaNeue", size: 30)))
             .font(Font.custom("HelveticaNeue", size: 30))
-            .foregroundStyle(Color(colorScheme == .dark ? .black : .white))
+            .underline(color: Color(colorScheme == .dark ? .black : .white))
+            .foregroundStyle(Color(colorScheme == .dark ? .black : .white).opacity(0.5))
             .multilineTextAlignment(.leading)
             Spacer()
             
@@ -32,4 +32,8 @@ struct CategoryNameAndColor: View {
             ColorPickerView(selectedColor: $selectedColor)
         }
     }
+}
+
+#Preview {
+    AddNewCategory()
 }

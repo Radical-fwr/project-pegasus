@@ -64,7 +64,7 @@ struct CategoryDetail: View {
                             .foregroundColor(.black)
                             .onTapGesture {
                                 self.presentationMode.wrappedValue.dismiss()
-                                updateCategory()
+                                onUpdate()
                             }
                         Spacer()
                     }
@@ -72,7 +72,7 @@ struct CategoryDetail: View {
                     
                     CategoryNameAndColor(categoryName: $categoryName, showColorPicker: $showColorPicker, selectedColor: $categoryColor)
                         .onSubmit {
-                            updateCategory()
+                            onUpdate()
                         }
 
                     //compare solo quando la possibilità di cambiare colore della categoria è disabilitata
@@ -154,7 +154,7 @@ struct CategoryDetail: View {
         .navigationBarHidden(true)
     }
     /// Permette di salvare le modifiche apportare alla categoria aperta dall'utente
-    func updateCategory() {
+    func onUpdate() {
         if let category{
             if category.name != categoryName{
                 category.name = categoryName

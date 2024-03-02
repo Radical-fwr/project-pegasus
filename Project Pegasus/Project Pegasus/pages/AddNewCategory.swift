@@ -13,7 +13,7 @@ struct AddNewCategory: View {
     @Environment(\.modelContext) private var context
     @State private var categoryName: String = "CATEGORIA"
     @State private var showColorPicker: Bool = false
-    @State private var selectedColor: Color = .gray
+    @State private var selectedColor: Color = Color(hex: "A8A8A8")
     
     var body: some View {
         NavigationStack {
@@ -32,7 +32,7 @@ struct AddNewCategory: View {
                         R_button()
                             .foregroundColor(colorScheme == .dark ? .black : .white)
                             .onTapGesture {
-                                //saveCategory()
+                                onSave()
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                         Spacer()
@@ -40,11 +40,9 @@ struct AddNewCategory: View {
                     
                     CategoryNameAndColor(categoryName: $categoryName, showColorPicker: $showColorPicker, selectedColor: $selectedColor)
                         .onSubmit {
-                            saveCategory()
-                            
+                            onSave()
                         }
                     Spacer()
-                    
                 }.padding(25)
             }.background(Color(selectedColor).edgesIgnoringSafeArea(.all))
         }
@@ -53,15 +51,17 @@ struct AddNewCategory: View {
         .navigationBarHidden(true)
     }
     
-    func saveCategory() {
-        if(categoryName != "CATEGORIA" && selectedColor != .gray){
-            do {
-                
-                let newCategory = Category(name:categoryName , color: try selectedColor.toHex())
-                context.insert(newCategory)
-                try context.save()
-            } catch {
-                print("Error saving context: \(error)")
+    func onSave() {
+        if categoryName != ""{
+            if(categoryName != "CATEGORIA" && selectedColor != .gray){
+                do {
+                    
+                    let newCategory = Category(name:categoryName , color: try selectedColor.toHex())
+                    context.insert(newCategory)
+                    try context.save()
+                } catch {
+                    print("Error saving context: \(error)")
+                }
             }
         }
     }
