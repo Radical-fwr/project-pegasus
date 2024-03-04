@@ -15,7 +15,7 @@ struct CircleChoseColorButton: View {
     
     var body: some View {
         Circle()
-            .fill(Color(hex: colorScheme == .dark ? darkCircleBackground : lightCircleBackground))
+            .fill(showColorPicker ? Color(hex: colorScheme == .dark ? darkCircleBackground : lightCircleBackground) : Color.clear)
             .frame(width: 30, height: 30)
             .overlay(
                 Circle().stroke(colorScheme == .dark ? Color.black : Color.white, lineWidth: 3)
