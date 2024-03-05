@@ -16,15 +16,19 @@ struct StartButton: View {
     @Binding var selectedHour: Double?
     @Binding var selectedMinute: Double?
     @Binding var timerIsActive: Bool
+    @Binding var slideReverse: Bool
     @StateObject var timerManager = TimerManager()
+    
+    @StateObject var blockManager = BlockManager.shared
     
     var body: some View {
         if selectedCategory != Category?.none && (selectedHour != Double?.none || selectedMinute != Double?.none) {
             Button(action: {
+                let timeInterval = ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60)
                 let newSession = Session(
                     category: selectedCategory,
                     startDate: Date(),
-                    timeGoal: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60)
+                    timeGoal: timeInterval
                 )
 
                 context.insert(newSession)
@@ -34,11 +38,13 @@ struct StartButton: View {
                     print("Error saving context: \(error)")
                 }
                 timerManager.startTimer(
-                    timeInterval: ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60),
+                    timeInterval: timeInterval,
                     sessionIdentifier: newSession.id,
                     contentTitle: "TIMER TERMINATO!!!!",
                     contentBody: "Sei riuscito ad arrivare alla fine della tua sessione in: \(selectedCategory!.name.uppercased())"
                 )
+                blockManager.initiateMonitoring(timeInterval: timeInterval)
+                slideReverse = false
                 timerIsActive = true
             }) {
                 Text("Start")

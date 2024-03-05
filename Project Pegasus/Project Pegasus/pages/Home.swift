@@ -65,7 +65,8 @@ struct Home: View {
                             selectedSubCategory: $selectedSubCategory,
                             selectedHour: $selectedHour,
                             selectedMinute: $selectedMinute,
-                            timerIsActive: $timerIsActive
+                            timerIsActive: $timerIsActive,
+                            slideReverse: $slideReverse
                         )
                         .scaledToFill()
                     }

@@ -122,6 +122,17 @@ struct HomeWheelSelectors: View {
                     .frame(height:25)
             }
             .frame(height: 150)
+            
+            VStack{
+                Rectangle()
+                    .fill(colorScheme == .dark ? Color.black : Color(hex: "F2EFE9"))
+                    .frame(height:25)
+                Spacer()
+                Rectangle()
+                    .fill(colorScheme == .dark ? Color.black : Color(hex: "F2EFE9"))
+                    .frame(height:25)
+            }
+            .frame(height: 200)
            
         }
        

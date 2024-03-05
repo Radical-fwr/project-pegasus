@@ -47,6 +47,11 @@
 		16A9E0422AED525D000C8EA8 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0412AED525D000C8EA8 /* Start.swift */; };
 		16A9E0802AED67D1000C8EA8 /* IntegralCF-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */; };
 		16A9E0832AED7381000C8EA8 /* CategoryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */; };
+		16B6EEB52B9727DF006988FF /* BlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6EEB42B9727DF006988FF /* BlockManager.swift */; };
+		16B6EED12B976A15006988FF /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B6EEBE2B976251006988FF /* DeviceActivity.framework */; };
+		16B6EED42B976A15006988FF /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6EED32B976A15006988FF /* DeviceActivityMonitorExtension.swift */; };
+		16B6EED92B976A15006988FF /* MonitorExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 16B6EED02B976A15006988FF /* MonitorExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		16B6EEDE2B976A3E006988FF /* BlockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6EEB42B9727DF006988FF /* BlockManager.swift */; };
 		16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE43D22B8A506600DD6761 /* LiquidCircle.swift */; };
 		16BE43D52B8A52A400DD6761 /* WaveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */; };
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
@@ -54,6 +59,16 @@
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		16B6EED72B976A15006988FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 16A9E0262AED51AA000C8EA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 16B6EECF2B976A15006988FF;
+			remoteInfo = MonitorExtension;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		160D90682B1FD215002D61A0 /* Embed Frameworks */ = {
@@ -64,6 +79,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16B6EECB2B976251006988FF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				16B6EED92B976A15006988FF /* MonitorExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -108,6 +134,12 @@
 		16A9E07C2AED61E7000C8EA8 /* Project-Pegasus-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Project-Pegasus-Info.plist"; sourceTree = SOURCE_ROOT; };
 		16A9E07F2AED67D1000C8EA8 /* IntegralCF-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Bold.ttf"; sourceTree = "<group>"; };
 		16A9E0822AED7381000C8EA8 /* CategoryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButtonStyle.swift; sourceTree = "<group>"; };
+		16B6EEB42B9727DF006988FF /* BlockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockManager.swift; sourceTree = "<group>"; };
+		16B6EEBE2B976251006988FF /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
+		16B6EED02B976A15006988FF /* MonitorExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MonitorExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		16B6EED32B976A15006988FF /* DeviceActivityMonitorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceActivityMonitorExtension.swift; sourceTree = "<group>"; };
+		16B6EED52B976A15006988FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16B6EED62B976A15006988FF /* MonitorExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MonitorExtension.entitlements; sourceTree = "<group>"; };
 		16BE43D22B8A506600DD6761 /* LiquidCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCircle.swift; sourceTree = "<group>"; };
 		16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveAnimation.swift; sourceTree = "<group>"; };
 		16D6AC812B2B223100F66DB8 /* RunningTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningTimer.swift; sourceTree = "<group>"; };
@@ -128,12 +160,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		16B6EECD2B976A15006988FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16B6EED12B976A15006988FF /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		160D90692B1FD247002D61A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16B6EEBE2B976251006988FF /* DeviceActivity.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -152,6 +193,7 @@
 		16547B5B2B213FE500C2E67B /* timer */ = {
 			isa = PBXGroup;
 			children = (
+				16B6EEB42B9727DF006988FF /* BlockManager.swift */,
 				16547B5C2B2227C100C2E67B /* timer.swift */,
 			);
 			path = timer;
@@ -183,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				16A9E0302AED51AB000C8EA8 /* Project Pegasus */,
+				16B6EED22B976A15006988FF /* MonitorExtension */,
 				16A9E02F2AED51AB000C8EA8 /* Products */,
 				160D90692B1FD247002D61A0 /* Frameworks */,
 			);
@@ -192,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				16A9E02E2AED51AB000C8EA8 /* Project Pegasus.app */,
+				16B6EED02B976A15006988FF /* MonitorExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,6 +315,16 @@
 			path = styles;
 			sourceTree = "<group>";
 		};
+		16B6EED22B976A15006988FF /* MonitorExtension */ = {
+			isa = PBXGroup;
+			children = (
+				16B6EED32B976A15006988FF /* DeviceActivityMonitorExtension.swift */,
+				16B6EED52B976A15006988FF /* Info.plist */,
+				16B6EED62B976A15006988FF /* MonitorExtension.entitlements */,
+			);
+			path = MonitorExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -282,10 +336,12 @@
 				16A9E02B2AED51AB000C8EA8 /* Frameworks */,
 				16A9E02C2AED51AB000C8EA8 /* Resources */,
 				160D90682B1FD215002D61A0 /* Embed Frameworks */,
+				16B6EECB2B976251006988FF /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				16B6EED82B976A15006988FF /* PBXTargetDependency */,
 			);
 			name = "Project Pegasus";
 			packageProductDependencies = (
@@ -297,6 +353,23 @@
 			productReference = 16A9E02E2AED51AB000C8EA8 /* Project Pegasus.app */;
 			productType = "com.apple.product-type.application";
 		};
+		16B6EECF2B976A15006988FF /* MonitorExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16B6EEDA2B976A15006988FF /* Build configuration list for PBXNativeTarget "MonitorExtension" */;
+			buildPhases = (
+				16B6EECC2B976A15006988FF /* Sources */,
+				16B6EECD2B976A15006988FF /* Frameworks */,
+				16B6EECE2B976A15006988FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MonitorExtension;
+			productName = MonitorExtension;
+			productReference = 16B6EED02B976A15006988FF /* MonitorExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -304,11 +377,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					16A9E02D2AED51AB000C8EA8 = {
 						CreatedOnToolsVersion = 15.0.1;
+					};
+					16B6EECF2B976A15006988FF = {
+						CreatedOnToolsVersion = 15.2;
 					};
 				};
 			};
@@ -330,6 +406,7 @@
 			projectRoot = "";
 			targets = (
 				16A9E02D2AED51AB000C8EA8 /* Project Pegasus */,
+				16B6EECF2B976A15006988FF /* MonitorExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -344,6 +421,13 @@
 				16A9E0802AED67D1000C8EA8 /* IntegralCF-Bold.ttf in Resources */,
 				16A9E0362AED51AC000C8EA8 /* Assets.xcassets in Resources */,
 				1632847B2AFD4BF200D94C32 /* IntegralCF-Regular.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16B6EECE2B976A15006988FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,10 +476,28 @@
 				162E6E552B516A8A00BB9F0F /* FadingCircleView.swift in Sources */,
 				1680A6B42B8FD16300C95B0C /* FilterSheetView.swift in Sources */,
 				162E6E572B5182D600BB9F0F /* CircleMovingLine.swift in Sources */,
+				16B6EEB52B9727DF006988FF /* BlockManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		16B6EECC2B976A15006988FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16B6EED42B976A15006988FF /* DeviceActivityMonitorExtension.swift in Sources */,
+				16B6EEDE2B976A3E006988FF /* BlockManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		16B6EED82B976A15006988FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 16B6EECF2B976A15006988FF /* MonitorExtension */;
+			targetProxy = 16B6EED72B976A15006988FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		16A9E03A2AED51AC000C8EA8 /* Debug */ = {
@@ -520,6 +622,7 @@
 		16A9E03D2AED51AC000C8EA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Project Pegasus/Project Pegasus.entitlements";
@@ -556,6 +659,7 @@
 		16A9E03E2AED51AC000C8EA8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Project Pegasus/Project Pegasus.entitlements";
@@ -589,6 +693,60 @@
 			};
 			name = Release;
 		};
+		16B6EEDB2B976A15006988FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MonitorExtension/MonitorExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WM336XG96C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MonitorExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MonitorExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Project-Pegasus.MonitorExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		16B6EEDC2B976A15006988FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MonitorExtension/MonitorExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WM336XG96C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MonitorExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MonitorExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Project-Pegasus.MonitorExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -606,6 +764,15 @@
 			buildConfigurations = (
 				16A9E03D2AED51AC000C8EA8 /* Debug */,
 				16A9E03E2AED51AC000C8EA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16B6EEDA2B976A15006988FF /* Build configuration list for PBXNativeTarget "MonitorExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16B6EEDB2B976A15006988FF /* Debug */,
+				16B6EEDC2B976A15006988FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

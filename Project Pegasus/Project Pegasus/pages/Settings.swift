@@ -10,8 +10,8 @@ import FamilyControls
 
 struct Settings: View {
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var selection = FamilyActivitySelection()
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject var blockManager = BlockManager.shared
     @State var isPresented = false
     
     var body: some View {
@@ -40,14 +40,8 @@ struct Settings: View {
                     
                     Spacer()
                     Button("Present FamilyActivityPicker") { isPresented = true }
-                           .familyActivityPicker(isPresented: $isPresented,
-                                                 selection: $selection)
-                           .onChange(of: selection) { newSelection in
-                               let applications = selection.applications
-                               let categories = selection.categories
-                               let webDomains = selection.webDomains
-                           }
-                           .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .familyActivityPicker(isPresented: $isPresented, selection: $blockManager.selectionToDiscourage)
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
                     
                     
                     Spacer()

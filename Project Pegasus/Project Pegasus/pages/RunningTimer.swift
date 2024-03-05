@@ -13,6 +13,7 @@ struct RunningTimer: View {
     @Environment(\.modelContext) private var context
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var timerManager = TimerManager()
+    @StateObject var blockManager = BlockManager.shared
     @State private var degrees: Double = 0
     @Query var sessions: [Session]
     @State private var mainColor: Color = .white
@@ -108,6 +109,7 @@ struct RunningTimer: View {
                                     do {
                                         try context.save()
                                         timerManager.deleteFirstPendingTimer(completion: { _ in })
+                                        blockManager.stopMonitoring()
                                         isSessionFinished = true
                                     } catch {
                                         print("Error saving context: \(error)")
