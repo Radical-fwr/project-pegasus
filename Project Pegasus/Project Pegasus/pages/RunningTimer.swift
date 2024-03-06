@@ -191,6 +191,7 @@ struct RunningTimer: View {
         .onChange(of: timerManager.remainingTime) {
             if(!stopped) {
                 if timerManager.remainingTime == 0 {
+                    blockManager.stopMonitoring()// aggiunto da gio 06/03/2024
                     if let identifier = timerManager.identifier {
                         if let session = sessions.first(where: { $0.id == identifier }) {
                             activeSession = session

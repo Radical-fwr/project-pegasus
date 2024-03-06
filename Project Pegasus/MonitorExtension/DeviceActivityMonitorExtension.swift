@@ -18,20 +18,20 @@ class Monitor: DeviceActivityMonitor {
         store.shield.applications = applications.isEmpty ? nil : applications
         print("start monitoring")
     }
-
+    // modificato da nil a Optional.none da gio 06/03/2024
     override func intervalDidEnd(for activity: DeviceActivityName) {
         super.intervalDidEnd(for: activity)
-        store.shield.applications = nil
-        store.shield.applicationCategories = nil
-        store.shield.webDomainCategories = nil
-        store.shield.webDomains = nil
+        store.shield.applications = Optional.none
+        store.shield.applicationCategories = Optional.none
+        store.shield.webDomainCategories = Optional.none
+        store.shield.webDomains = Optional.none
     }
-    
+    // modificato da nil a Optional.none da gio 06/03/2024
     override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventDidReachThreshold(event, activity: activity)
-        store.shield.applications = nil
-        store.shield.applicationCategories = nil
-        store.shield.webDomainCategories = nil
-        store.shield.webDomains = nil
+        store.shield.applications = Optional.none
+        store.shield.applicationCategories = Optional.none
+        store.shield.webDomainCategories = Optional.none
+        store.shield.webDomains = Optional.none
     }
 }
