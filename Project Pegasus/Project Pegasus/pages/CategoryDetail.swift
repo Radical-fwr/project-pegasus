@@ -91,14 +91,14 @@ struct CategoryDetail: View {
                     ScrollView(showsIndicators: false){
                         
                         /// codice di test
-                        ForEach(0..<15) { _ in
-                            CategoryWStats(
-                                name: "Analisi 2",
-                                color: categoryColor,
-                                progress: 0.6,
-                                gradient: gradient
-                            )
-                        }
+                        //ForEach(0..<15) { _ in
+                        //    CategoryWStats(
+                        //        name: "Analisi 2",
+                        //        color: categoryColor,
+                        //        progress: 0.6,
+                        //        gradient: gradient
+                        //    )
+                        //}
                         
                         ForEach(filteredSessions){ session in
                                 CategoryDetailSession(

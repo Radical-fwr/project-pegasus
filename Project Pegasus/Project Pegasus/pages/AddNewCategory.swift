@@ -53,7 +53,7 @@ struct AddNewCategory: View {
     
     func onSave() {
         if categoryName != ""{
-            if(categoryName != "CATEGORIA" && selectedColor != .gray){
+            if(categoryName != "CATEGORIA" && selectedColor != Color(hex: "A8A8A8")){
                 do {
                     
                     let newCategory = Category(name:categoryName , color: try selectedColor.toHex())
