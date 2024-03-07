@@ -104,7 +104,7 @@ struct Profile: View {
                     ScrollView{
                         ForEach(categories) { category in
                             // al click della categoria vai alla pagina dettaglio categoria
-                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color))) {
+                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category)) {
                                 CategoryWStats(
                                     name: category.name.uppercased(),
                                     color: Color(hex: category.color),
@@ -117,13 +117,21 @@ struct Profile: View {
                     }
                     
                     Spacer()
-                    Text("+ Nuovo Tag")
-                        .font(Font.custom("HelveticaNeue", size: 24))
-                        .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                        .padding()
-                        .onTapGesture {
-                            isSheetPresented = true
-                        }
+                    /*
+                     Text("+ Nuovo Tag")
+                     .font(Font.custom("HelveticaNeue", size: 24))
+                     .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                     .padding()
+                     .onTapGesture {
+                     isSheetPresented = true
+                     }*/
+                    NavigationLink(destination: AddNewCategory()) {
+                        Text("+ Nuovo Tag")
+                            .font(Font.custom("HelveticaNeue", size: 24))
+                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                            .padding()
+                    }
+                    
                 }
             }
         }

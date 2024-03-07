@@ -37,8 +37,3 @@ struct FilterSheetView: View {
 }
 
 
-
-#Preview {
-    
-    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange)
-}
