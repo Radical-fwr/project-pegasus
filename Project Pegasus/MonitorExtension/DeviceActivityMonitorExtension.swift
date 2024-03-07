@@ -21,17 +21,17 @@ class Monitor: DeviceActivityMonitor {
     // modificato da nil a Optional.none da gio 06/03/2024
     override func intervalDidEnd(for activity: DeviceActivityName) {
         super.intervalDidEnd(for: activity)
-        store.shield.applications = Optional.none
-        store.shield.applicationCategories = Optional.none
-        store.shield.webDomainCategories = Optional.none
-        store.shield.webDomains = Optional.none
+        store.shield.applications = nil
+        store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.none
+        store.shield.webDomainCategories = ShieldSettings.ActivityCategoryPolicy.none
+        store.shield.webDomains = .none
     }
     // modificato da nil a Optional.none da gio 06/03/2024
     override func eventDidReachThreshold(_ event: DeviceActivityEvent.Name, activity: DeviceActivityName) {
         super.eventDidReachThreshold(event, activity: activity)
-        store.shield.applications = Optional.none
-        store.shield.applicationCategories = Optional.none
-        store.shield.webDomainCategories = Optional.none
-        store.shield.webDomains = Optional.none
+        store.shield.applications = nil
+        store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.none
+        store.shield.webDomainCategories = ShieldSettings.ActivityCategoryPolicy.none
+        store.shield.webDomains = .none
     }
 }
