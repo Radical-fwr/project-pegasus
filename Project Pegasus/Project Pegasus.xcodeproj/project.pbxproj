@@ -26,6 +26,8 @@
 		163284802AFD592F00D94C32 /* category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632847F2AFD592F00D94C32 /* category.swift */; };
 		163284822AFE84B900D94C32 /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163284812AFE84B900D94C32 /* AddCategory.swift */; };
 		16547B5D2B2227C100C2E67B /* timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16547B5C2B2227C100C2E67B /* timer.swift */; };
+		167D0DFF2B9F7E7800128C64 /* activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D0DFE2B9F7E7800128C64 /* activity.swift */; };
+		167D0E002B9F865A00128C64 /* DeviceActivityMonitorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B6EED32B976A15006988FF /* DeviceActivityMonitorExtension.swift */; };
 		1680A6B22B8FD13B00C95B0C /* CategoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B12B8FD13B00C95B0C /* CategoryDetail.swift */; };
 		1680A6B42B8FD16300C95B0C /* FilterSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B32B8FD16300C95B0C /* FilterSheetView.swift */; };
 		1680A6B62B8FD18B00C95B0C /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6B52B8FD18B00C95B0C /* FilterButton.swift */; };
@@ -116,6 +118,7 @@
 		1632847F2AFD592F00D94C32 /* category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = category.swift; sourceTree = "<group>"; };
 		163284812AFE84B900D94C32 /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
 		16547B5C2B2227C100C2E67B /* timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timer.swift; sourceTree = "<group>"; };
+		167D0DFE2B9F7E7800128C64 /* activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activity.swift; sourceTree = "<group>"; };
 		1680A6B12B8FD13B00C95B0C /* CategoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetail.swift; sourceTree = "<group>"; };
 		1680A6B32B8FD16300C95B0C /* FilterSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSheetView.swift; sourceTree = "<group>"; };
 		1680A6B52B8FD18B00C95B0C /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 				16A67EC42B03BD6B00E57C65 /* user.swift */,
 				16A67EC62B03BE3D00E57C65 /* session.swift */,
 				162E6E5A2B5568CF00BB9F0F /* subcategory.swift */,
+				167D0DFE2B9F7E7800128C64 /* activity.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -472,6 +476,8 @@
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
+				167D0E002B9F865A00128C64 /* DeviceActivityMonitorExtension.swift in Sources */,
+				167D0DFF2B9F7E7800128C64 /* activity.swift in Sources */,
 				160D90592B1F9D51002D61A0 /* TopBar.swift in Sources */,
 				16BE43D32B8A506600DD6761 /* LiquidCircle.swift in Sources */,
 				162E6E512B51532000BB9F0F /* DelimitationBars.swift in Sources */,

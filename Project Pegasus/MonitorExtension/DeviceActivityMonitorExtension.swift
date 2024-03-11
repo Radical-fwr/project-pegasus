@@ -8,6 +8,7 @@
 import MobileCoreServices
 import ManagedSettings
 import DeviceActivity
+import SwiftUI
 
 class Monitor: DeviceActivityMonitor {
     let store = ManagedSettingsStore()
