@@ -36,7 +36,6 @@ struct HomeWheelSelectors: View {
                                 .tag(Category?.some(category))
                                 .onChange(of: selectedCategory) {
                                     if selectedCategoryIndex == index {
-                                        print("onAppear",category.name)
                                         withAnimation {
                                             animationIndex = index
                                         }

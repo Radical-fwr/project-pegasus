@@ -16,7 +16,6 @@ class Monitor: DeviceActivityMonitor {
         let model = BlockManager.shared
         let applications = model.selectionToDiscourage.applicationTokens
         store.shield.applications = applications.isEmpty ? nil : applications
-        print("start monitoring")
     }
     // modificato da nil a Optional.none da gio 06/03/2024
     override func intervalDidEnd(for activity: DeviceActivityName) {
