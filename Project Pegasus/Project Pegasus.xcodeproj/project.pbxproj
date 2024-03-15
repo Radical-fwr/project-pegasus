@@ -59,10 +59,13 @@
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
+		E6309B642BA440F9006F7D49 /* ExpandableAiAnalysisRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6309B632BA440F9006F7D49 /* ExpandableAiAnalysisRectangle.swift */; };
+		E6309B662BA4942E006F7D49 /* AnalysisCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6309B652BA4942E006F7D49 /* AnalysisCarousel.swift */; };
 		E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6347A322B9130AD00C51E6C /* AddNewCategory.swift */; };
 		E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */; };
 		E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */; };
 		E6A9C2602B92226200EC13B5 /* CategoryNameAndColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */; };
+		E6E94FA42B9FB0FC0044435D /* ExpandableCategoriesRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E94FA32B9FB0FC0044435D /* ExpandableCategoriesRectangle.swift */; };
 		E6F595E42B80CD1C004897E0 /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F595E32B80CD1B004897E0 /* Histogram.swift */; };
 /* End PBXBuildFile section */
 
@@ -153,10 +156,13 @@
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
+		E6309B632BA440F9006F7D49 /* ExpandableAiAnalysisRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableAiAnalysisRectangle.swift; sourceTree = "<group>"; };
+		E6309B652BA4942E006F7D49 /* AnalysisCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisCarousel.swift; sourceTree = "<group>"; };
 		E6347A322B9130AD00C51E6C /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
 		E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChoseColorButton.swift; sourceTree = "<group>"; };
 		E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryNameAndColor.swift; sourceTree = "<group>"; };
+		E6E94FA32B9FB0FC0044435D /* ExpandableCategoriesRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableCategoriesRectangle.swift; sourceTree = "<group>"; };
 		E6F595E32B80CD1B004897E0 /* Histogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -309,6 +315,9 @@
 				E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */,
 				E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */,
 				E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */,
+				E6E94FA32B9FB0FC0044435D /* ExpandableCategoriesRectangle.swift */,
+				E6309B632BA440F9006F7D49 /* ExpandableAiAnalysisRectangle.swift */,
+				E6309B652BA4942E006F7D49 /* AnalysisCarousel.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -457,6 +466,7 @@
 				1680A6B22B8FD13B00C95B0C /* CategoryDetail.swift in Sources */,
 				162E6E592B55659C00BB9F0F /* SubCategoriesButton.swift in Sources */,
 				16A9E0342AED51AB000C8EA8 /* ContentView.swift in Sources */,
+				E6309B662BA4942E006F7D49 /* AnalysisCarousel.swift in Sources */,
 				16A67EC72B03BE3D00E57C65 /* session.swift in Sources */,
 				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
 				E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */,
@@ -474,6 +484,7 @@
 				1680A6BA2B90909700C95B0C /* R_button.swift in Sources */,
 				162E6E5D2B557E5200BB9F0F /* SubCategoriesDisplay.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
+				E6309B642BA440F9006F7D49 /* ExpandableAiAnalysisRectangle.swift in Sources */,
 				1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
 				167D0E002B9F865A00128C64 /* DeviceActivityMonitorExtension.swift in Sources */,
@@ -499,6 +510,7 @@
 				1680A6B42B8FD16300C95B0C /* FilterSheetView.swift in Sources */,
 				162E6E572B5182D600BB9F0F /* CircleMovingLine.swift in Sources */,
 				16B6EEB52B9727DF006988FF /* BlockManager.swift in Sources */,
+				E6E94FA42B9FB0FC0044435D /* ExpandableCategoriesRectangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

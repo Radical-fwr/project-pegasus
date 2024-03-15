@@ -16,7 +16,12 @@ struct Profile: View {
     @Query var categories: [Category]
     @State private var isSheetPresented: Bool = false
     @Query var sessions: [Session]
+    @State private var isExpanded: ExpandedSection? = nil
+    @Query var activities: [Activity]
     
+    enum ExpandedSection {
+        case isCategories, isAnalysis
+    }
     
     private func daysSelected() -> String? {
         let calendar = Calendar.current
@@ -59,7 +64,6 @@ struct Profile: View {
                     
                     Spacer().frame(height: 30)
                     
-                    
                     Text("Efficienza".uppercased())
                         .font(Font.custom("Montserrat", size: 32).weight(.bold))
                         .fontWeight(.bold)
@@ -88,35 +92,73 @@ struct Profile: View {
                                     colorScheme == .dark ? .black : Color(hex: "F2EFE9")
                                 ], startPoint: .leading, endPoint: .trailing)
                             )
-                        
                     }
                     
-                    Spacer(minLength: 30)
-                    
-                    Text("Categorie".uppercased())
-                        .font(Font.custom("Montserrat", size: 32).weight(.bold))
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity,alignment: .leading)
-                        .padding([.leading])
-                        .frame(height: 33)
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
-                    
-                    ScrollView{
-                        ForEach(categories) { category in
-                            // al click della categoria vai alla pagina dettaglio categoria
-                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category)) {
-                                CategoryWStats(
-                                    name: category.name.uppercased(),
-                                    color: Color(hex: category.color),
-                                    progress: category.progress
-                                )
-                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.85)
-                                .padding(5)
+                    VStack {
+                        if isExpanded != .isAnalysis {
+                            VStack {
+                                HStack {
+                                    Text("Categorie".uppercased())
+                                        .font(Font.custom("Montserrat", size: 32).weight(.bold))
+                                        .fontWeight(.bold)
+                                        .frame(alignment: .leading)
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        // Toggle tra espanso e collassato per questa sezione
+                                        isExpanded = isExpanded == .isCategories ? nil : .isCategories
+                                    }) {
+                                        Image("Group")
+                                            .resizable()
+                                            .frame(width: 32, height: 32)
+                                    }
+                                }.padding(.horizontal)
+
+                                ExpandableCategoriesRectangle(isExpanded: Binding<Bool>(
+                                            get: { self.isExpanded == .isCategories },
+                                            set: { _ in self.isExpanded = self.isExpanded == .isCategories ? nil : .isCategories }
+                                ), categories: categories, isSheetPresented: $isSheetPresented)
                             }
                         }
+                        
+                        if isExpanded != .isCategories {
+                            VStack {
+                                HStack {
+                                    Text("Ai Analysis".uppercased())
+                                        .font(Font.custom("Montserrat", size: 32).weight(.bold))
+                                        .fontWeight(.bold)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .frame(height: 33)
+                                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        // Toggle tra espanso e collassato per questa sezione
+                                        isExpanded = isExpanded == .isAnalysis ? nil : .isAnalysis
+                                    }) {
+                                        Image("Group 39")
+                                            .resizable()
+                                            .frame(width: 32, height: 32)
+                                    }
+                                }.padding(.horizontal)
+                                    .padding(.top)
+                            }
+                            
+                            if(isExpanded == .isAnalysis){
+                                AnalysisCarousel(categories: categories)
+                            }else{
+                                ExpandableAiAnalysisRectangle()
+                                    .padding(.top, 10)
+                                    .cornerRadius(20)
+                            }
+                            
+                        }
                     }
+                    .animation(.easeInOut(duration: 0.3), value: isExpanded)
                     
-                    Spacer()
                     /*
                      Text("+ Nuovo Tag")
                      .font(Font.custom("HelveticaNeue", size: 24))
@@ -125,12 +167,6 @@ struct Profile: View {
                      .onTapGesture {
                      isSheetPresented = true
                      }*/
-                    NavigationLink(destination: AddNewCategory()) {
-                        Text("+ Nuovo Tag")
-                            .font(Font.custom("HelveticaNeue", size: 24))
-                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                            .padding()
-                    }
                     
                 }
             }
@@ -138,14 +174,13 @@ struct Profile: View {
         .background(.black)
         .foregroundColor(.white)
         .sheet(isPresented: $isSheetPresented, onDismiss: {isSheetPresented = false}, content: {
-            AddCategory(isPresented: $isSheetPresented).background(.black)
+            AddNewCategory().background(.black)
         })
         .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
 }
-
 
 
 #Preview {

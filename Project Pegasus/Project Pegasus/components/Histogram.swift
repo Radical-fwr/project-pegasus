@@ -86,26 +86,26 @@ struct CustomHistogramView: View {
                             colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
                             colorScheme == .dark ? Color(hex: "F2EFE9") : .black
                         ]), startPoint: .bottom, endPoint: .top))
-                        .frame(width: width, height: barHeight)
+                        .frame(width: width, height: barHeight+2)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .offset(x: CGFloat(index) * (width + 15), y: maxHeight - barHeight)
                 }
 
                 
                 Path { path in
-                    let y = maxHeight + 1
+                    let y = maxHeight + 2
                     path.move(to: CGPoint(x: 0, y: y))
                     path.addLine(to: CGPoint(x: geometry.size.width, y: y))
                 }
                 .stroke(LinearGradient(gradient: Gradient(colors: [
-                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1),
-                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
+                    colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.6),
                     colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7),
-                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
-                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1)
+                    colorScheme == .dark ? .white.opacity(0.8) : .black.opacity(0.8),
+                    colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7),
+                    colorScheme == .dark ? .white.opacity(0.6) : .black.opacity(0.6)
                 ]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
             }
-            .frame(height: 200)
+            .frame(height: 150)
             
             HStack {
                 ForEach(dailyEfficiency().keys.sorted(), id: \.self) { key in
