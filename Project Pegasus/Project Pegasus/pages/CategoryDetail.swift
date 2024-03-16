@@ -64,8 +64,13 @@ struct CategoryDetail: View {
                         R_button()
                             .foregroundColor(.black)
                             .onTapGesture {
-                                self.presentationMode.wrappedValue.dismiss()
+                                print("torna indietro cliccato")
                                 onUpdate()
+                                let delayInSeconds: Double = 0.5
+                                DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
+                                
                             }
                         Spacer()
                     }

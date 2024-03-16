@@ -86,7 +86,7 @@ struct CustomHistogramView: View {
                             colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
                             colorScheme == .dark ? Color(hex: "F2EFE9") : .black
                         ]), startPoint: .bottom, endPoint: .top))
-                        .frame(width: width, height: barHeight+2)
+                        .frame(width: width, height: barHeight)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .offset(x: CGFloat(index) * (width + 15), y: maxHeight - barHeight)
                 }

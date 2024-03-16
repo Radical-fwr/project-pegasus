@@ -10,6 +10,24 @@ import SwiftUI
 struct AnalysisCarousel: View {
     @Environment(\.colorScheme) var colorScheme
     var categories: [Category]
+    var sessions: [Session]
+    
+    private func modaOrariSessioni(categoryId: String) -> String {
+            let filteredSessions = sessions.filter { session in
+                session.category?.id == categoryId && session.progress >= 0.9
+            }
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            let orari = filteredSessions.map { dateFormatter.string(from: $0.startDate) }
+            let frequenze = Dictionary(orari.map { ($0, 1) }, uniquingKeysWith: +)
+            
+            guard let maxFrequenza = frequenze.values.max() else { return "Non disponibile" }
+            let moda = frequenze.filter { $0.value == maxFrequenza }.map { $0.key }.joined(separator: ", ")
+            
+            return moda
+        }
     
     var body: some View {
         TabView {
@@ -31,7 +49,7 @@ struct AnalysisCarousel: View {
                                 .font(.callout)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             Spacer()
-                            Text("14:00")
+                            Text(modaOrariSessioni(categoryId: category.id))
                                 .font(.callout)
                                 .bold()
                                 .foregroundColor(Color(hex: category.color))

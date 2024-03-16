@@ -148,7 +148,7 @@ struct Profile: View {
                             }
                             
                             if(isExpanded == .isAnalysis){
-                                AnalysisCarousel(categories: categories)
+                                AnalysisCarousel(categories: categories, sessions: sessions)
                             }else{
                                 ExpandableAiAnalysisRectangle()
                                     .padding(.top, 10)

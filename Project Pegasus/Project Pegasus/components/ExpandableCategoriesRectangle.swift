@@ -88,4 +88,3 @@ struct ExpandableCategoriesRectangle: View {
     return Profile()
 }
 
-
