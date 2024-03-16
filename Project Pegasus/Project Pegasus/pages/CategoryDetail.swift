@@ -25,13 +25,14 @@ struct CategoryDetail: View {
     @State private var showingFilter = false
     @State private var selectedFilter: FilterType = .null
     @State private var showColorPicker: Bool = false
+    let activity: [Activity]
     
     /// permette di applicare il filtro selezionato, di default è impostato .null ovvero la lista di sottocategorie così come viene ottenuta da @Query
     private var filteredSessions: [Session] {
         
         switch selectedFilter {
         case .alphabetical:
-            return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.subCategory!.name < $1.subCategory!.name })
+            return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.activity!.title < $1.activity!.title })
         case .efficiency:
             return sessions.filter{ session in session.category!.id == categoryId }.sorted(by: { $0.progress > $1.progress })
         case .date:
@@ -102,7 +103,7 @@ struct CategoryDetail: View {
                         
                         ForEach(filteredSessions){ session in
                                 CategoryDetailSession(
-                                    name: session.subCategory != nil ? session.subCategory!.name.uppercased() : "Nessuna sottocategoria",
+                                    name: session.activity != nil ? session.activity!.title.uppercased() : "Nessuna activity",
                                     color: categoryColor,
                                     progress: session.progress,
                                     gradient: gradient

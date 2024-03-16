@@ -104,7 +104,7 @@ struct ContentView: View {
         //        } catch {
         //            print("Error saving context: \(error)")
         //        }
-        
+        /*
         var calendar = Calendar.current
         calendar.timeZone = TimeZone.current
         
@@ -113,7 +113,7 @@ struct ContentView: View {
         let oneDayBeforeToday = calendar.date(byAdding: .day, value: -1, to: today)!
         let oneDayAfterToday = calendar.date(byAdding: .day, value: +1, to: today)!
         let twoDayAfterToday = calendar.date(byAdding: .day, value: +2, to: today)!
-        
+        */
         
 //        let session1 : Session = Session(category: categories[0],startDate: twoDaysBeforeToday, stopDate: twoDaysBeforeToday.addingTimeInterval(1800), timeGoal: 3600)
 //        let session2 : Session = Session(category: categories[1],startDate: oneDayBeforeToday, stopDate: oneDayBeforeToday.addingTimeInterval(800), timeGoal: 3600)

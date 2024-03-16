@@ -49,7 +49,7 @@ struct Profile: View {
         NavigationStack {
             ZStack{
                 
-                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer().frame(height: 10)
@@ -119,7 +119,7 @@ struct Profile: View {
                                 ExpandableCategoriesRectangle(isExpanded: Binding<Bool>(
                                             get: { self.isExpanded == .isCategories },
                                             set: { _ in self.isExpanded = self.isExpanded == .isCategories ? nil : .isCategories }
-                                ), categories: categories, isSheetPresented: $isSheetPresented)
+                                ), activities: activities ,categories: categories, isSheetPresented: $isSheetPresented)
                             }
                         }
                         

@@ -27,8 +27,9 @@ class Session: Identifiable {
             return progressCalc
         }
     }
+    var activity: Activity?
     
-    init(category: Category? = nil, subCategory: SubCategory? = nil, startDate: Date, stopDate: Date? = nil, timeGoal: Double) {
+    init(category: Category? = nil, subCategory: SubCategory? = nil, activity: Activity? = nil ,startDate: Date, stopDate: Date? = nil, timeGoal: Double) {
         self.id = UUID().uuidString
         self.startDate = startDate
         self.stopDate = stopDate
@@ -39,6 +40,9 @@ class Session: Identifiable {
         if let subCategory = subCategory {
             setSubCategory(subCategory)
         }
+        if let activity = activity{
+            setActivity(activity)
+        }
     }
     
     func setCategory(_ category: Category) {
@@ -47,6 +51,10 @@ class Session: Identifiable {
     
     func setSubCategory(_ subCategory: SubCategory) {
         self.subCategory = subCategory
+    }
+    
+    func setActivity(_ activity: Activity){
+        self.activity = activity
     }
 }
 

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ExpandableCategoriesRectangle: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var isExpanded: Bool
+    let activities: [Activity]
     let categories: [Category]
     let gradient = LinearGradient(
         stops: [
@@ -27,7 +29,7 @@ struct ExpandableCategoriesRectangle: View {
                 ScrollView(showsIndicators: false){
                     ForEach(Array(categories.enumerated()), id: \.offset) { index, category in
                         if index < (isExpanded ? categories.count : 2) {
-                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category)) {
+                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category, activity: activities)) {
                                 CategoryWStats(
                                     name: category.name.uppercased(),
                                     color: Color(hex: category.color),
