@@ -32,10 +32,43 @@ class Category: Identifiable {
         }
     }
     
+    var isDark : Bool?
+    
+    var lightMode : String {
+        get{
+            if !color.isEmpty{
+                return color
+            }
+            return ""
+        }
+    }
+    
+    var darkMode : String {
+        get{
+            if !color.isEmpty{
+                return color
+            }
+            return ""
+        }
+    }
+    
     init(name: String, color: String) {
         self.id = UUID().uuidString
         self.name = name
         self.color = color
         self.sessions = []
     }
+    
 }
+
+enum CategoryColor: String{
+    case cyan = "Cyan"
+    case gray = "Gray"
+    case green = "Green"
+    case lightGreen = "Light-Green"
+    case orange = "Orange"
+    case pink = "Pink"
+    case red = "Red"
+    case yellow = "Yellow"
+}
+
