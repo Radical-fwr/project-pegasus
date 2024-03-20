@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ExpandableAiAnalysisRectangle: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var isExpanded = false
+    var lightColor = "BFB48F"
     
     var body: some View {
         VStack {
@@ -17,19 +19,18 @@ struct ExpandableAiAnalysisRectangle: View {
                     .foregroundColor(.clear)
                     .frame(height: 120)
                     .background(
-                        RadialGradient(gradient: Gradient(colors: [.black, .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
+                        RadialGradient(gradient: Gradient(colors: colorScheme == .dark ? [.black, .white.opacity(0.4)] : [Color(hex: lightColor), .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
                     )
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .inset(by: 0.5)
-                            .stroke(.white, lineWidth: 1)
+                            .stroke(colorScheme == .dark ? .gray : .white, lineWidth: 1)
                     )
                 
-                // Aggiungi il testo qui
                 Text("Scopri la sessione ideale \nbasata sulle tue performance:")
-                    .foregroundColor(.white) // Cambia il colore del testo se necessario
-                    .font(.callout) // Personalizza il font se necessario
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                    .font(.callout)
                     .multilineTextAlignment(.center)
             }
         }

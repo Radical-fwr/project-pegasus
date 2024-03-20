@@ -11,6 +11,7 @@ struct ExpandableCategoriesRectangle: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var isExpanded: Bool
+    var lightColor = "BFB48F"
     let activities: [Activity]
     let categories: [Category]
     let gradient = LinearGradient(
@@ -60,14 +61,14 @@ struct ExpandableCategoriesRectangle: View {
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 15)
             .background(
-                RadialGradient(gradient: Gradient(colors: [.black,.white.opacity(0.4)]), center: .center, startRadius:250, endRadius: 2)
+                RadialGradient(gradient: Gradient(colors: colorScheme == .dark ? [.black, .white.opacity(0.4)] : [Color(hex: lightColor), .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
             )
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 2)
+                    .stroke(colorScheme == .dark ? .gray : .white, lineWidth: 1)
             )
-            //.animation(.easeInOut, value: isExpanded)
+            .animation(.easeInOut, value: isExpanded)
             .padding(.horizontal)
         }
         .navigationBarTitle("")
