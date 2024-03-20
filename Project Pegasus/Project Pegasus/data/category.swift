@@ -32,8 +32,6 @@ class Category: Identifiable {
         }
     }
     
-    var isDark : Bool?
-    
     var lightMode : String {
         get{
             if !color.isEmpty{

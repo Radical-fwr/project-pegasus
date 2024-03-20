@@ -13,21 +13,42 @@ struct AnalysisCarousel: View {
     var sessions: [Session]
     
     private func modaOrariSessioni(categoryId: String) -> String {
-            let filteredSessions = sessions.filter { session in
-                session.category?.id == categoryId && session.progress >= 0.9
-            }
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-            
-            let orari = filteredSessions.map { dateFormatter.string(from: $0.startDate) }
-            let frequenze = Dictionary(orari.map { ($0, 1) }, uniquingKeysWith: +)
-            
-            guard let maxFrequenza = frequenze.values.max() else { return "Non disponibile" }
-            let moda = frequenze.filter { $0.value == maxFrequenza }.map { $0.key }.joined(separator: ", ")
-            
-            return moda
+        let filteredSessions = sessions.filter { session in
+            session.category?.id == categoryId && session.progress >= 0.9
         }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        let orari = filteredSessions.map { dateFormatter.string(from: $0.startDate) }
+        let frequenze = Dictionary(orari.map { ($0, 1) }, uniquingKeysWith: +)
+        
+        guard let maxFrequenza = frequenze.values.max() else { return "Non disponibile" }
+        let moda = frequenze.filter { $0.value == maxFrequenza }.map { $0.key }.joined(separator: ", ")
+        
+        return moda
+    }
+    
+    private func mediaRatingSessioni(categoryId: String) -> String {
+        let filteredSessions = sessions.filter { $0.category?.id == categoryId }
+        let totalRating = filteredSessions.reduce(0) { $0 + $1.rating }
+        let averageRating = filteredSessions.isEmpty ? 0 : Double(totalRating) / Double(filteredSessions.count)
+        
+        return String(format: "%.1f/5", averageRating)
+    }
+    
+    private func durataMediaEfficace(categoryId: String) -> String {
+        let filteredSessions = sessions.filter { session in
+            session.category?.id == categoryId && session.progress >= 0.9
+        }
+        
+        let totalDuration = filteredSessions.reduce(0.0) { $0 + $1.stopDate!.timeIntervalSince($1.startDate) }
+        let averageDuration = filteredSessions.isEmpty ? 0 : totalDuration / Double(filteredSessions.count)
+        
+        let hours = Int(averageDuration) / 3600
+        let minutes = Int(averageDuration) % 3600 / 60
+        return String(format: "%d H %d M", hours, minutes)
+    }
     
     var body: some View {
         TabView {
@@ -60,7 +81,7 @@ struct AnalysisCarousel: View {
                                 .font(.callout)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             Spacer()
-                            Text("3 H")
+                            Text(durataMediaEfficace(categoryId: category.id))
                                 .font(.callout)
                                 .bold()
                                 .foregroundColor(Color(hex: category.color))
@@ -71,7 +92,7 @@ struct AnalysisCarousel: View {
                                 .font(.callout)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             Spacer()
-                            Text("3.5/5")
+                            Text(mediaRatingSessioni(categoryId: category.id))
                                 .font(.callout)
                                 .bold()
                                 .foregroundColor(Color(hex: category.color))
