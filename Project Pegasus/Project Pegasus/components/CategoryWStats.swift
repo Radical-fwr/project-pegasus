@@ -14,13 +14,15 @@ struct CategoryWStats: View {
     private var progress: Double
     private var gradient: LinearGradient?
     private var useColorScheme: Bool
+    private var backgroundColor : Color?
     
-    init(name: String, color: Color , progress: Double, gradient: LinearGradient? = nil, useColorScheme: Bool) {
+    init(name: String, color: Color , progress: Double, gradient: LinearGradient? = nil, useColorScheme: Bool, backgroundColor: Color? = nil) {
         self.name = name
         self.color = color
         self.progress = progress
         self.gradient = gradient
         self.useColorScheme = useColorScheme
+        self.backgroundColor = backgroundColor
     }
     
     var body: some View {
@@ -38,7 +40,7 @@ struct CategoryWStats: View {
                 .frame(width: 20)
                 .padding(.trailing)
         }
-        .background(gradient != nil ? AnyView(gradient!) : AnyView(Color(color)))
+        .background(gradient != nil ? AnyView(gradient!) : AnyView(backgroundColor == nil ? Color(color) : backgroundColor))
         .cornerRadius(200)
         .frame(height: useColorScheme == true ? 40 : 53)
     }

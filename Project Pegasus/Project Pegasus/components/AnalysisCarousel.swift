@@ -101,11 +101,18 @@ struct AnalysisCarousel: View {
                     .padding(.horizontal,35)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .cornerRadius(20)
-                    .background(LinearGradient(gradient: Gradient(colors: [.black, Color(hex: category.color).opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .background(colorScheme == .dark ? LinearGradient(gradient: Gradient(colors: [.black, Color(hex: category.color).opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing) : LinearGradient(gradient: Gradient(colors: [.white, Color(hex: category.color).opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(LinearGradient(gradient: Gradient(colors: [Color(hex: category.color).opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
+                            .stroke(
+                                colorScheme == .dark
+                                    ? LinearGradient(gradient: Gradient(colors: [Color(hex: category.color).opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                : LinearGradient(gradient: Gradient(colors: [.white, .white.opacity(0.6), .white.opacity(0.2) ,Color(hex: category.color)]), startPoint: .topLeading, endPoint: .bottomTrailing),
+                                lineWidth: 1
+                            )
                     )
+
+                
                 }
                 .cornerRadius(20)
                 .padding(.horizontal,2)
@@ -113,8 +120,8 @@ struct AnalysisCarousel: View {
         }
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         .cornerRadius(20)
-        .frame(height: 300)
-        .padding()
+        .frame(height: 327)
+        .padding(.horizontal)
     }
 }
 

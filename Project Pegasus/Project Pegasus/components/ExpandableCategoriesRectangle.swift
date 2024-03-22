@@ -11,10 +11,10 @@ struct ExpandableCategoriesRectangle: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var isExpanded: Bool
-    var lightColor = "BFB48F"
+    // var lightColor = "BFB48F"
     let activities: [Activity]
     let categories: [Category]
-    let gradient = LinearGradient(
+    let darkGradient = LinearGradient(
         stops: [
             Gradient.Stop(color: Color(red: 0.53, green: 0.53, blue: 0.53).opacity(0.5), location: 0.00),
             Gradient.Stop(color: Color(red: 0.53, green: 0.53, blue: 0.53).opacity(0.35), location: 1.00),
@@ -35,8 +35,9 @@ struct ExpandableCategoriesRectangle: View {
                                     name: category.name.uppercased(),
                                     color: Color(hex: category.color),
                                     progress: category.progress,
-                                    gradient: gradient,
-                                    useColorScheme: false
+                                    gradient: colorScheme == .dark ? darkGradient : nil,
+                                    useColorScheme: false,
+                                    backgroundColor: colorScheme == .dark ? nil : .white
                                 )
                             }
                             .padding(.top, index == 0 ? 10 : 0)
@@ -46,7 +47,7 @@ struct ExpandableCategoriesRectangle: View {
                     if isExpanded {
                         Text("+ Nuovo Tag")
                             .font(Font.custom("HelveticaNeue", size: 24))
-                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                            .foregroundColor(colorScheme == .dark ? .white : .white)
                             .padding(.horizontal)
                             .padding(.top,10)
                             .padding(.bottom,20)
@@ -56,12 +57,23 @@ struct ExpandableCategoriesRectangle: View {
                         
                     }
                 }
-                .frame(height: isExpanded ? 330 : 135 )
+                .frame(height: isExpanded ? 327 : 135 )
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, 15)
             .background(
-                RadialGradient(gradient: Gradient(colors: colorScheme == .dark ? [.black, .white.opacity(0.4)] : [Color(hex: lightColor), .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
+                colorScheme == .dark ? AnyView(
+                    RadialGradient(gradient: Gradient(colors: [.black, .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
+                ) : AnyView(
+                    LinearGradient(
+                    stops: [
+                    Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.7), location: 0.00),
+                    Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.3), location: 1.00),
+                    ],
+                    startPoint: UnitPoint(x: 0, y: 0.5),
+                    endPoint: UnitPoint(x: 1, y: 0.5)
+                    )
+                )
             )
             .cornerRadius(10)
             .overlay(
@@ -76,14 +88,6 @@ struct ExpandableCategoriesRectangle: View {
         .navigationBarHidden(true)
     }
 }
-
-/*ForEach(Array(categories.enumerated()), id: \.offset) { index, category in
- if index < (isExpanded ? 4 : 2) {
- category
- .padding(.top, index == 0 ? 10 : 0)
- .padding(.bottom, index == (isExpanded ? min(categories.count, 4) : 2) - 1 ? 10 : 0)
- }
- }*/
 
 #Preview {
     return Profile()

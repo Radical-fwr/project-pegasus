@@ -49,7 +49,7 @@ struct Profile: View {
         NavigationStack {
             ZStack{
                 
-                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex:"F2EFE9").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer().frame(height: 10)
@@ -100,8 +100,7 @@ struct Profile: View {
                                 HStack {
                                     Text("Categorie".uppercased())
                                         .font(Font.custom("Montserrat", size: 32).weight(.bold))
-                                        .fontWeight(.bold)
-                                        .frame(alignment: .leading)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         .foregroundColor(colorScheme == .dark ? .white : .black)
                                     
                                     Spacer()
@@ -110,7 +109,7 @@ struct Profile: View {
                                         // Toggle tra espanso e collassato per questa sezione
                                         isExpanded = isExpanded == .isCategories ? nil : .isCategories
                                     }) {
-                                        Image("Group")
+                                        Image(colorScheme == .dark ? "LightCategory" : "RGBCategory")
                                             .resizable()
                                             .frame(width: 32, height: 32)
                                     }
@@ -128,9 +127,7 @@ struct Profile: View {
                                 HStack {
                                     Text("Ai Analysis".uppercased())
                                         .font(Font.custom("Montserrat", size: 32).weight(.bold))
-                                        .fontWeight(.bold)
                                         .frame(maxWidth: .infinity, alignment: .leading)
-                                        .frame(height: 33)
                                         .foregroundColor(colorScheme == .dark ? .white : .black)
                                     
                                     Spacer()
@@ -139,35 +136,22 @@ struct Profile: View {
                                         // Toggle tra espanso e collassato per questa sezione
                                         isExpanded = isExpanded == .isAnalysis ? nil : .isAnalysis
                                     }) {
-                                        Image("Group 39")
+                                        Image(colorScheme == .dark ? "LightAi" : "DarkAi")
                                             .resizable()
                                             .frame(width: 32, height: 32)
                                     }
                                 }.padding(.horizontal)
-                                    .padding(.top)
                             }
                             
                             if(isExpanded == .isAnalysis){
                                 AnalysisCarousel(categories: categories, sessions: sessions)
                             }else{
                                 ExpandableAiAnalysisRectangle()
-                                    .padding(.top, 10)
-                                    .cornerRadius(20)
                             }
                             
                         }
                     }
                     .animation(.easeInOut(duration: 0.3), value: isExpanded)
-                    
-                    /*
-                     Text("+ Nuovo Tag")
-                     .font(Font.custom("HelveticaNeue", size: 24))
-                     .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                     .padding()
-                     .onTapGesture {
-                     isSheetPresented = true
-                     }*/
-                    
                 }
             }
         }
