@@ -56,7 +56,7 @@ struct AddNewCategory: View {
             if(categoryName != "CATEGORIA" && selectedColor != Color(hex: "A8A8A8")){
                 do {
                     
-                    let newCategory = Category(name:categoryName , color: try selectedColor.toHex())
+                    let newCategory = Category(name:categoryName , color:  try selectedColor.toHex())
                     context.insert(newCategory)
                     try context.save()
                 } catch {

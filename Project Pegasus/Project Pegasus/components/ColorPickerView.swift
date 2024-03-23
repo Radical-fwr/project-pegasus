@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorPickerView: View {
     @Environment(\.colorScheme) var colorScheme
-    let colors: [Color] = [.orange, .yellow, .green, .cyan, .pink, .indigo, .brown]
+    let colors: [CategoryColor] = [.cyan, .gray, .green, .lightGreen, .orange, .pink, .red, .yellow]
     @Binding var selectedColor: Color
     let columns = [
         GridItem(.adaptive(minimum: 60))
@@ -18,16 +18,17 @@ struct ColorPickerView: View {
     var body: some View {
         LazyVGrid(columns: columns) {
             ForEach(colors, id: \.self) { color in
+                let colorValue = color.color // Ottieni il colore dalla proprietà color dell'enum CategoryColor
                 Rectangle()
-                    .fill(LinearGradient(gradient: Gradient(colors: [color, color.opacity(0.7)]), startPoint: .leading, endPoint: .trailing))
+                    .fill(LinearGradient(gradient: Gradient(colors: [colorValue, colorValue.opacity(0.7)]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(20)
                     .frame(width: 48, height: 48)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .stroke(selectedColor == color ? Color.white : Color.clear, lineWidth: 3)
+                            .stroke(selectedColor == colorValue ? Color.white : Color.clear, lineWidth: 3)
                     )
                     .onTapGesture {
-                        selectedColor = color
+                        selectedColor = colorValue
                     }
                     .padding(20)
                     .shadow(color: .black.opacity(0.2), radius: 12, x: 0, y: 4)
@@ -38,6 +39,7 @@ struct ColorPickerView: View {
         .background(RoundedRectangle(cornerRadius: 25).fill(LinearGradient(gradient: Gradient(colors: [Color(colorScheme == .dark ? .black : .white), Color(colorScheme == .dark ? .black : .white).opacity(0.7)]), startPoint: .leading, endPoint: .trailing)))
     }
 }
+
 
 
 

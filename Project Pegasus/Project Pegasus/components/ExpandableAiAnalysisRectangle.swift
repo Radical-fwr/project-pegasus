@@ -23,8 +23,8 @@ struct ExpandableAiAnalysisRectangle: View {
                         ) : AnyView(
                             LinearGradient(
                             stops: [
-                            Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.7), location: 0.00),
-                            Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.3), location: 1.00),
+                                Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.7), location: 0.00),
+                                Gradient.Stop(color: Color(red: 0.75, green: 0.71, blue: 0.56).opacity(0.3), location: 1.00),
                             ],
                             startPoint: UnitPoint(x: 0, y: 0.5),
                             endPoint: UnitPoint(x: 1, y: 0.5)
@@ -32,6 +32,7 @@ struct ExpandableAiAnalysisRectangle: View {
                         )
                     )
                     .cornerRadius(10)
+                    .shadow(color: colorScheme == .dark ? Color(red: 0.37, green: 0.37, blue: 0.37) : Color.white, radius: 0, x: 0, y: colorScheme == .dark ? 4 : 0)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .inset(by: 0.5)

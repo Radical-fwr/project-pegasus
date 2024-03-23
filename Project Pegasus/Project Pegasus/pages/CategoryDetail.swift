@@ -165,7 +165,7 @@ struct CategoryDetail: View {
             if category.name != categoryName{
                 category.name = categoryName
             }
-            if category.color != (try! categoryColor.toHex()){
+            if category.color != ( try! categoryColor.toHex()){
                 category.color = try! categoryColor.toHex()
             }
         }

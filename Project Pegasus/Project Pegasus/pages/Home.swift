@@ -55,9 +55,8 @@ struct Home: View {
                     Spacer()
                     HStack {
                         SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
-                            //.padding()
                             .padding(.leading, 50)
-                            //.padding()
+                            
                             
                         Spacer()
                         StartButton(
@@ -101,9 +100,9 @@ struct Home: View {
 
 #Preview{
     let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)
-    let category1: Category = Category(name: "study", color: "EC8E14")
-    let category2: Category = Category(name: "work", color: "F6DE00")
-    let category3: Category = Category(name: "detox", color: "F9DEFF")
+    let category1: Category = Category(name: "study", color: try! CategoryColor.yellow.color.toHex())
+    let category2: Category = Category(name: "work", color: try! CategoryColor.red.color.toHex())
+    let category3: Category = Category(name: "detox", color: try! CategoryColor.cyan.color.toHex())
     container.mainContext.insert(category1)
     container.mainContext.insert(category2)
     container.mainContext.insert(category3)

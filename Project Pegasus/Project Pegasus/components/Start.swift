@@ -55,13 +55,13 @@ struct Start: View {
                     Text("Ciao,\ncosa ti porta qui?")
                         .font(Font.custom("HelveticaNeue", size: 38))
                         .foregroundColor(.white)
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                     
                     ForEach(categories) { category in
                         Button(category.name) {
                             
                         }
-                        .buttonStyle(CategoryButtonStyle(color: Color.init(hex: category.color)))
+                        .buttonStyle(CategoryButtonStyle(color: Color.init(category.color)))
                     }
                     
                     Button("Add...") {

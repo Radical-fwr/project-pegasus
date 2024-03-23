@@ -12,7 +12,7 @@ import SwiftData
 class Category: Identifiable {
     @Attribute(.unique) var id: String
     @Attribute(.unique) var name: String
-    var color: String
+    var color : String
     var sessions: [Session]?
     var subCategories: [SubCategory]?
     var progress: Double {
@@ -32,23 +32,23 @@ class Category: Identifiable {
         }
     }
     
-    var lightMode : String {
-        get{
-            if !color.isEmpty{
-                return color
-            }
-            return ""
-        }
-    }
-    
-    var darkMode : String {
-        get{
-            if !color.isEmpty{
-                return color
-            }
-            return ""
-        }
-    }
+//    var lightMode : String {
+//        get{
+//            if !color.isEmpty{
+//                return color
+//            }
+//            return ""
+//        }
+//    }
+//    
+//    var darkMode : String {
+//        get{
+//            if !color.isEmpty{
+//                return color
+//            }
+//            return ""
+//        }
+//    }
     
     init(name: String, color: String) {
         self.id = UUID().uuidString
@@ -68,5 +68,19 @@ enum CategoryColor: String{
     case pink = "Pink"
     case red = "Red"
     case yellow = "Yellow"
+    
+    var color: Color {
+            switch self {
+            case .cyan: return Color("Cyan")
+            case .gray: return Color("Gray")
+            case .green: return Color("Green")
+            case .lightGreen: return Color("Light-Green")
+            case .orange: return Color("Orange")
+            case .pink: return Color("Pink")
+            case .red: return Color("Red")
+            case .yellow: return Color("Yellow")
+            }
+        }
 }
+
 
