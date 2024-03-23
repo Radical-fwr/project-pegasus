@@ -100,9 +100,9 @@ struct Home: View {
 
 #Preview{
     let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)
-    let category1: Category = Category(name: "study", color: try! CategoryColor.yellow.color.toHex())
-    let category2: Category = Category(name: "work", color: try! CategoryColor.red.color.toHex())
-    let category3: Category = Category(name: "detox", color: try! CategoryColor.cyan.color.toHex())
+    let category1: Category = Category(name: "studio", color: try! CategoryColor.orange.color.toHex())//"EC8E14"
+    let category2: Category = Category(name: "lavoro", color: try! CategoryColor.yellow.color.toHex())//"F6DE00"
+    let category3: Category = Category(name: "detox", color: try! CategoryColor.green.color.toHex())//"67CD67"
     container.mainContext.insert(category1)
     container.mainContext.insert(category2)
     container.mainContext.insert(category3)

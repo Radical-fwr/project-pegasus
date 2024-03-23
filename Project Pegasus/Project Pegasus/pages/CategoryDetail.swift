@@ -172,9 +172,8 @@ struct CategoryDetail: View {
     }
 }
 
-/*
+
 #Preview {
-    
-    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange, category: Category(name: "Prova", color: "FFFFFF"))
+    return Profile()
 }
-*/
+

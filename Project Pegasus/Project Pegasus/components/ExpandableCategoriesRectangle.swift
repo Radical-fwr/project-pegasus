@@ -57,14 +57,13 @@ struct ExpandableCategoriesRectangle: View {
                         
                     }
                 }
-                .frame(height: isExpanded ? 327 : 135 )
+                .frame(height: isExpanded ? 327 : 135)
             }
             .frame(maxWidth: .infinity)
-
             .padding(.horizontal, 15)
             .background(
                 colorScheme == .dark ? AnyView(
-                    LinearGradient(gradient: Gradient(colors: [.black,.gray.opacity(0.2),.white.opacity(0.2),.gray.opacity(0.2),.black]), startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(gradient: Gradient(colors: [.black,.gray.opacity(0.2),.white.opacity(0.2),.gray.opacity(0.2),.black]), startPoint: .leading, endPoint: .trailing) //in fase di test
                 ) : AnyView(
                     LinearGradient(
                     stops: [
@@ -77,10 +76,10 @@ struct ExpandableCategoriesRectangle: View {
                 )
             )
             .cornerRadius(10)
-            .shadow(color: colorScheme == .dark ? Color(red: 0.37, green: 0.37, blue: 0.37) : Color.white, radius: 0, x: 0, y: isExpanded ? 0 : colorScheme == .dark ? 4 : 0)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(colorScheme == .dark ? .gray : .white, lineWidth: 1)
+                    //.shadow(color: colorScheme == .dark ? Color(red: 0.37, green: 0.37, blue: 0.37) : Color.white, radius: 0, x: 0, y: isExpanded ? 0 : colorScheme == .dark ? 4 : 0)
             )
             .animation(.easeInOut, value: isExpanded)
             .padding(.horizontal)
@@ -90,6 +89,7 @@ struct ExpandableCategoriesRectangle: View {
         .navigationBarHidden(true)
     }
 }
+//precedente radiente prima di quello test
 //RadialGradient(gradient: Gradient(colors: [.black, .white.opacity(0.4)]), center: .center, startRadius: 250, endRadius: 2)
 #Preview {
     return Profile()
