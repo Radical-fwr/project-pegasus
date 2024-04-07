@@ -31,11 +31,11 @@ struct SubCategoriesButton: View {
                         Spacer()
                         
                         HStack{
-                            if !opened {
-                                Text("All")
-                                    .font(Font.custom("HelveticaNeue", size: 22))
-                                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                            }
+                            
+                            Text("All")
+                                .font(Font.custom("HelveticaNeue", size: 22))
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                            
                             Image(systemName: "chevron.right")
                                 .rotationEffect(Angle(degrees: chevronRotation))
                                 .font(.system(size: 20))
@@ -55,14 +55,15 @@ struct SubCategoriesButton: View {
                     HStack{
                         
                     }
-                    .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
+                    .frame(height: 40)
                     .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 }
-                .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
+                .frame(height: 40)
                 .cornerRadius(5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
+                        .stroke(Color(hex: category.color).opacity(opened ? 0 : 0.6), lineWidth: 1)
+                        
                 )
             }
         } else {
@@ -73,7 +74,7 @@ struct SubCategoriesButton: View {
                     .fontWeight(.light)
                     .padding()
             }
-            .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
+            .frame( height: 40)
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)

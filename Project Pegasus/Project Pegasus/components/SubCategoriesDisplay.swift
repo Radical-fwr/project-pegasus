@@ -32,11 +32,35 @@ struct SubCategoriesDisplay: View {
     
     var body: some View {
         if let category = category {
-            ZStack {
+            
+            VStack{
                 SubCategoriesButton(category: category, opened: $opened)
+                if opened{
+                    VStack(alignment:.leading){
+                        Text("Rispondere mail")
+                        Divider().foregroundColor(Color(hex: category.color))
+                        Text("Organizzare consegne")
+                        Divider().foregroundColor(Color(hex: category.color))
+                        Text("Fare fatture")
+                        
+                    }
+                    .padding(.horizontal)
+                    
+                }
+            }
+            .padding(.vertical, opened ? 8: 0)
+            
+            .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(opened ? 10 : 0)
+            .padding(.trailing, opened ? 30 : 0)
+            //.offset(y: 70)
+           // .opacity(opened ? 1.00 : 0.00)
+           // ZStack {
+                
                
-                ZStack {
-                    ZStack {
+                //ZStack {
+                   // ZStack {
+                        /*
                         ScrollView {
                             VStack {
                                 Spacer()
@@ -88,19 +112,18 @@ struct SubCategoriesDisplay: View {
                                 }
                             }
                         }
-                        .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
-                    }
-                    .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
-                    .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
-                    .cornerRadius(5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
-                    )
-                }
-                .offset(y: 70)
-                .opacity(opened ? 1.00 : 0.00)
-            }
+                        .frame(width: UIScreen.main.bounds.width*0.6, height: 90)*/
+                    //}
+                    
+//                    .frame(width: UIScreen.main.bounds.width*0.6, height: 90)
+//                    .cornerRadius(5)
+//                    .overlay(
+//                        RoundedRectangle(cornerRadius: 5)
+//                            .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
+//                    )
+                //}
+               
+           // }
             
 
         } else {

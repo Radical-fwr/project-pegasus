@@ -59,6 +59,9 @@
 		16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AC812B2B223100F66DB8 /* RunningTimer.swift */; };
 		16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2712B1646D500E2249D /* CircularProgressBar.swift */; };
 		16EAB2742B18C99B00E2249D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EAB2732B18C99B00E2249D /* Home.swift */; };
+		9FFDE7262BB8B60A00CAAE6E /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7252BB8B60A00CAAE6E /* ActivitySelection.swift */; };
+		9FFDE7282BB8E09900CAAE6E /* HomeCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7272BB8E09800CAAE6E /* HomeCalendar.swift */; };
+		9FFDE72A2BB8E15500CAAE6E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7292BB8E15500CAAE6E /* CalendarView.swift */; };
 		E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6347A322B9130AD00C51E6C /* AddNewCategory.swift */; };
 		E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */; };
 		E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */; };
@@ -153,6 +156,9 @@
 		16EAB2712B1646D500E2249D /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		16EAB2732B18C99B00E2249D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Project Pegasus.entitlements"; sourceTree = "<group>"; };
+		9FFDE7252BB8B60A00CAAE6E /* ActivitySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
+		9FFDE7272BB8E09800CAAE6E /* HomeCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCalendar.swift; sourceTree = "<group>"; };
+		9FFDE7292BB8E15500CAAE6E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E6347A322B9130AD00C51E6C /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
 		E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChoseColorButton.swift; sourceTree = "<group>"; };
@@ -225,11 +231,14 @@
 				163284812AFE84B900D94C32 /* AddCategory.swift */,
 				16A67EC22B03BA6E00E57C65 /* Profile.swift */,
 				16EAB2732B18C99B00E2249D /* Home.swift */,
+				9FFDE7272BB8E09800CAAE6E /* HomeCalendar.swift */,
 				16D6AC812B2B223100F66DB8 /* RunningTimer.swift */,
 				160F33092B8F35260053EF6E /* EndOFSession.swift */,
 				1680A6B12B8FD13B00C95B0C /* CategoryDetail.swift */,
 				1680A6C12B90CCC400C95B0C /* Settings.swift */,
 				E6347A322B9130AD00C51E6C /* AddNewCategory.swift */,
+				9FFDE7252BB8B60A00CAAE6E /* ActivitySelection.swift */,
+				9FFDE7292BB8E15500CAAE6E /* CalendarView.swift */,
 			);
 			path = pages;
 			sourceTree = "<group>";
@@ -456,6 +465,7 @@
 			files = (
 				1680A6B22B8FD13B00C95B0C /* CategoryDetail.swift in Sources */,
 				162E6E592B55659C00BB9F0F /* SubCategoriesButton.swift in Sources */,
+				9FFDE72A2BB8E15500CAAE6E /* CalendarView.swift in Sources */,
 				16A9E0342AED51AB000C8EA8 /* ContentView.swift in Sources */,
 				16A67EC72B03BE3D00E57C65 /* session.swift in Sources */,
 				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
@@ -473,6 +483,7 @@
 				16547B5D2B2227C100C2E67B /* timer.swift in Sources */,
 				1680A6BA2B90909700C95B0C /* R_button.swift in Sources */,
 				162E6E5D2B557E5200BB9F0F /* SubCategoriesDisplay.swift in Sources */,
+				9FFDE7262BB8B60A00CAAE6E /* ActivitySelection.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */,
 				16A67ECB2B06895900E57C65 /* CategoryWStats.swift in Sources */,
@@ -494,6 +505,7 @@
 				168C06482B40807600BEE44F /* HomeWheelSelectors.swift in Sources */,
 				163284822AFE84B900D94C32 /* AddCategory.swift in Sources */,
 				160F330A2B8F35260053EF6E /* EndOFSession.swift in Sources */,
+				9FFDE7282BB8E09900CAAE6E /* HomeCalendar.swift in Sources */,
 				160F33132B8F9A890053EF6E /* SessionWStats.swift in Sources */,
 				162E6E552B516A8A00BB9F0F /* FadingCircleView.swift in Sources */,
 				1680A6B42B8FD16300C95B0C /* FilterSheetView.swift in Sources */,

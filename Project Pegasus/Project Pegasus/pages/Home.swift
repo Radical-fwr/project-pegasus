@@ -52,32 +52,38 @@ struct Home: View {
                         )
                         DelimitationBars()
                     }
-                    Spacer()
-                    HStack {
-                        SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
+                   // Spacer()
+                    VStack{
+                        HStack {
+                            SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
                             //.padding()
-                            .padding(.leading, 50)
+                                .padding(.leading, 30)
                             //.padding()
                             
-                        Spacer()
-                        StartButton(
-                            selectedCategory: $selectedCategory,
-                            selectedSubCategory: $selectedSubCategory,
-                            selectedHour: $selectedHour,
-                            selectedMinute: $selectedMinute,
-                            timerIsActive: $timerIsActive,
-                            slideReverse: $slideReverse
-                        )
-                        .scaledToFill()
+                            if !isSubCategoriesDisplayExpanded{
+                               // Spacer()
+                                StartButton(
+                                    selectedCategory: $selectedCategory,
+                                    selectedSubCategory: $selectedSubCategory,
+                                    selectedHour: $selectedHour,
+                                    selectedMinute: $selectedMinute,
+                                    timerIsActive: $timerIsActive,
+                                    slideReverse: $slideReverse
+                                )
+                                .scaledToFill()
+                            }
+                        }
+                        //Spacer()
+                    }.frame(height: 250)
+                    NavigationLink {
+                        CalendarScreen(calendar: .current)
+                    } label: {
+                        WeeklyView()
                     }
-                    Spacer()
                     
                 }
-                
-                Streak()
-                    .ignoresSafeArea()
-                    .opacity(isSubCategoriesDisplayExpanded ? 0 : 1)
             }
+            
         }
         .navigationTransition(slideReverse ? .reverseSlide(axis: .horizontal) : .slide(axis: .horizontal))
         .onChange(of: navToProfile) {
