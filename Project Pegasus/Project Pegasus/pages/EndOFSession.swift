@@ -30,62 +30,106 @@ struct EndOFSession: View {
                 colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
                 
                 VStack{
-                    Text("radical.")
-                    .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
+                    HStack{
+                        Spacer()
+                        Button {
+                            session!.rating = rating
+                            do {
+                                try context.save()
+                                print("rating saved")
+                            } catch {
+                                print("Error saving context: \(error)")
+                            }
+                            goHome = true
+                        } label: {
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .frame(width: 25,height: 25)
+                                .foregroundColor(.white)
+                        }
+                        
+                    }
+                    .padding(.horizontal)
+                    Spacer()
                     
+                    Text("ANALISI ROUND")
+                        .font(Font.custom("Montserrat", size: 36).weight(.bold))
+                    
+                    Spacer()
+                    Text("Macroeconomia")
+                        .font(Font.custom("Montserrat", size: 24).weight(.bold))
+                        .foregroundStyle(LinearGradient(colors: [Color.init(hex: "#FFFFFF"), Color.init(hex: session?.category?.color ?? "#FFFFFF")], startPoint: .top, endPoint: .bottom))
+                    Spacer()
+                    ActivityProgressView(progress: 1, color: Color.init(hex: session?.category?.color ?? "#FFFFFF"))
                     
                     Spacer()
                     
-                    Text("COM’É ANDATA?")
-                    .font(Font.custom("Montserrat", size: 36).weight(.bold))
+                    HStack{
+                        Text("Attività finita in:")
+                            .font(Font.custom("Helvetica Neue", size: 20))
+                        Spacer()
+                        Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
+                            .font(Font.custom("Helvetica Neue", size: 24).weight(.bold))
+                    }.padding(.horizontal)
                     
+                    Spacer()
+                    HStack{
+                        Text("Hai usato il telefono:")
+                            .font(Font.custom("Helvetica Neue", size: 20))
+                        Spacer()
+                        Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
+                            .font(Font.custom("Helvetica Neue", size: 24).weight(.bold))
+                    }.padding(.horizontal)
+                    Spacer()
                     
-                    Text("Lascia una valutazione:")
-                    .font(Font.custom("HelveticaNeue", size: 20).weight(.light))
+                    HStack{
+                        Text("Periodo maggiore di \ninutilizzo del telefono:")
+                            .font(Font.custom("Helvetica Neue", size: 20))
+                        Spacer()
+                        Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
+                            .font(Font.custom("Helvetica Neue", size: 24).weight(.bold))
+                    }.padding(.horizontal)
                     
                     
                     Spacer()
-                    
-                    
+                    Text("Valuta la tua sessione:")
+                        .font(Font.custom("Helvetica Neue", size: 20))
+                    Spacer()
                     RatingSelector(rating: $rating, borderColor: Color(hex: session!.category!.color))
                     
                     Spacer()
                     
-                    Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
-                        .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
-                    .multilineTextAlignment(.center)
+                    //                    Text(session!.category!.name.uppercased())
+                    //                        .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
+                    //                    .multilineTextAlignment(.center)
+                    //                    
+                    //                    
+                    //                    Spacer()
+                    //                    
+                    //                    Button(action: {
+                    //                        session!.rating = rating
+                    //                        do {
+                    //                            try context.save()
+                    //                            print("rating saved")
+                    //                        } catch {
+                    //                            print("Error saving context: \(error)")
+                    //                        }
+                    //                        goHome = true
+                    //                    }) {
+                    //                        Image("home")
+                    //                            .resizable()
+                    //                            .aspectRatio(contentMode: .fit)
+                    //                            .padding(25)
+                    //                            .foregroundColor(colorScheme == .dark ? .black : .white)
+                    //                            
+                    //                    }
+                    //                    .background(colorScheme == .dark ? .white : .black)
+                    //                    .frame(width: 80)
+                    //                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     
-                    
-                    Text(session!.category!.name.uppercased())
-                        .font(Font.custom("Helvetica Neue", size: 36).weight(.bold))
-                    .multilineTextAlignment(.center)
-                    
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        session!.rating = rating
-                        do {
-                            try context.save()
-                            print("rating saved")
-                        } catch {
-                            print("Error saving context: \(error)")
-                        }
-                        goHome = true
-                    }) {
-                        Image("home")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(25)
-                            .foregroundColor(colorScheme == .dark ? .black : .white)
-                            
-                    }
-                    .background(colorScheme == .dark ? .white : .black)
-                    .frame(width: 80)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    
-                    Spacer()
+                    // Spacer()
                 }
+                .padding(.horizontal)
             }
         }
         .navigationBarTitle("")

@@ -37,12 +37,15 @@ struct SubCategoriesDisplay: View {
                 SubCategoriesButton(category: category, opened: $opened)
                 if opened{
                     VStack(alignment:.leading){
-                        Text("Rispondere mail")
-                        Divider().foregroundColor(Color(hex: category.color))
-                        Text("Organizzare consegne")
-                        Divider().foregroundColor(Color(hex: category.color))
-                        Text("Fare fatture")
-                        
+                        ForEach(subCategories){subCategory in
+                            Text(subCategory.name)
+                            Divider().foregroundColor(Color(hex: category.color))
+                        }
+//                       
+//                        Text("Organizzare consegne")
+//                        Divider().foregroundColor(Color(hex: category.color))
+//                        Text("Fare fatture")
+//                        
                     }
                     .padding(.horizontal)
                     

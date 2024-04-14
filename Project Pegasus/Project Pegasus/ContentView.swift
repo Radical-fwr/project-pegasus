@@ -82,10 +82,10 @@ struct ContentView: View {
                 print("error")
             }
         }
-        let category1: Category = Category(name: "studio", color: "EC8E14")
-        let category2: Category = Category(name: "lavoro", color: "F6DE00")
-        let category3: Category = Category(name: "detox", color: "67CD67")
-        let category4: Category = Category(name: "sport", color: "01A0E2")
+        let category1: Category = Category(name: "studio", color: "EC8E14", gifName: "orange")
+        let category2: Category = Category(name: "lavoro", color: "F6DE00", gifName: "yellow")
+        let category3: Category = Category(name: "detox", color: "67CD67", gifName: "green1")
+        let category4: Category = Category(name: "sport", color: "01A0E2", gifName: "blue1")
         context.insert(category1)
         context.insert(category2)
         context.insert(category3)

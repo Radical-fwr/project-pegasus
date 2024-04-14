@@ -15,6 +15,7 @@ class Category: Identifiable {
     var color: String
     var sessions: [Session]?
     var subCategories: [SubCategory]?
+    var gifName:String
     var progress: Double {
         get {
             var progressList: [Double] = []
@@ -32,10 +33,11 @@ class Category: Identifiable {
         }
     }
     
-    init(name: String, color: String) {
+    init(name: String, color: String,gifName:String) {
         self.id = UUID().uuidString
         self.name = name
         self.color = color
         self.sessions = []
+        self.gifName = gifName
     }
 }

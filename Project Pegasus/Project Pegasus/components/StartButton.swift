@@ -25,6 +25,9 @@ struct StartButton: View {
         if selectedCategory != Category?.none && (selectedHour != Double?.none || selectedMinute != Double?.none) {
             Button(action: {
                 let timeInterval = ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60)
+                if timeInterval == 0{
+                    return
+                }
                 let newSession = Session(
                     category: selectedCategory,
                     startDate: Date(),
