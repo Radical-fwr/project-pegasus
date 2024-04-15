@@ -15,12 +15,16 @@ class Activity: Identifiable {
     var title: String
     var sessions: [Session]
     var completed: Bool
+    var day:Int
+    var month: Int
     
-    init(category: Category, title: String) {
+    init(category: Category, title: String, day: Int, month: Int) {
         self.id = UUID().uuidString
         self.category = category
         self.title = title
         self.sessions = []
         self.completed = false
+        self.day = day
+        self.month = month
     }
 }

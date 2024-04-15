@@ -11,13 +11,15 @@ import SwiftData
 struct ToDo: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) private var context
     @State var isPresented = false
     @Query var categories: [Category] = []
-    @Query var subCategories: [SubCategory]
+    @Query var activities: [Activity]
     @State private var selectedItem = 0
-    @State var addSubCategory = false
-    @State var newSubCategory = ""
-    @State var newDateString = ""
+    @StateObject var toDoVM = ToDoViewModel()
+    @FocusState var dateFocused: Bool
+    @FocusState var nameFocused: Bool
+  //  @FocusState var Focused = false
     var body: some View {
         NavigationStack{
             ZStack {
@@ -43,8 +45,6 @@ struct ToDo: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                         
-                        
-                        
                     }
                     Spacer().frame(height: 30)
                     HStack{
@@ -67,39 +67,52 @@ struct ToDo: View {
                     }
                     
                     TabView(selection: $selectedItem) {
-                        ForEach(categories){ category in
+                        ForEach(categories){category in
                             VStack(alignment:.leading){
                                 Text(category.name.uppercased())
                                     .font(Font.custom("Montserrat", size: 24).weight(.bold))
                                     .foregroundColor(Color(hex: category.color))
+                                    .padding(.bottom,12)
                                 
                                 VStack(alignment:.leading,spacing: 16){
-                                    if addSubCategory{
+                                    if toDoVM.addSubCategory{
                                         HStack{
                                             CircularProgressView(progress: 0.8, color: Color.init(hex: category.color))
                                                 .frame(width:16.5,height:16.5)
                                             
-                                            TextField(text: $newSubCategory, prompt: Text("Home sessione")) {
+                                            TextField(text: $toDoVM.newActivityName, prompt: Text("Home sessione")) {
                                                 
                                             }
                                             .font(Font.custom("Montserrat", size: 15))
+                                            .keyboardType(.alphabet)
+                                            .focused($nameFocused)
                                             
                                             Spacer()
                                             
-                                            TextField(text: $newDateString, prompt: Text("00/00")) {
+                                            TextField(text: $toDoVM.newDateString, prompt: Text("00/00")) {
                                                 
                                             }
+                                            .keyboardType(.numberPad)
                                             .font(Font.custom("Montserrat", size: 15).weight(.bold))
                                             .frame(width:48)
-                                           
+                                            .focused($dateFocused)
+                                            
                                         }
                                     }
-                                    ForEach(subCategories.filter({$0.parentCategory == category})){subCategory in
-                                        Text(subCategory.name)
+                                    ForEach(activities.filter({$0.category.id == category.id})){activity in
+                                        HStack{   
+                                            Text(activity.title)
+                                                .font(Font.custom("HelveticaNeue", size: 16))
+                                            Spacer()
+                                            Text("\(activity.day)/\(activity.month)")
+                                                .font(Font.custom("Montserrat", size: 15).weight(.bold))
+                                                .foregroundColor(Color(hex: category.color))
+                                        }
+                                        
                                     }
                                     HStack(spacing:12) {
                                         Button {
-                                            addSubCategory = true
+                                            toDoVM.addSubCategory = true
                                         } label: {
                                             HStack{
                                                 ZStack(alignment:.center){
@@ -109,7 +122,7 @@ struct ToDo: View {
                                                     Image(systemName: "plus")
                                                         .resizable()
                                                         .frame(width: 12, height: 12)
-                                                        //.font(Font.custom("HelveticaNeue", size: 20))
+                                                    //.font(Font.custom("HelveticaNeue", size: 20))
                                                 }
                                                 
                                                 Text("Attivitá")
@@ -126,22 +139,15 @@ struct ToDo: View {
                                                 .foregroundColor(Color(hex: category.color))
                                                 .frame(width: 25, height: 25)
                                         }
-                                        
-                                        
-                                        
                                     }
                                     .font(Font.custom("HelveticaNeue", size: 16))
-                                    
-                                    
                                 }
                                 
                                 Spacer()
-                                
-                                
                             }
                             .padding()
                             .tag(categories.firstIndex(of: category) ?? 0)
-                           
+                            
                         }
                     }
                     .tabViewStyle(.page)
@@ -156,6 +162,23 @@ struct ToDo: View {
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
             }
+        }
+        .onChange(of: toDoVM.newDateString, initial: false, {
+            toDoVM.formatDate()
+        })
+        .onChange(of: nameFocused, { oldValue, newValue in
+            if !newValue{
+                toDoVM.createActivityIfNeeded(context:context, category: categories[selectedItem])
+            }
+        })
+        .onChange(of: dateFocused, { oldValue, newValue in
+            if !newValue{
+                toDoVM.createActivityIfNeeded(context:context, category: categories[selectedItem])
+            }
+        })
+        .onTapGesture {
+            nameFocused = false
+            dateFocused = false
         }
     }
     

@@ -22,7 +22,7 @@ struct Project_PegasusApp: App {
             Category.self,
             User.self,
             Session.self,
-            SubCategory.self
+            Activity.self
         ])
     }
 }
