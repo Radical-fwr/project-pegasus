@@ -19,7 +19,7 @@ struct ToDo: View {
     @StateObject var toDoVM = ToDoViewModel()
     @FocusState var dateFocused: Bool
     @FocusState var nameFocused: Bool
-  //  @FocusState var Focused = false
+    //  @FocusState var Focused = false
     var body: some View {
         NavigationStack{
             ZStack {
@@ -74,45 +74,81 @@ struct ToDo: View {
                                     .foregroundColor(Color(hex: category.color))
                                     .padding(.bottom,12)
                                 
-                                VStack(alignment:.leading,spacing: 16){
-                                    if toDoVM.addSubCategory{
-                                        HStack{
-                                            CircularProgressView(progress: 0.8, color: Color.init(hex: category.color))
-                                                .frame(width:16.5,height:16.5)
-                                            
-                                            TextField(text: $toDoVM.newActivityName, prompt: Text("Home sessione")) {
+                                VStack(alignment:.leading,spacing: 13){
+                                    
+                                    ScrollView {
+                                        if toDoVM.addSubCategory{
+                                            HStack{
+                                                CircularProgressView(progress: 0.8, color: Color.init(hex: category.color))
+                                                    .frame(width:16.5,height:16.5)
                                                 
-                                            }
-                                            .font(Font.custom("Montserrat", size: 15))
-                                            .keyboardType(.alphabet)
-                                            .focused($nameFocused)
-                                            
-                                            Spacer()
-                                            
-                                            TextField(text: $toDoVM.newDateString, prompt: Text("00/00")) {
+                                                TextField(text: $toDoVM.newActivityName, prompt: Text("Home sessione")) {
+                                                    
+                                                }
+                                                .font(Font.custom("Montserrat", size: 15))
+                                                .keyboardType(.alphabet)
+                                                .focused($nameFocused)
                                                 
-                                            }
-                                            .keyboardType(.numberPad)
-                                            .font(Font.custom("Montserrat", size: 15).weight(.bold))
-                                            .frame(width:48)
-                                            .focused($dateFocused)
-                                            
-                                        }
-                                    }
-                                    ForEach(activities.filter({$0.category.id == category.id})){activity in
-                                        HStack{   
-                                            Text(activity.title)
-                                                .font(Font.custom("HelveticaNeue", size: 16))
-                                            Spacer()
-                                            Text("\(activity.day)/\(activity.month)")
+                                                Spacer()
+                                                
+                                                TextField(text: $toDoVM.newDateString, prompt: Text("00/00")) {
+                                                    
+                                                }
+                                                .keyboardType(.numberPad)
                                                 .font(Font.custom("Montserrat", size: 15).weight(.bold))
-                                                .foregroundColor(Color(hex: category.color))
+                                                .frame(width:48)
+                                                .focused($dateFocused)
+                                                
+                                            }
                                         }
-                                        
+                                        ForEach(activities.filter({$0.category.id == category.id})){activity in
+                                            HStack{
+                                                if toDoVM.isDeleting{
+                                                    Button {
+                                                        if toDoVM.deletedActivities.contains(where: {$0.id == activity.id}){
+                                                            toDoVM.deletedActivities.removeAll(where: {$0.id == activity.id})
+                                                        }
+                                                        else{
+                                                            toDoVM.deletedActivities.append(activity)
+                                                        }
+                                                    } label: {
+                                                        if toDoVM.deletedActivities.contains(where: {$0.id == activity.id}){
+                                                            Circle()
+                                                                .fill(Color(hex: categories[selectedItem].color).opacity(0.7))
+                                                                .stroke(Color(hex: categories[selectedItem].color))
+                                                                .frame(width: 22, height: 22)
+                                                        }
+                                                        else{
+                                                            Circle()
+                                                                .stroke(Color(hex: categories[selectedItem].color))
+                                                                .frame(width: 22, height: 22)
+                                                        }
+                                                    }
+                                                    
+                                                    
+                                                }
+                                                Text(activity.title)
+                                                    .font(Font.custom("HelveticaNeue", size: 16))
+                                                    .frame(height: 22)
+                                                //.padding(.vertical,8)
+                                                Spacer()
+                                                Text("\(activity.day)/\(activity.month)")
+                                                    .font(Font.custom("Montserrat", size: 15).weight(.bold))
+                                                    .foregroundColor(Color(hex: category.color))
+                                            }
+                                            .onLongPressGesture(perform: {
+                                                toDoVM.isDeleting = true
+                                                toDoVM.addSubCategory = false
+                                            })
+                                            
+                                        }
                                     }
+                                    .frame(height: 92)
+                                    
                                     HStack(spacing:12) {
                                         Button {
                                             toDoVM.addSubCategory = true
+                                            toDoVM.isDeleting = false
                                         } label: {
                                             HStack{
                                                 ZStack(alignment:.center){
@@ -131,16 +167,19 @@ struct ToDo: View {
                                         }
                                         Spacer()
                                         Button {
-                                            
+                                            if toDoVM.isDeleting{
+                                                toDoVM.deletedSelectedActivites(context: context)
+                                            }
                                         } label: {
                                             Image(.bin)
                                                 .resizable()
                                                 .renderingMode(.template)
-                                                .foregroundColor(Color(hex: category.color))
+                                                .foregroundColor(Color(hex: toDoVM.isDeleting ? category.color : "#59574C"))
                                                 .frame(width: 25, height: 25)
                                         }
                                     }
                                     .font(Font.custom("HelveticaNeue", size: 16))
+                                    .frame(height:25)
                                 }
                                 
                                 Spacer()
@@ -152,7 +191,10 @@ struct ToDo: View {
                     }
                     .tabViewStyle(.page)
                     .frame(height:240)
-                    .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.1), Color(hex: categories[selectedItem].color).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10))
+                    .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.1), Color(hex: categories[selectedItem].color).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
+                        
+                    )
+                    
                     
                     .padding(.horizontal)
                     Spacer()
@@ -161,6 +203,11 @@ struct ToDo: View {
                 .navigationBarTitle("")
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
+            }
+            .background(Color.clear)
+            .onTapGesture {
+                nameFocused = false
+                dateFocused = false
             }
         }
         .onChange(of: toDoVM.newDateString, initial: false, {
@@ -176,10 +223,7 @@ struct ToDo: View {
                 toDoVM.createActivityIfNeeded(context:context, category: categories[selectedItem])
             }
         })
-        .onTapGesture {
-            nameFocused = false
-            dateFocused = false
-        }
+        
     }
     
 }

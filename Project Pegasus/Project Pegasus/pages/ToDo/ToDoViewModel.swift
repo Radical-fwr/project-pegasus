@@ -14,6 +14,8 @@ class ToDoViewModel: ObservableObject{
     @Published var newActivityName = ""
     @Published var newDateString = ""
     @Published var addSubCategory = false
+    @Published var isDeleting = false
+    @Published var deletedActivities: [Activity] = []
     private var oldDateString = ""
     
     func formatDate(){
@@ -52,5 +54,13 @@ class ToDoViewModel: ObservableObject{
         } catch {
             print("Error saving context: \(error)")
         }
+    }
+    
+    func deletedSelectedActivites(context: ModelContext){
+        deletedActivities.forEach { activity in
+            context.delete(activity)
+        }
+        deletedActivities = []
+        isDeleting = false
     }
 }
