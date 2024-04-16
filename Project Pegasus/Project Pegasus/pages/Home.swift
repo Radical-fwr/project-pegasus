@@ -15,7 +15,7 @@ struct Home: View {
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
-    @State private var selectedSubCategory: SubCategory?
+    @State private var selectedActivity: Activity?
     @State private var selectedHour: Double?
     @State private var selectedMinute: Double?
     @State private var timerIsActive: Bool = false
@@ -55,7 +55,7 @@ struct Home: View {
                    // Spacer()
                     VStack{
                         HStack {
-                            SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
+                            ActivitiesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedActivity: $selectedActivity)
                             //.padding()
                                 .padding(.leading, 30)
                             //.padding()
@@ -64,7 +64,7 @@ struct Home: View {
                                // Spacer()
                                 StartButton(
                                     selectedCategory: $selectedCategory,
-                                    selectedSubCategory: $selectedSubCategory,
+                                    selectedActivity: $selectedActivity,
                                     selectedHour: $selectedHour,
                                     selectedMinute: $selectedMinute,
                                     timerIsActive: $timerIsActive,
@@ -86,6 +86,9 @@ struct Home: View {
             
         }
         .navigationTransition(slideReverse ? .reverseSlide(axis: .horizontal) : .slide(axis: .horizontal))
+        .onChange(of: selectedCategory, {
+            selectedActivity = nil
+        })
         .onChange(of: navToProfile) {
             slideReverse = false
         }

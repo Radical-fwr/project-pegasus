@@ -8,15 +8,15 @@
 import SwiftUI
 import SwiftData
 
-struct SubCategoriesDisplay: View {
+struct ActivitiesDisplay: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     var category: Category?
     @Binding var opened: Bool
     @State private var showAlert: Bool = false
     @State private var newSubcategoryName: String = ""
-    @Query var subCategories: [SubCategory]
-    @Binding var selectedSubCategory: SubCategory?
+    @Query var activities: [Activity]
+    @Binding var selectedActivity: Activity?
     
     func createNewSubCategory() {
         print("test")
@@ -34,18 +34,28 @@ struct SubCategoriesDisplay: View {
         if let category = category {
             
             VStack{
-                SubCategoriesButton(category: category, opened: $opened)
+                SubCategoriesButton(category: category, opened: $opened, selectedActivity: $selectedActivity)
                 if opened{
                     VStack(alignment:.leading){
-                        ForEach(subCategories){subCategory in
-                            Text(subCategory.name)
+                        ForEach(activities.filter({$0.category.id == category.id})){activity in
+                            Button {
+                                selectedActivity = activity
+                            } label: {
+                                HStack{
+                                    Text(activity.title)
+                                        .font(Font.custom("HelveticaNeue", size: 16))
+                                        .frame(height: 22)
+                                        .foregroundColor(.white)
+                                    //.padding(.vertical,8)
+                                    Spacer()
+                                    Text("\(activity.day)/\(activity.month)")
+                                        .font(Font.custom("Montserrat", size: 15).weight(.bold))
+                                        .foregroundColor(Color(hex: category.color))
+                                }
+                            }
+                            
                             Divider().foregroundColor(Color(hex: category.color))
                         }
-//                       
-//                        Text("Organizzare consegne")
-//                        Divider().foregroundColor(Color(hex: category.color))
-//                        Text("Fare fatture")
-//                        
                     }
                     .padding(.horizontal)
                     
@@ -131,7 +141,7 @@ struct SubCategoriesDisplay: View {
 
         } else {
             ZStack {
-                SubCategoriesButton(category: category, opened: $opened)
+                SubCategoriesButton(category: category, opened: $opened, selectedActivity: $selectedActivity)
                 
                 ZStack {
                     EmptyView()

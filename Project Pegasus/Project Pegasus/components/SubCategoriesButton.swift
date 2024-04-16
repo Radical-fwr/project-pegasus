@@ -13,6 +13,7 @@ struct SubCategoriesButton: View {
     var category: Category?
     @Binding var opened: Bool
     @State private var chevronRotation: Double = 0
+    @Binding var selectedActivity: Activity?
     
     var body: some View {
         if let category = category {
@@ -21,7 +22,7 @@ struct SubCategoriesButton: View {
             }) {
                 ZStack{
                     HStack{
-                        Text(category.name.uppercased())
+                        Text(selectedActivity?.title.uppercased() ??  category.name.uppercased())
                             .font(Font.custom("HelveticaNeue", size: 22))
                             .foregroundColor(Color(hex: category.color))
                             .fontWeight(.light)

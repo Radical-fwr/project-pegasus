@@ -13,7 +13,7 @@ struct SessionWStats: View {
     
     var body: some View {
         HStack {
-            Text(session.subCategory != nil ? session.subCategory!.name : "Nessuna")
+            Text(session.activity != nil ? session.activity!.title : "Nessuna")
                 .foregroundColor(colorScheme == .dark ? .white : .black)
                 .padding()
                 .cornerRadius(200)

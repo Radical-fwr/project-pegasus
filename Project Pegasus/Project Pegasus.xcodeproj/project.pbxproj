@@ -21,7 +21,7 @@
 		162E6E572B5182D600BB9F0F /* CircleMovingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E562B5182D600BB9F0F /* CircleMovingLine.swift */; };
 		162E6E592B55659C00BB9F0F /* SubCategoriesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E582B55659C00BB9F0F /* SubCategoriesButton.swift */; };
 		162E6E5B2B5568CF00BB9F0F /* subcategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E5A2B5568CF00BB9F0F /* subcategory.swift */; };
-		162E6E5D2B557E5200BB9F0F /* SubCategoriesDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E5C2B557E5200BB9F0F /* SubCategoriesDisplay.swift */; };
+		162E6E5D2B557E5200BB9F0F /* ActivitiesDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162E6E5C2B557E5200BB9F0F /* ActivitiesDisplay.swift */; };
 		1632847B2AFD4BF200D94C32 /* IntegralCF-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */; };
 		163284802AFD592F00D94C32 /* category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1632847F2AFD592F00D94C32 /* category.swift */; };
 		163284822AFE84B900D94C32 /* AddCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163284812AFE84B900D94C32 /* AddCategory.swift */; };
@@ -135,7 +135,7 @@
 		162E6E562B5182D600BB9F0F /* CircleMovingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleMovingLine.swift; sourceTree = "<group>"; };
 		162E6E582B55659C00BB9F0F /* SubCategoriesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesButton.swift; sourceTree = "<group>"; };
 		162E6E5A2B5568CF00BB9F0F /* subcategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subcategory.swift; sourceTree = "<group>"; };
-		162E6E5C2B557E5200BB9F0F /* SubCategoriesDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesDisplay.swift; sourceTree = "<group>"; };
+		162E6E5C2B557E5200BB9F0F /* ActivitiesDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDisplay.swift; sourceTree = "<group>"; };
 		1632847A2AFD4BF200D94C32 /* IntegralCF-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntegralCF-Regular.otf"; sourceTree = "<group>"; };
 		1632847F2AFD592F00D94C32 /* category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = category.swift; sourceTree = "<group>"; };
 		163284812AFE84B900D94C32 /* AddCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategory.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 				162E6E542B516A8A00BB9F0F /* FadingCircleView.swift */,
 				162E6E562B5182D600BB9F0F /* CircleMovingLine.swift */,
 				162E6E582B55659C00BB9F0F /* SubCategoriesButton.swift */,
-				162E6E5C2B557E5200BB9F0F /* SubCategoriesDisplay.swift */,
+				162E6E5C2B557E5200BB9F0F /* ActivitiesDisplay.swift */,
 				E6F595E32B80CD1B004897E0 /* Histogram.swift */,
 				16BE43D22B8A506600DD6761 /* LiquidCircle.swift */,
 				16BE43D42B8A52A400DD6761 /* WaveAnimation.swift */,
@@ -573,7 +573,7 @@
 				168C06462B407D7500BEE44F /* StartButton.swift in Sources */,
 				16547B5D2B2227C100C2E67B /* timer.swift in Sources */,
 				1680A6BA2B90909700C95B0C /* R_button.swift in Sources */,
-				162E6E5D2B557E5200BB9F0F /* SubCategoriesDisplay.swift in Sources */,
+				162E6E5D2B557E5200BB9F0F /* ActivitiesDisplay.swift in Sources */,
 				9FFDE7262BB8B60A00CAAE6E /* ActivitySelection.swift in Sources */,
 				16EAB2722B1646D500E2249D /* CircularProgressBar.swift in Sources */,
 				1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */,
