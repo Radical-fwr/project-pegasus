@@ -20,7 +20,7 @@ struct CircularProgressView: View {
                     color,
                     // 1
                     style: StrokeStyle(
-                        lineWidth: 3,
+                        lineWidth: 2,
                         lineCap: .round
                     )
                 )
@@ -53,7 +53,7 @@ struct ActivityProgressView: View {
                 .frame(width: 157, height: 157)
             
             
-            Image(progress == 1 ? "check" : "cross")
+            Image(progress == 1 ? "check3" : "cross2")
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()

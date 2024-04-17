@@ -17,6 +17,7 @@ class Session: Identifiable {
     var stopDate: Date?
     var timeGoal: Double
     var rating: Int = 0
+    var isCompleted: Bool = false
     var progress: Double {
         get {
             var progressCalc: Double = 0
@@ -47,6 +48,10 @@ class Session: Identifiable {
     
     func setActivity(_ activity: Activity) {
         self.activity = activity
+    }
+    
+    func completeSession(){
+        isCompleted = true
     }
 }
 

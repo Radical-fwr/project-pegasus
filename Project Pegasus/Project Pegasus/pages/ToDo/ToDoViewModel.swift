@@ -16,6 +16,7 @@ class ToDoViewModel: ObservableObject{
     @Published var addSubCategory = false
     @Published var isDeleting = false
     @Published var deletedActivities: [Activity] = []
+    @Query var sessions: [Session]
     private var oldDateString = ""
     
     func formatDate(){
@@ -62,5 +63,11 @@ class ToDoViewModel: ObservableObject{
         }
         deletedActivities = []
         isDeleting = false
+    }
+    
+    
+    func getRecentSessionProgress(sessions: [Session], activityId: String) -> Double? {
+        return sessions.filter({$0.activity?.id ==  activityId}).max(by: {$0.startDate < $1.startDate})?.progress
+ 
     }
 }

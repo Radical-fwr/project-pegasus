@@ -13,7 +13,6 @@ class Activity: Identifiable {
     @Attribute(.unique) var id: String
     var category: Category
     var title: String
-    var sessions: [Session]
     var completed: Bool
     var day:Int
     var month: Int
@@ -22,9 +21,9 @@ class Activity: Identifiable {
         self.id = UUID().uuidString
         self.category = category
         self.title = title
-        self.sessions = []
         self.completed = false
         self.day = day
         self.month = month
     }
+   
 }

@@ -15,6 +15,7 @@ struct ToDo: View {
     @State var isPresented = false
     @Query var categories: [Category] = []
     @Query var activities: [Activity]
+    @Query var sessions: [Session]
     @State private var selectedItem = 0
     @StateObject var toDoVM = ToDoViewModel()
     @FocusState var dateFocused: Bool
@@ -79,6 +80,7 @@ struct ToDo: View {
                                     ScrollView {
                                         if toDoVM.addSubCategory{
                                             HStack{
+                                                
                                                 CircularProgressView(progress: 0.8, color: Color.init(hex: category.color))
                                                     .frame(width:16.5,height:16.5)
                                                 
@@ -126,6 +128,10 @@ struct ToDo: View {
                                                     }
                                                     
                                                     
+                                                }
+                                                else{
+                                                    CircularProgressView(progress: toDoVM.getRecentSessionProgress(sessions:sessions, activityId: activity.id) ?? 0, color: Color(hex: categories[selectedItem].color))
+                                                        .frame(width: 18, height: 18)
                                                 }
                                                 Text(activity.title)
                                                     .font(Font.custom("HelveticaNeue", size: 16))
@@ -191,7 +197,7 @@ struct ToDo: View {
                     }
                     .tabViewStyle(.page)
                     .frame(height:240)
-                    .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.1), Color(hex: categories[selectedItem].color).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
+                    .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.3), Color(hex: categories[selectedItem].color).opacity(0.8)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
                         
                     )
                     

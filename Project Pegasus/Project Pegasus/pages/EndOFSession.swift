@@ -13,19 +13,11 @@ struct EndOFSession: View {
     @Environment(\.modelContext) private var context
     var session: Session?
     @State var rating: Int = 1
-    @State private var goHome: Bool = false
     
     var body: some View {
+        let duration = session!.stopDate!.timeIntervalSince(session!.startDate)
         NavigationStack{
             ZStack{
-                
-                NavigationLink(destination: Home(), isActive: $goHome) {
-                    EmptyView()
-                }
-                .hidden()
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
-                .animation(nil)
                 
                 colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
                 
@@ -40,12 +32,13 @@ struct EndOFSession: View {
                             } catch {
                                 print("Error saving context: \(error)")
                             }
-                            goHome = true
+                            NotificationCenter.default.post(name: NSNotification.Name("goHome"), object: nil)
                         } label: {
                             Image(systemName: "xmark")
                                 .resizable()
+                                .renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black)
                                 .frame(width: 25,height: 25)
-                                .foregroundColor(.white)
+                                
                         }
                         
                     }
@@ -58,17 +51,19 @@ struct EndOFSession: View {
                     Spacer()
                     Text("Macroeconomia")
                         .font(Font.custom("Montserrat", size: 24).weight(.bold))
-                        .foregroundStyle(LinearGradient(colors: [Color.init(hex: "#FFFFFF"), Color.init(hex: session?.category?.color ?? "#FFFFFF")], startPoint: .top, endPoint: .bottom))
+                        .foregroundStyle(LinearGradient(colors: [Color.init(uiColor: .label), Color.init(hex: session?.category?.color ?? "#FFFFFF")], startPoint: .top, endPoint: .bottom))
                     Spacer()
-                    ActivityProgressView(progress: 1, color: Color.init(hex: session?.category?.color ?? "#FFFFFF"))
+                    if session?.isCompleted ?? false{
+                        ActivityProgressView(progress: 1, color: Color.init(hex: session?.category?.color ?? "#FFFFFF"))
+                        Spacer()
+                    }
                     
-                    Spacer()
                     
                     HStack{
                         Text("Attività finita in:")
                             .font(Font.custom("Helvetica Neue", size: 20))
                         Spacer()
-                        Text("\(Int(session!.timeGoal) / 3600)h \(Int(session!.timeGoal) % 3600 / 60)m")
+                        Text("\(Int(duration) / 3600)h \(Int(duration) % 3600 / 60)m")
                             .font(Font.custom("Helvetica Neue", size: 24).weight(.bold))
                     }.padding(.horizontal)
                     
@@ -92,6 +87,10 @@ struct EndOFSession: View {
                     
                     
                     Spacer()
+                    if !(session?.isCompleted ?? true){
+                        ActivityProgressView(progress: session?.progress ?? 0, color: Color.init(hex: session?.category?.color ?? "#FFFFFF"))
+                        Spacer()
+                    }
                     Text("Valuta la tua sessione:")
                         .font(Font.custom("Helvetica Neue", size: 20))
                     Spacer()

@@ -25,17 +25,13 @@ struct Home: View {
     @State var slideReverse: Bool = false
     @State var navToSettings: Bool = false
     @State var navToProfile: Bool = false
+    
+    let goHome = NotificationCenter.default
+        .publisher(for: NSNotification.Name("goHome"))
         
     var body: some View {
         NavigationStack {
             ZStack {
-                
-                NavigationLink(destination: RunningTimer(), isActive: $timerIsActive) {
-                    EmptyView()
-                }
-                .hidden()
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
                 
                 colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
 
@@ -82,6 +78,8 @@ struct Home: View {
                     }
                     
                 }
+            }.navigationDestination(isPresented: $timerIsActive) {
+                RunningTimer()
             }
             
         }
@@ -95,6 +93,9 @@ struct Home: View {
         .onChange(of: navToSettings) {
             slideReverse = true
         }
+        .onReceive(goHome, perform: { _ in
+            timerIsActive = false
+        })
         .background(colorScheme == .dark ? .black : Color(hex: "F2EFE9"))
         .onAppear() {
             
@@ -105,6 +106,9 @@ struct Home: View {
                 }
             }
         }
+        
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

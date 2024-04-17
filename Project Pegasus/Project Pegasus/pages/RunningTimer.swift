@@ -81,9 +81,11 @@ struct RunningTimer: View {
                    }
                    .onEnded { value in
                        if value.translation.height < -200{
+                           endSession(isCompleted: true)
                            print("Task Complete")
                        }
                        else if value.translation.height > 200{
+                           endSession(isCompleted: false)
                            print("Task Missed")
                        }
                        withAnimation {
@@ -119,9 +121,9 @@ struct RunningTimer: View {
                     ZStack{
                         if isHoldingCircle{
                             VStack(spacing:16){
-                                Image(.check).resizable().scaledToFill().frame(width:30, height: 20)
-                                Image(.line).resizable().scaledToFill().frame(width:1, height: 400)
-                                Image(.cross).resizable().scaledToFill().frame(width: 18, height: 18)
+                                Image(.check).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black) .scaledToFill().frame(width:30, height: 20)
+                                Image(.line).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black).scaledToFill().frame(width:1, height: 400)
+                                Image(.cross).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black).scaledToFill().frame(width: 18, height: 18)
                             }
                         }
                         GIFImage(name: name)
@@ -223,25 +225,36 @@ struct RunningTimer: View {
         .onChange(of: timerManager.remainingTime) {
             if(!stopped) {
                 if timerManager.remainingTime == 0 {
-                    blockManager.stopMonitoring()// aggiunto da gio 06/03/2024
-                    if let identifier = timerManager.identifier {
-                        if let session = sessions.first(where: { $0.id == identifier }) {
-                            activeSession = session
-                            session.stopDate = session.startDate.addingTimeInterval(session.timeGoal)
-                            do {
-                                try context.save()
-                            } catch {
-                                print("Error saving context: \(error)")
-                            }
-                        } else {
-                            print("errore nell'aggiornare la sessione")
-                        }
-                    }
-                    isSessionFinished = true
+                    // aggiunto da gio 06/03/2024
+                    endSession(isCompleted: true)
                 }
                 
             }
         }
+    }
+    
+    func endSession(isCompleted: Bool){
+        stopTimer()
+        blockManager.stopMonitoring()
+        if let identifier = timerManager.identifier {
+            if let session = sessions.first(where: { $0.id == identifier }) {
+                activeSession = session
+                let duration = session.timeGoal - timerManager.remainingTime
+                session.stopDate = session.startDate.addingTimeInterval(duration)
+                if isCompleted{
+                    activeSession?.completeSession()
+                }
+                do {
+                    try context.save()
+                } catch {
+                    print("Error saving context: \(error)")
+                }
+            } else {
+                print("errore nell'aggiornare la sessione")
+            }
+            isSessionFinished = true
+        }
+        timerManager.deleteFirstPendingTimer(completion: { _ in })
     }
 }
 
