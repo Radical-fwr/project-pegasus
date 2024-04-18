@@ -219,8 +219,10 @@ struct ToDo: View {
                                         VStack{
                                             HStack{
                                                 Text(session.activity?.title ?? session.category?.name ?? "")
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                                                 Spacer()
                                                 Text("\(Int(session.progress * 100))%")
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                                             }
                                             ZStack{
                                                 GeometryReader { proxy in
