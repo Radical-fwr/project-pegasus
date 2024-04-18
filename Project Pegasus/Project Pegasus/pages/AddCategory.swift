@@ -15,7 +15,7 @@ struct AddCategory: View {
     
     private func onSave() {
         do {
-            let newCat: Category = Category(name: nome, color: try color.toHex(), gifName: "blue")
+            let newCat: Category = Category(name: nome, color: try color.toHex(), gifName: "blue", darkColor: "",darkGif: "")
             context.insert(newCat)
             try context.save()
             isPresented = false

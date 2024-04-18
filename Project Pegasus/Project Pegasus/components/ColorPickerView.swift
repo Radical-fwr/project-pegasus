@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ColorPickerView: View {
     @Environment(\.colorScheme) var colorScheme
+    
+    //colors to change
     let colors: [Color] = [.orange, .yellow, .green, .cyan, .pink, .indigo, .brown]
     @Binding var selectedColor: Color
     let columns = [
