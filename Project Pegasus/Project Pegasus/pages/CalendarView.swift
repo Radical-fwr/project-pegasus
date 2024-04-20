@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-
+import SwiftData
 
 struct CalendarScreen: View {
     @Environment(\.colorScheme) var colorScheme
@@ -18,7 +17,8 @@ struct CalendarScreen: View {
     private let weekDayFormatter: DateFormatter
     private let fullFormatter: DateFormatter
     private let yearFormatter: DateFormatter
-    
+    @Query var activites: [Activity]
+
     @State private var selectedDate = Self.now
     private static var now = Date() // Cache now
     
@@ -52,32 +52,28 @@ struct CalendarScreen: View {
                     date: $selectedDate,
                     content: { date in
                         Button(action: { selectedDate = date }) {
-                            Text(dayFormatter.string(from: date))
-                                .foregroundColor(
-                                    (calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black :
-                                            .white)
-                            
-                                .background(
-                                     Color.init(hex: "#D3D3D3").frame(width: 35,height: 35)
+                            VStack(alignment: .center, content: {
+                                Text(dayFormatter.string(from: date))
+                                    .foregroundColor(
+                                        (calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
+                               //Circle().size(width: 6, height: 6)
+                                    //.padding(.leading,20)
+                                    
+                            })
+                            .background(
+                                    Color.init(hex: "#D3D3D3").frame(width: 35,height: 35)
                                         .opacity(calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
                                         .cornerRadius(10)
-                                        
-                                   
-                                        
                                 )
                                 .background(content: {
-                                    
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
                                         .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
                                         .cornerRadius(10)
                                         .frame(width: 45,height: 45)
-                                        
-                                    
-                                })
-                                
-                                .frame(height:50)
-                                .accessibilityHidden(true)
+                            })
+                            .frame(height:50)
+                        .accessibilityHidden(true)
                         }
                     },
                     trailing: { date in
@@ -152,10 +148,43 @@ struct CalendarScreen: View {
                         }
                         .padding(.bottom, 6)
                     }
+                    
                 )
-                
                 .equatable()
                 .font(.system(size: 24, weight: .medium))
+                
+                ScrollView(showsIndicators: false) {
+                    ForEach(activites) { activity in
+                        if (activity.day == calendar.component(.day, from: selectedDate))
+                        {
+                            Rectangle()
+                                .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                .frame(width: 330, height: 70)
+                                .overlay(
+                                    HStack {
+                                        VStack(alignment: .leading, content: {
+                                            Text(activity.category.name)
+                                                //.foregroundStyle(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                                .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                                .bold()
+                                            Text(activity.title)
+                                                .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                        })
+                                        Spacer()
+                                        VStack(alignment: .trailing, content: {
+                                            Text(String(activity.day))
+                                                .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                            Spacer()
+                                        })
+                                    }
+                                    .padding(10)
+                                    
+                                )
+                                .cornerRadius(10)
+                                .padding(5)
+                        }
+                    }
+                }
                 Spacer()
             }
             .foregroundColor(colorScheme == .dark ? .white : .black)
@@ -164,7 +193,23 @@ struct CalendarScreen: View {
         .navigationBarBackButtonHidden()
         
     }
+    func deleteItem(at offsets: IndexSet) {
+        items.remove(atOffsets: offsets)
+    }
+
 }
+
+struct Item: Identifiable {
+    let id = UUID()
+    let name: String
+}
+
+var items: [Item] = [
+    Item(name: "Item 1"),
+    Item(name: "Item 2"),
+    Item(name: "Item 3")
+]
+
 
 // MARK: - Component
 
@@ -209,6 +254,7 @@ public struct CalendarView<Day: View, Header: View, Title: View, Trailing: View>
                         content(date)
                     } else {
                         trailing(date)
+                        
                     }
                 }
             }

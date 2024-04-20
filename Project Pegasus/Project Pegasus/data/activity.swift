@@ -14,9 +14,9 @@ class Activity: Identifiable {
     var category: Category
     var title: String
     var completed: Bool
-    var day:Int
+    var day: Int
     var month: Int
-    
+
     init(category: Category, title: String, day: Int, month: Int) {
         self.id = UUID().uuidString
         self.category = category
@@ -25,5 +25,5 @@ class Activity: Identifiable {
         self.day = day
         self.month = month
     }
-   
 }
+
