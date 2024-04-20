@@ -10,7 +10,6 @@ import FamilyControls
 import DeviceActivity
 import ManagedSettings
 
-
 class BlockManager: ObservableObject {
     static let shared = BlockManager()
     let store = ManagedSettingsStore()

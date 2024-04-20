@@ -15,7 +15,7 @@ struct Home: View {
     @Environment(\.modelContext) private var context
     @Query var categories: [Category]
     @State private var selectedCategory: Category?
-    @State private var selectedSubCategory: SubCategory?
+    @State private var selectedActivity: Activity?
     @State private var selectedHour: Double?
     @State private var selectedMinute: Double?
     @State private var timerIsActive: Bool = false
@@ -25,17 +25,13 @@ struct Home: View {
     @State var slideReverse: Bool = false
     @State var navToSettings: Bool = false
     @State var navToProfile: Bool = false
+    
+    let goHome = NotificationCenter.default
+        .publisher(for: NSNotification.Name("goHome"))
         
     var body: some View {
         NavigationStack {
             ZStack {
-                
-                NavigationLink(destination: RunningTimer(), isActive: $timerIsActive) {
-                    EmptyView()
-                }
-                .hidden()
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
                 
                 colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
 
@@ -52,40 +48,54 @@ struct Home: View {
                         )
                         DelimitationBars()
                     }
-                    Spacer()
-                    HStack {
-                        SubCategoriesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedSubCategory: $selectedSubCategory)
+                   // Spacer()
+                    VStack{
+                        HStack {
+                            ActivitiesDisplay(category: selectedCategory, opened: $isSubCategoriesDisplayExpanded, selectedActivity: $selectedActivity)
                             //.padding()
-                            .padding(.leading, 50)
+                                .padding(.leading, 30)
                             //.padding()
                             
-                        Spacer()
-                        StartButton(
-                            selectedCategory: $selectedCategory,
-                            selectedSubCategory: $selectedSubCategory,
-                            selectedHour: $selectedHour,
-                            selectedMinute: $selectedMinute,
-                            timerIsActive: $timerIsActive,
-                            slideReverse: $slideReverse
-                        )
-                        .scaledToFill()
+                            if !isSubCategoriesDisplayExpanded{
+                               // Spacer()
+                                StartButton(
+                                    selectedCategory: $selectedCategory,
+                                    selectedActivity: $selectedActivity,
+                                    selectedHour: $selectedHour,
+                                    selectedMinute: $selectedMinute,
+                                    timerIsActive: $timerIsActive,
+                                    slideReverse: $slideReverse
+                                )
+                                .scaledToFill()
+                            }
+                        }
+                        //Spacer()
+                    }.frame(height: 250)
+                    NavigationLink {
+                        CalendarScreen(calendar: .current)
+                    } label: {
+                        WeeklyView()
                     }
-                    Spacer()
                     
                 }
-                
-                Streak()
-                    .ignoresSafeArea()
-                    .opacity(isSubCategoriesDisplayExpanded ? 0 : 1)
+            }.navigationDestination(isPresented: $timerIsActive) {
+                RunningTimer()
             }
+            
         }
         .navigationTransition(slideReverse ? .reverseSlide(axis: .horizontal) : .slide(axis: .horizontal))
+        .onChange(of: selectedCategory, {
+            selectedActivity = nil
+        })
         .onChange(of: navToProfile) {
             slideReverse = false
         }
         .onChange(of: navToSettings) {
             slideReverse = true
         }
+        .onReceive(goHome, perform: { _ in
+            timerIsActive = false
+        })
         .background(colorScheme == .dark ? .black : Color(hex: "F2EFE9"))
         .onAppear() {
             
@@ -96,17 +106,20 @@ struct Home: View {
                 }
             }
         }
+        
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview{
     let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)
-    let category1: Category = Category(name: "study", color: "EC8E14")
-    let category2: Category = Category(name: "work", color: "F6DE00")
-    let category3: Category = Category(name: "detox", color: "F9DEFF")
+    /*let category1: Category = Category(name: "study", color: "EC8E14", gifName: "orange",darkColor: "",darkGif: "")
+    let category2: Category = Category(name: "work", color: "F6DE00", gifName: "yellow",darkColor: "",darkGif: "")
+    let category3: Category = Category(name: "detox", color: "F9DEFF", gifName: "green",darkColor: "",darkGif: "")
     container.mainContext.insert(category1)
     container.mainContext.insert(category2)
-    container.mainContext.insert(category3)
+    container.mainContext.insert(category3)*/
     return Home()
         .modelContainer(container)
 }

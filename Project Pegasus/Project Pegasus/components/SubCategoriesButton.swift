@@ -13,6 +13,7 @@ struct SubCategoriesButton: View {
     var category: Category?
     @Binding var opened: Bool
     @State private var chevronRotation: Double = 0
+    @Binding var selectedActivity: Activity?
     
     var body: some View {
         if let category = category {
@@ -21,9 +22,9 @@ struct SubCategoriesButton: View {
             }) {
                 ZStack{
                     HStack{
-                        Text(category.name.uppercased())
+                        Text(selectedActivity?.title.uppercased() ??  category.name.uppercased())
                             .font(Font.custom("HelveticaNeue", size: 22))
-                            .foregroundColor(Color(hex: category.color))
+                            .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                             .fontWeight(.light)
                             .padding()
                         
@@ -31,11 +32,11 @@ struct SubCategoriesButton: View {
                         Spacer()
                         
                         HStack{
-                            if !opened {
-                                Text("All")
-                                    .font(Font.custom("HelveticaNeue", size: 22))
-                                    .foregroundColor(colorScheme == .dark ? .white : .black)
-                            }
+                            
+                            Text("All")
+                                .font(Font.custom("HelveticaNeue", size: 22))
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                            
                             Image(systemName: "chevron.right")
                                 .rotationEffect(Angle(degrees: chevronRotation))
                                 .font(.system(size: 20))
@@ -55,14 +56,15 @@ struct SubCategoriesButton: View {
                     HStack{
                         
                     }
-                    .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
-                    .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                    .frame(height: 40)
+                    .background(LinearGradient(colors: [Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.1), Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 }
-                .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
+                .frame(height: 40)
                 .cornerRadius(5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
+                        .stroke(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(opened ? 0 : 0.6), lineWidth: 1)
+                        
                 )
             }
         } else {
@@ -73,7 +75,7 @@ struct SubCategoriesButton: View {
                     .fontWeight(.light)
                     .padding()
             }
-            .frame(width: UIScreen.main.bounds.width*0.6, height: 40)
+            .frame( height: 40)
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)

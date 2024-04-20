@@ -1,5 +1,15 @@
 {
+  "originHash" : "6255d773d71a4b1fea46d8c60599353c3b9436146b8b3f63ccc0045f7c71b697",
   "pins" : [
+    {
+      "identity" : "swiftui-gif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/globulus/swiftui-gif",
+      "state" : {
+        "revision" : "89af6b7e04b0dc0bf97a721d27fc87c4db8e3829",
+        "version" : "1.0.1"
+      }
+    },
     {
       "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
@@ -19,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

@@ -12,7 +12,7 @@ struct StartButton: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) private var context
     @Binding var selectedCategory: Category?
-    @Binding var selectedSubCategory: SubCategory?
+    @Binding var selectedActivity: Activity?
     @Binding var selectedHour: Double?
     @Binding var selectedMinute: Double?
     @Binding var timerIsActive: Bool
@@ -25,8 +25,12 @@ struct StartButton: View {
         if selectedCategory != Category?.none && (selectedHour != Double?.none || selectedMinute != Double?.none) {
             Button(action: {
                 let timeInterval = ((selectedHour ?? 0) * 60 * 60) + ((selectedMinute ?? 0) * 60)
+                if timeInterval == 0{
+                    return
+                }
                 let newSession = Session(
                     category: selectedCategory,
+                    activity: selectedActivity,
                     startDate: Date(),
                     timeGoal: timeInterval
                 )

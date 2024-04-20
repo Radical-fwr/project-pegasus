@@ -15,7 +15,7 @@ struct TopBar: View {
     var body: some View {
         HStack {
             // top bar
-            NavigationLink(destination: Settings(), isActive: $navToSettings) {
+            NavigationLink(destination: ToDo(), isActive: $navToSettings) {
                 Image("menu")
                     .resizable()
                     .aspectRatio(contentMode: .fit)

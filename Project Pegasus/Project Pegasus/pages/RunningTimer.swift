@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import SwiftUIGIF
 
 struct RunningTimer: View {
     @Environment(\.colorScheme) var colorScheme
@@ -20,13 +21,17 @@ struct RunningTimer: View {
     @State private var categoryName: String = ""
     @State private var stopped = false
     
-    @GestureState private var isHoldingCircle = false
+    @State private var isHoldingCircle = false
     @State private var timer: Timer?
     @State private var remainingTime: Double = 10
     @State private var progress: Double = 0
     
     @State private var activeSession: Session?
     @State private var isSessionFinished: Bool = false
+    @State private var gifName : String? = nil
+    
+    @State private var position: CGSize = .zero
+       @State private var isDragging = false
     
     func changeCategoryName(_ categoryName: String) {
         self.categoryName = categoryName
@@ -42,7 +47,7 @@ struct RunningTimer: View {
             progress = 10 - remainingTime
         }
     }
-
+    
     func stopTimer() {
         timer?.invalidate()
         timer = nil
@@ -51,6 +56,46 @@ struct RunningTimer: View {
     }
     
     var body: some View {
+        let longPressGesture = LongPressGesture(minimumDuration: 3)
+        
+            .onChanged { state in
+                if state {
+                    isHoldingCircle = state
+                }
+            }
+            .onEnded { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.isHoldingCircle = false
+                }
+            }
+//            .updating($isHoldingCircle) { value, state, transaction in
+//                state = value
+//            }
+                 
+        let dragGesture = DragGesture()
+                   .onChanged { value in
+                       isHoldingCircle = true
+                       let height = value.translation.height > 200 ? 200 :  value.translation.height < -200 ? -200 : value.translation.height
+                       position = CGSize(width: position.width, height: height)
+                       print("position",position)
+                   }
+                   .onEnded { value in
+                       if value.translation.height < -200{
+                           endSession(isCompleted: true)
+                           print("Task Complete")
+                       }
+                       else if value.translation.height > 200{
+                           endSession(isCompleted: false)
+                           print("Task Missed")
+                       }
+                       withAnimation {
+                           isDragging = false
+                           position = .zero
+                           isHoldingCircle = false
+                       }
+                   }
+               
+        
         NavigationStack {
             ZStack{
                 
@@ -72,106 +117,94 @@ struct RunningTimer: View {
                         .foregroundColor(Color.blue)
                         .ignoresSafeArea()
                 }.ignoresSafeArea()
-                ZStack {
-                    FadingCircleView(size: UIScreen.main.bounds.width * 0.7, color: mainColor).animation(nil)
-                    if (!isHoldingCircle) {
-                        ZStack {
-                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 6, size: 100)
-                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 5, size: 80, wait: 1)
-                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 10, size: 120, wait: 2)
-                                .rotationEffect(.degrees(70))
-                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 80, wait: 3)
-                                .rotationEffect(Angle(degrees: 200))
-                            CircleMovingLine(color: mainColor, lineLenght: 150, speed: 4, size: 110, wait: 4)
-                                .rotationEffect(Angle(degrees: 270))
-                        }
-                        .opacity(isHoldingCircle ? 0 : 1)
-                    }
-                }
-                .rotationEffect(.degrees(degrees))
-                .onAppear {
-                    withAnimation(.linear(duration: 30).repeatForever(autoreverses: false)) {
-                        degrees = 360
-                    }
-                }
-                .gesture(
-                    LongPressGesture(minimumDuration: 10)
-                        .updating($isHoldingCircle) { value, state, transaction in
-                            state = value
-                        }
-                        .onEnded { finished in
-                            stopped = true
-                            if let identifier = timerManager.identifier {
-                                if let session = sessions.first(where: { $0.id == identifier }) {
-                                    activeSession = session
-                                    session.stopDate = Date()
-                                    print(Date())
-                                    do {
-                                        try context.save()
-                                        timerManager.deleteFirstPendingTimer(completion: { _ in })
-                                        blockManager.stopMonitoring()
-                                        isSessionFinished = true
-                                    } catch {
-                                        print("Error saving context: \(error)")
-                                    }
-                                } else {
-                                    print("errore nell'aggiornare la sessione")
-                                }
+                if let name = gifName{
+                    ZStack{
+                        if isHoldingCircle{
+                            VStack(spacing:16){
+                                Image(.check).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black) .scaledToFill().frame(width:30, height: 20)
+                                Image(.line).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black).scaledToFill().frame(width:1, height: 400)
+                                Image(.cross).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black).scaledToFill().frame(width: 18, height: 18)
                             }
                         }
-                )
-                .onChange(of: isHoldingCircle) {
-                    if isHoldingCircle {
-                        startTimer()
-                    } else {
-                        stopTimer()
-                    }
-                }
-                
-                ZStack {
-                    VStack{
-                        Text(".radical")
-                            .font(Font.custom("HelveticaNeue", size: 36))
-                            .fontWeight(.bold)
-                            .animation(nil)
-                        
-                        Spacer().animation(nil)
-                        
-                        Text("Hai già finito?")
-                            .font(Font.custom("Montserrat", size: 36))
-                            .fontWeight(.bold)
-                            .textCase(.uppercase)
-                            .animation(nil)
-                        
-                        Text("Solleva il dito per riprendere:")
-                            .font(Font.custom("HelveticaNeue", size: 20))
-                            .animation(nil)
-                        
-                        Spacer().animation(nil)
-                        
-                        Spacer().animation(nil)
-                        Spacer().animation(nil)
-                        Spacer().animation(nil)
-                        
-                        Spacer().animation(nil)
-                        
-                        Text("\(categoryName)")
-                            .font(Font.custom("HelveticaNeue", size: 36))
-                            .fontWeight(.bold)
-                            .textCase(.uppercase)
-                            .animation(nil)
-                        
-                        Spacer().animation(nil)
-                        
-                        Spacer().animation(nil)
+                        GIFImage(name: name)
+                            .offset(position)
+                            .gesture(dragGesture)
+                                  
+//                                    .onEnded { finished in
+//                                        stopped = true
+//                                        if let identifier = timerManager.identifier {
+//                                            if let session = sessions.first(where: { $0.id == identifier }) {
+//                                                activeSession = session
+//                                                session.stopDate = Date()
+//                                                print(Date())
+//                                                do {
+//                                                    try context.save()
+//                                                    timerManager.deleteFirstPendingTimer(completion: { _ in })
+//                                                    blockManager.stopMonitoring()
+//                                                    isSessionFinished = true
+//                                                } catch {
+//                                                    print("Error saving context: \(error)")
+//                                                }
+//                                            } else {
+//                                                print("errore nell'aggiornare la sessione")
+//                                            }
+//                                        }
+//                                    }
+                            
+//                            .onChange(of: isHoldingCircle) {
+//                                if isHoldingCircle {
+//                                    startTimer()
+//                                } else {
+//                                    stopTimer()
+//                                }
+//                            }
                     }
                     
-                    LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                    ZStack {
+                        VStack{
+                            //                            Text(".radical")
+                            //                                .font(Font.custom("HelveticaNeue", size: 36))
+                            //                                .fontWeight(.bold)
+                            //                                .animation(nil)
+                            //
+                            Spacer().animation(nil)
+                            
+                            Text("Hai finito?")
+                                .font(Font.custom("Montserrat", size: 36))
+                                .fontWeight(.bold)
+                                .textCase(.uppercase)
+                                .animation(nil)
+                                .opacity(isHoldingCircle ? 1 : 0)
+                            //
+                            //                            Text("Solleva il dito per riprendere:")
+                            //                                .font(Font.custom("HelveticaNeue", size: 20))
+                            //                                .animation(nil)
+                            
+                            Spacer().animation(nil)
+                            
+                            Spacer().animation(nil)
+                            Spacer().animation(nil)
+                            Spacer().animation(nil)
+                            
+                            Spacer().animation(nil)
+                            
+                            Text("\(categoryName)")
+                                .font(Font.custom("HelveticaNeue", size: 36))
+                                .fontWeight(.bold)
+                                .textCase(.uppercase)
+                                .animation(nil)
+                            
+                            Spacer().animation(nil)
+                            
+                            
+                        }
+                        
+                        //LiquidCircle(width: UIScreen.main.bounds.width * 0.8, progress: $progress, color: mainColor)
+                        
+                    }
+                    
                     
                 }
-                .opacity(isHoldingCircle ? 1 : 0)
-                
-                
             }
         }
         .onAppear() {
@@ -181,6 +214,7 @@ struct RunningTimer: View {
                     if let session = sessions.first(where: { $0.id == identifier }) {
                         changeMainColor(Color(hex: session.category!.color))
                         changeCategoryName(session.category!.name)
+                        gifName = (session.category?.gifName ?? "") + "\(colorScheme == .dark ? "_dark" : "_light")"
                     }
                 }
             }
@@ -191,25 +225,36 @@ struct RunningTimer: View {
         .onChange(of: timerManager.remainingTime) {
             if(!stopped) {
                 if timerManager.remainingTime == 0 {
-                    blockManager.stopMonitoring()// aggiunto da gio 06/03/2024
-                    if let identifier = timerManager.identifier {
-                        if let session = sessions.first(where: { $0.id == identifier }) {
-                            activeSession = session
-                            session.stopDate = session.startDate.addingTimeInterval(session.timeGoal)
-                            do {
-                                try context.save()
-                            } catch {
-                                print("Error saving context: \(error)")
-                            }
-                        } else {
-                            print("errore nell'aggiornare la sessione")
-                        }
-                    }
-                    isSessionFinished = true
+                    // aggiunto da gio 06/03/2024
+                    endSession(isCompleted: true)
                 }
-
+                
             }
         }
+    }
+    
+    func endSession(isCompleted: Bool){
+        stopTimer()
+        blockManager.stopMonitoring()
+        if let identifier = timerManager.identifier {
+            if let session = sessions.first(where: { $0.id == identifier }) {
+                activeSession = session
+                let duration = session.timeGoal - timerManager.remainingTime
+                session.stopDate = session.startDate.addingTimeInterval(duration)
+                if isCompleted{
+                    activeSession?.completeSession()
+                }
+                do {
+                    try context.save()
+                } catch {
+                    print("Error saving context: \(error)")
+                }
+            } else {
+                print("errore nell'aggiornare la sessione")
+            }
+            isSessionFinished = true
+        }
+        timerManager.deleteFirstPendingTimer(completion: { _ in })
     }
 }
 

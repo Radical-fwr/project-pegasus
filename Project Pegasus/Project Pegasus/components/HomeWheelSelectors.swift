@@ -30,7 +30,7 @@ struct HomeWheelSelectors: View {
                         ForEach(0 ..< 200) { index  in
                             let category = categories[index % categories.count]
                             Text(category.name.uppercased())
-                                .foregroundColor(index == animationIndex ? Color(hex: category.color) : colorScheme == .dark ? .white : .black)
+                                .foregroundColor(index == animationIndex ? Color(hex: colorScheme == .dark ? category.color : category.darkColor) : colorScheme == .dark ? .white : .black)
                                 .font(Font.custom("Montserrat", size: index == animationIndex ?  20 : 16))
                                 .fontWeight(.bold)
                                 .tag(Category?.some(category))
