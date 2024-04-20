@@ -50,11 +50,11 @@ struct ActivitiesDisplay: View {
                                     Spacer()
                                     Text("\(activity.day)/\(activity.month)")
                                         .font(Font.custom("Montserrat", size: 15).weight(.bold))
-                                        .foregroundColor(Color(hex: category.color))
+                                        .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                                 }
                             }
                             
-                            Divider().foregroundColor(Color(hex: category.color))
+                            Divider().foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                         }
                     }
                     .padding(.horizontal)
@@ -63,7 +63,7 @@ struct ActivitiesDisplay: View {
             }
             .padding(.vertical, opened ? 8: 0)
             
-            .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+            .background(LinearGradient(colors: [Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.1), Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
             .cornerRadius(opened ? 10 : 0)
             .padding(.trailing, opened ? 30 : 0)
             //.offset(y: 70)
@@ -84,8 +84,8 @@ struct ActivitiesDisplay: View {
                                 }
                                 Rectangle()
                                     .frame(width: 170, height: 1)
-                                    .background(Color(hex: category.color))
-                                    .border(Color(hex: category.color).opacity(0.6))
+                                    .background(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
+                                    .border(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6))
                                 ForEach(subCategories) { subCategory in
                                     if subCategory.parentCategory!.id == category.id {
                                         Spacer()
@@ -102,8 +102,8 @@ struct ActivitiesDisplay: View {
                                         }
                                         Rectangle()
                                             .frame(width: 170, height: 1)
-                                            .background(Color(hex: category.color))
-                                            .border(Color(hex: category.color).opacity(0.6))
+                                            .background(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
+                                            .border(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6))
                                     }
                                 }
                                 Spacer()
@@ -132,7 +132,7 @@ struct ActivitiesDisplay: View {
 //                    .cornerRadius(5)
 //                    .overlay(
 //                        RoundedRectangle(cornerRadius: 5)
-//                            .stroke(Color(hex: category.color).opacity(0.6), lineWidth: 1)
+//                            .stroke(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6), lineWidth: 1)
 //                    )
                 //}
                

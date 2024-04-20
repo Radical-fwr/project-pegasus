@@ -32,13 +32,9 @@ class Category: Identifiable {
             return result
         }
     }
-    //add dark version of gif and color
-    //the goal is to change the color of the category and the gif based on the light/dark mode of the device
-    //I added two variables darkColor and darkGif, I hope they can be useful for you to implement what I asked you
+    
     var darkColor: String
     var darkGif: String
-    
-    //tips: in the ColorPickerView component in the past I had manually added an array of colors, know that it will have to be modified based on how you choose to proceed
     
     init(name: String, color: String,gifName:String,darkColor:String, darkGif:String) {
         self.id = UUID().uuidString
@@ -49,4 +45,26 @@ class Category: Identifiable {
         self.darkColor = darkColor
         self.darkGif = darkGif
     }
+}
+
+class AppColorDark{
+    var orange: String = "FDB55D"
+    var yellow: String = "FFE900"
+    var deepGreen: String = "386641"
+    var blue: String = "23395B"
+    var red:String = "A3333D"
+    var brownRed: String = "904E55"
+    var green:String = "904E55"
+    var deepGray: String = "2A3D45"
+}
+
+class AppColorLight{
+    var orange: String = "F8A84A"
+    var yellow: String = "F8E745"
+    var green: String = "67CD67"
+    var blue: String = "4557F8"
+    var pink:String = "F84AC7"
+    var cyan: String = "01A0E2"
+    var lightGreen:String = "B2CD67"
+    var lightOrange: String = "E2B001"
 }

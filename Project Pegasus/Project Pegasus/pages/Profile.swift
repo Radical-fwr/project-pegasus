@@ -44,7 +44,7 @@ struct Profile: View {
         NavigationStack {
             ZStack{
                 
-                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer().frame(height: 10)
@@ -104,10 +104,10 @@ struct Profile: View {
                     ScrollView{
                         ForEach(categories) { category in
                             // al click della categoria vai alla pagina dettaglio categoria
-                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: category.color), category: category)) {
+                            NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: colorScheme == .dark ? category.color : category.darkColor), category: category)) {
                                 CategoryWStats(
                                     name: category.name.uppercased(),
-                                    color: Color(hex: category.color),
+                                    color: Color(hex: colorScheme == .dark ? category.color : category.darkColor),
                                     progress: category.progress
                                 )
                                 .frame(maxWidth: UIScreen.main.bounds.size.width*0.85)

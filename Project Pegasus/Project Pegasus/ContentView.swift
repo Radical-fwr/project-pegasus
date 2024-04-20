@@ -82,15 +82,17 @@ struct ContentView: View {
                 print("error")
             }
         }
-        let category1: Category = Category(name: "studio", color: "EC8E14", gifName: "orange_light", darkColor: "69461E" , darkGif: "orange_dark")
-                let category2: Category = Category(name: "lavoro", color: "F6DE00", gifName: "yellow_light", darkColor: "5B4B03" , darkGif: "yellow_dark")
-                let category3: Category = Category(name: "detox", color: "67CD67", gifName: "green1_light", darkColor: "083E08" , darkGif: "green1_dark")
-                let category4: Category = Category(name: "sport", color: "01A0E2", gifName: "blue1_light", darkColor: "004562" , darkGif: "blue1_dark")
+        
+        let category1: Category = Category(name: "studio", color: AppColorLight.init().lightOrange, gifName: "orange_light.gif", darkColor: AppColorDark.init().orange, darkGif: "orange_dark.gif")
+        let category2: Category = Category(name: "lavoro", color: AppColorLight.init().yellow, gifName: "yellow_light.gif", darkColor: AppColorDark.init().yellow , darkGif: "yellow_dark.gif")
+        let category3: Category = Category(name: "detox", color: AppColorLight.init().lightGreen, gifName: "green1_light.gif", darkColor: AppColorDark.init().green , darkGif: "green1_dark.gif")
+        let category4: Category = Category(name: "sport", color: AppColorLight.init().cyan, gifName: "blue1_light.gif", darkColor: AppColorDark.init().blue , darkGif: "blue1_dark.gif")
+        let category5: Category = Category(name: "life", color: AppColorLight.init().pink, gifName: "pink_light.gif", darkColor: AppColorDark.init().red , darkGif: "pink_dark.gif")
         context.insert(category1)
         context.insert(category2)
         context.insert(category3)
         context.insert(category4)
-        
+        context.insert(category5)
         do {
             try context.save()
         } catch {

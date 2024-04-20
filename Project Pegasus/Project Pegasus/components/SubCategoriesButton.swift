@@ -24,7 +24,7 @@ struct SubCategoriesButton: View {
                     HStack{
                         Text(selectedActivity?.title.uppercased() ??  category.name.uppercased())
                             .font(Font.custom("HelveticaNeue", size: 22))
-                            .foregroundColor(Color(hex: category.color))
+                            .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                             .fontWeight(.light)
                             .padding()
                         
@@ -57,13 +57,13 @@ struct SubCategoriesButton: View {
                         
                     }
                     .frame(height: 40)
-                    .background(LinearGradient(colors: [Color(hex: category.color).opacity(0.1), Color(hex: category.color).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
+                    .background(LinearGradient(colors: [Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.1), Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 }
                 .frame(height: 40)
                 .cornerRadius(5)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(hex: category.color).opacity(opened ? 0 : 0.6), lineWidth: 1)
+                        .stroke(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(opened ? 0 : 0.6), lineWidth: 1)
                         
                 )
             }

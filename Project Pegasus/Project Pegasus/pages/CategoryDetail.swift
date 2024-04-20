@@ -16,6 +16,7 @@ enum FilterType {
 struct CategoryDetail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Environment(\.modelContext) private var context
+    @Environment(\.colorScheme) var colorScheme
     let categoryId: String
     @State var categoryName: String
     @State var categoryColor: Color
@@ -148,9 +149,16 @@ struct CategoryDetail: View {
             if category.name != categoryName{
                 category.name = categoryName
             }
-            if category.color != (try! categoryColor.toHex()){
-                category.color = try! categoryColor.toHex()
+            if colorScheme == .dark{
+                if category.color != (try! categoryColor.toHex()){
+                    category.color = try! categoryColor.toHex()
+                }
+            }else{
+                if category.darkColor != (try! categoryColor.toHex()){
+                    category.darkColor = try! categoryColor.toHex()
+                }
             }
+            
         }
     }
 }
@@ -158,5 +166,5 @@ struct CategoryDetail: View {
 
 #Preview {
     
-    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: .orange, category: Category(name: "Prova", color: "FFFFFF", gifName: "blue"))
+    return CategoryDetail(categoryId: "12345", categoryName: "Prova", categoryColor: Color(hex: AppColorLight.init().orange), category: Category(name: "Prova", color: AppColorLight.init().orange, gifName: "blue1_light.gif", darkColor: AppColorDark.init().orange,darkGif: "blue1_dark.gif"))
 }

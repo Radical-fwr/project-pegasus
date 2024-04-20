@@ -26,7 +26,7 @@ struct ToDo: View {
     var body: some View {
         NavigationStack{
             ZStack {
-                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer().frame(height: 10)
@@ -76,7 +76,7 @@ struct ToDo: View {
                                 VStack(alignment:.leading){
                                     Text(category.name.uppercased())
                                         .font(Font.custom("Montserrat", size: 24).weight(.bold))
-                                        .foregroundColor(Color(hex: category.color))
+                                        .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                                         .padding(.bottom,12)
                                     
                                     VStack(alignment:.leading,spacing: 13){
@@ -85,7 +85,7 @@ struct ToDo: View {
                                             if toDoVM.addSubCategory{
                                                 HStack{
                                                     
-                                                    CircularProgressView(progress: 0.8, color: Color.init(hex: category.color))
+                                                    CircularProgressView(progress: 0.8, color: Color.init(hex: colorScheme == .dark ? category.color : category.darkColor))
                                                         .frame(width:16.5,height:16.5)
                                                     
                                                     TextField(text: $toDoVM.newActivityName, prompt: Text("Home sessione")) {
@@ -144,7 +144,7 @@ struct ToDo: View {
                                                     Spacer()
                                                     Text("\(activity.day)/\(activity.month)")
                                                         .font(Font.custom("Montserrat", size: 15).weight(.bold))
-                                                        .foregroundColor(Color(hex: category.color))
+                                                        .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                                                 }
                                                 .onLongPressGesture(perform: {
                                                     toDoVM.isDeleting = true
@@ -184,7 +184,7 @@ struct ToDo: View {
                                                 Image(.bin)
                                                     .resizable()
                                                     .renderingMode(.template)
-                                                    .foregroundColor(Color(hex: toDoVM.isDeleting ? category.color : "#59574C"))
+                                                    .foregroundColor(Color(hex: toDoVM.isDeleting ? colorScheme == .dark ? category.color : category.darkColor : "#59574C"))
                                                     .frame(width: 25, height: 25)
                                             }
                                             
@@ -229,7 +229,6 @@ struct ToDo: View {
                                                     Rectangle().fill(Color("Divider")).frame(height:1.5)
                                                         .padding(.top,0.75)
                                                     Rectangle().fill(Color.init(hex: session.category?.color ?? "#FFFFFF")).frame(width: proxy.size.width * session.progress, height:3)
-                                                    
                                                     
                                                 }
                                                 
