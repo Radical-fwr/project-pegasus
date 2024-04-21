@@ -75,7 +75,7 @@ struct ToDo: View {
                             ForEach(categories){category in
                                 VStack(alignment:.leading){
                                     Text(category.name.uppercased())
-                                        .font(Font.custom("Montserrat", size: 24).weight(.bold))
+                                        .font(Font.custom("Montserrat", size: 28).weight(.bold))
                                         .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                                         .padding(.bottom,12)
                                     
@@ -202,7 +202,7 @@ struct ToDo: View {
                         }
                         .tabViewStyle(.page)
                         .frame(height:240)
-                        .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.3), Color(hex: categories[selectedItem].color).opacity(0.8)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
+                        .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.09), Color(hex: categories[selectedItem].color).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
                                     
                         )
                     }

@@ -14,7 +14,20 @@ struct Graph: View {
     
     
     var body: some View {
-        VStack{
+        HStack{
+            
+            VStack {
+                Text("100%")
+                    .font(Font.custom("Helvetica Neue", size: 12))
+                
+                VerticalGradientLine()
+                    
+                
+                Text("0%")
+                    .font(Font.custom("Helvetica Neue", size: 12))
+                Spacer().frame(height: 7)
+            }.frame(height: 130)
+            
             Chart{
                 
                 PointMark(x: .value("day", 0), y: .value("percent", 1))
@@ -28,7 +41,7 @@ struct Graph: View {
                 }
                 .interpolationMethod(.cardinal)
                 .foregroundStyle(color)
-                .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
                 
                 ForEach(0..<data.count, id: \.self) { i in
                     AreaMark(
@@ -40,7 +53,6 @@ struct Graph: View {
                 .foregroundStyle(LinearGradient(gradient: Gradient(colors: [color.opacity(0.6), .clear]), startPoint: .top, endPoint: .bottom))
             }
             .frame(height: 120)
-            .padding(EdgeInsets(top: 15, leading: 15, bottom: 0, trailing: 15))
             .chartXScale(domain: .automatic)
             .chartYScale(domain: .automatic)
             .chartXAxis {
@@ -62,23 +74,18 @@ struct Graph: View {
                         .foregroundStyle(Color.white.opacity(0.6))
                     AxisTick(centered: true, length: 15, stroke: StrokeStyle(lineWidth: 1, dash: [7]))
                         .foregroundStyle(Color.white.opacity(0.6))
-                    AxisValueLabel {
-                        Text("\(Int(value*100))%").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
-                    }.foregroundStyle(Color.white.opacity(0.6))
+//                    AxisValueLabel {
+//                        Text("\(Int(value*100))%").padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
+//                    }.foregroundStyle(Color.white.opacity(0.6))
                 }
                 
                 AxisMarks(position: .trailing, values: .stride(by: 0.25)) {
-                    AxisTick(length: 15, stroke: StrokeStyle(lineWidth: 1, dash: [7]))
+                    AxisTick(length: 20, stroke: StrokeStyle(lineWidth: 1, dash: [7]))
                         .foregroundStyle(Color.clear)
                 }
             }
         }
-        .frame(height: 180)
-        .background(Color.black.opacity(0.8))
-        .cornerRadius(20)
-        .onAppear {
-            print(data)
-        }
+        //.frame(height: 180)
     }
 }
 
@@ -117,5 +124,34 @@ enum WeekdayAbbreviation: String {
         case 6: self = .sun
         default: self = .none
         }
+    }
+}
+
+
+struct VerticalGradientLine: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Path { path in
+                let startPoint = CGPoint(x: geometry.size.width * 0.5, y: 0)
+                let endPoint = CGPoint(x: geometry.size.width * 0.5, y: geometry.size.height)
+                
+                path.move(to: startPoint)
+                path.addLine(to: endPoint)
+            }
+            .stroke(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        colorScheme == .dark ? .white : .black,
+                        .clear
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                style: StrokeStyle(lineWidth: 2, lineCap: .round)
+            )
+        }
+        .frame(width: 50) // Adjust the width as needed
     }
 }

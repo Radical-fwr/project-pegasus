@@ -72,49 +72,70 @@ struct CustomHistogramView: View {
     }
     
     var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                let data = dailyEfficiency().sorted(by: { $0.key < $1.key })
-                let width = geometry.size.width / CGFloat(data.count) - 12
-                let maxHeight = geometry.size.height - 20
-                
-                ForEach(Array(data.enumerated()), id: \.element.key) { index, element in
-                    let barHeight = maxHeight * CGFloat(element.value)
+        ZStack{
+            VStack {
+                GeometryReader { geometry in
+                    let data = dailyEfficiency().sorted(by: { $0.key < $1.key })
+                    let width = geometry.size.width / CGFloat(data.count) - 12
+                    let maxHeight = geometry.size.height - 20
                     
-                    Rectangle()
-                        .fill(LinearGradient(gradient: Gradient(colors: [
-                            colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
-                            colorScheme == .dark ? Color(hex: "F2EFE9") : .black
-                        ]), startPoint: .bottom, endPoint: .top))
-                        .frame(width: width, height: barHeight)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .offset(x: CGFloat(index) * (width + 15), y: maxHeight - barHeight)
-                }
+                    ForEach(Array(data.enumerated()), id: \.element.key) { index, element in
+                        let barHeight = maxHeight * CGFloat(element.value)
+                        
+                        Rectangle()
+                            .fill(LinearGradient(gradient: Gradient(colors: [
+                                colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
+                                colorScheme == .dark ? Color(hex: "F2EFE9") : .black
+                            ]), startPoint: .bottom, endPoint: .top))
+                            .frame(width: width, height: barHeight)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .offset(x: CGFloat(index) * (width + 15), y: maxHeight - barHeight)
+                    }
 
+                    
+                    Path { path in
+                        let y = maxHeight + 1
+                        path.move(to: CGPoint(x: 0, y: y))
+                        path.addLine(to: CGPoint(x: geometry.size.width, y: y))
+                    }
+                    .stroke(LinearGradient(gradient: Gradient(colors: [
+                        colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1),
+                        colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
+                        colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7),
+                        colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
+                        colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1)
+                    ]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                }
+                .frame(height: 200)
                 
-                Path { path in
-                    let y = maxHeight + 1
-                    path.move(to: CGPoint(x: 0, y: y))
-                    path.addLine(to: CGPoint(x: geometry.size.width, y: y))
-                }
-                .stroke(LinearGradient(gradient: Gradient(colors: [
-                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1),
-                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
-                    colorScheme == .dark ? .white.opacity(0.7) : .black.opacity(0.7),
-                    colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5),
-                    colorScheme == .dark ? .white.opacity(0.1) : .black.opacity(0.1)
-                ]), startPoint: .leading, endPoint: .trailing), lineWidth: 1)
+                HStack {
+                    ForEach(dailyEfficiency().keys.sorted(), id: \.self) { key in
+                        Text(dayLabel(for: key))
+                            .frame(maxWidth: .infinity)
+                            .font(Font.custom("Helvetica Neue", size: 22).weight(dayLabel(for: key) == "oggi" ? .bold : .regular))
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                    }
+                }.offset(y: -20)
             }
-            .frame(height: 200)
+            .padding(10)
+            .frame(maxWidth: UIScreen.main.bounds.size.width*0.90)
             
-            HStack {
-                ForEach(dailyEfficiency().keys.sorted(), id: \.self) { key in
-                    Text(dayLabel(for: key))
-                        .frame(maxWidth: .infinity)
-                        .font(Font.custom("Helvetica Neue", size: 22).weight(dayLabel(for: key) == "oggi" ? .bold : .regular))
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
-                }
-            }.offset(y: -20)
+            VStack{
+                Rectangle()
+                    .fill(
+                        LinearGradient(colors: [
+                            colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
+                            colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
+                            .clear,
+                            colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
+                            colorScheme == .dark ? .black : Color(hex: "F2EFE9")
+                        ], startPoint: .leading, endPoint: .trailing)
+                    )
+                    //.border(Color.blue)
+                    .frame(maxHeight: 270)
+                
+                Spacer()
+            }
         }
     }
 }

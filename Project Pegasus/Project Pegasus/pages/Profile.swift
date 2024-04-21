@@ -42,69 +42,73 @@ struct Profile: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                ZStack{
-                    
-                    colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
-                    
-                    VStack {
-                        Spacer().frame(height: 10)
-                        HStack {
-                            R_button()
+            ZStack{
+                colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
+                ScrollView {
+                    ZStack{
+                        
+                        
+                        
+                        VStack {
+                            Spacer().frame(height: 10)
+                            HStack {
+                                R_button()
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .onTapGesture {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                Spacer()
+                            }.padding(.leading)
+                            
+                            Spacer().frame(height: 30)
+                            
+                            
+                            AIAnalysis()
+                            /*
+                            Text("Categorie".uppercased())
+                                .font(Font.custom("Montserrat", size: 32).weight(.bold))
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                                .padding([.leading])
+                                .frame(height: 33)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
-                                .onTapGesture {
-                                    self.presentationMode.wrappedValue.dismiss()
-                                }
-                            Spacer()
-                        }.padding(.leading)
-                        
-                        Spacer().frame(height: 30)
-                        
-                        
-                        AIAnalysis()
-                        /*
-                        Text("Categorie".uppercased())
-                            .font(Font.custom("Montserrat", size: 32).weight(.bold))
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity,alignment: .leading)
-                            .padding([.leading])
-                            .frame(height: 33)
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
-                        
-                        ScrollView{
-                            ForEach(categories) { category in
-                                // al click della categoria vai alla pagina dettaglio categoria
-                                NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: colorScheme == .dark ? category.color : category.darkColor), category: category)) {
-                                    CategoryWStats(
-                                        name: category.name.uppercased(),
-                                        color: Color(hex: colorScheme == .dark ? category.color : category.darkColor),
-                                        progress: category.progress
-                                    )
-                                    .frame(maxWidth: UIScreen.main.bounds.size.width*0.85)
-                                    .padding(5)
+                            
+                            ScrollView{
+                                ForEach(categories) { category in
+                                    // al click della categoria vai alla pagina dettaglio categoria
+                                    NavigationLink(destination: CategoryDetail(categoryId: category.id ,categoryName: category.name.uppercased(), categoryColor: Color(hex: colorScheme == .dark ? category.color : category.darkColor), category: category)) {
+                                        CategoryWStats(
+                                            name: category.name.uppercased(),
+                                            color: Color(hex: colorScheme == .dark ? category.color : category.darkColor),
+                                            progress: category.progress
+                                        )
+                                        .frame(maxWidth: UIScreen.main.bounds.size.width*0.85)
+                                        .padding(5)
+                                    }
                                 }
                             }
+                            
+                            Spacer()
+                            /*
+                             Text("+ Nuovo Tag")
+                             .font(Font.custom("HelveticaNeue", size: 24))
+                             .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                             .padding()
+                             .onTapGesture {
+                             isSheetPresented = true
+                             }*/
+                            NavigationLink(destination: AddNewCategory()) {
+                                Text("+ Nuovo Tag")
+                                    .font(Font.custom("HelveticaNeue", size: 24))
+                                    .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
+                                    .padding()
+                            }
+                            */
+                            CalendarScreen(calendar: Calendar(identifier: .gregorian))
                         }
-                        
-                        Spacer()
-                        /*
-                         Text("+ Nuovo Tag")
-                         .font(Font.custom("HelveticaNeue", size: 24))
-                         .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                         .padding()
-                         .onTapGesture {
-                         isSheetPresented = true
-                         }*/
-                        NavigationLink(destination: AddNewCategory()) {
-                            Text("+ Nuovo Tag")
-                                .font(Font.custom("HelveticaNeue", size: 24))
-                                .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                                .padding()
-                        }
-                        */
-                        CalendarScreen(calendar: Calendar(identifier: .gregorian))
                     }
                 }
+
             }
         }
         .background(.black)
