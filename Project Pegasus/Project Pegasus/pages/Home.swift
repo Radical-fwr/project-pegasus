@@ -71,11 +71,13 @@ struct Home: View {
                         }
                         //Spacer()
                     }.frame(height: 250)
-                    NavigationLink {
-                        CalendarScreen(calendar: .current)
-                    } label: {
-                        WeeklyView()
-                    }
+//                    NavigationLink {
+//                        CalendarScreen(calendar: .current)
+//                    } label: {
+//                        WeeklyView()
+//                    }
+                    
+                    DarkLightModeSelector()
                     
                 }
             }.navigationDestination(isPresented: $timerIsActive) {
