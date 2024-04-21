@@ -44,6 +44,7 @@ struct CalendarScreen: View {
                             VStack(alignment: .center, content: {
                                 Text(dayFormatter.string(from: date))
                                     .foregroundColor((calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
+                                    //.foregroundStyle(Color(colorScheme == .dark ? .white : .black))
                             })
                             .background(
                                 Color.init(hex: "#D3D3D3")
@@ -54,24 +55,18 @@ struct CalendarScreen: View {
                             .overlay(
                                 GeometryReader { geometry in
                                     ZStack {
-                                        ForEach(activites.prefix(4)) { activity in
-                                            if (activity.day == calendar.component(.day, from: date)) {
-                                                let index = activites.firstIndex(where: { $0.id == activity.id }) ?? 0
-                                                let totalActivities = min(4, activites.filter({ $0.day == calendar.component(.day, from: date) }).count)
-                                                let xOffset = (geometry.size.width / CGFloat(totalActivities + 1)) * CGFloat(index + 1 )
-                                                
-                                                VStack {
-                                                    Spacer(minLength: geometry.size.height - 20)
-                                                    Circle()
-                                                        .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
-                                                        .frame(width: 8, height: 8)
-                                                    Circle()
-                                                        .fill(Color.black)
-                                                        .frame(width: 3, height: 3)
+                                        if calendar.component(.day, from: date) >= calendar.component(.day, from: Date()) {
+                                            HStack(spacing: 5) {
+                                                ForEach(Array(activites.prefix(4).enumerated()), id: \.element) { index, activity in
+                                                    if activity.day == calendar.component(.day, from: date) && activity.month == calendar.component(.month, from: date) {
+                                                        Circle()
+                                                            .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                                            .frame(width: 8, height: 8)
+                                                    }
                                                 }
-                                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                                .position(x: xOffset, y: geometry.size.height)
                                             }
+                                            .frame(width: geometry.size.width, height: 15) // Regola l'altezza per i cerchi
+                                            .position(x: geometry.size.width / 2, y: geometry.size.height)
                                         }
                                     }
                                 }
@@ -79,24 +74,25 @@ struct CalendarScreen: View {
                             )
                             .background(
                                 content: {
-                                    if (calendar.component(.day, from: date) >= calendar.component(.day,from: Date())){
+                                    if (calendar.isDate(date, inSameDayAs: selectedDate)){
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                            .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 3)
                                             .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
                                             .cornerRadius(10)
                                             .frame(width: 50, height: 50)
-                                    }
-                                    ForEach(activites) { activity in
-                                        if calendar.component(.day, from: date) < calendar.component(.day, from: Date()) {
-                                                    let activitiesForDate = activites.filter { $0.day == calendar.component(.day, from: date) }
-                                                    if !activitiesForDate.isEmpty {
-                                                        Circle()
-                                                            .fill(Color(hex: activitiesForDate[0].category.color))
-                                                            .frame(width: 50, height: 50)
+                                    }else{
+                                        ForEach(activites) { activity in
+                                            if calendar.component(.day, from: date) < calendar.component(.day, from: Date()) {
+                                                        let activitiesForDate = activites.filter { $0.day == calendar.component(.day, from: date) }
+                                                let activiiesForMonth = activites.filter{ $0.month == calendar.component(.month, from: date)}
+                                                if !activitiesForDate.isEmpty && !activiiesForMonth.isEmpty{
+                                                            Circle()
+                                                                .fill(Color(hex: activitiesForDate[0].category.color))
+                                                                .frame(width: 50, height: 50)
+                                                        }
                                                     }
-                                                }
+                                        }
                                     }
-                                    
                                 }
                             )
                             .frame(height: 50)
@@ -180,7 +176,7 @@ struct CalendarScreen: View {
                 .font(.system(size: 24, weight: .medium))
                 //lista attività della giornata
                     ForEach(activites) { activity in
-                        if (activity.day == calendar.component(.day, from: selectedDate))
+                        if (activity.day == calendar.component(.day, from: selectedDate) && activity.month == calendar.component(.month, from: selectedDate))
                         {
                             Rectangle()
                                 .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.5)]), startPoint: .leading, endPoint: .trailing))
@@ -190,14 +186,30 @@ struct CalendarScreen: View {
                                         VStack(alignment: .leading, content: {
                                             Text(activity.category.name.uppercased())
                                                 .foregroundStyle(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
-                                                .bold()
+                                                .font(
+                                                    Font.custom("Montserrat", size: 20)
+                                                        .weight(.bold)
+                                                )
                                             Text(activity.title)
                                                 .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                                .font(
+                                                    Font.custom("Helvetica Neue", size: 16)
+                                                        .weight(.medium)
+                                                )
                                         })
                                         Spacer()
                                         VStack(alignment: .trailing, content: {
-                                            Text(String(activity.day))
+                                            let dateFormatter: DateFormatter = {
+                                                let formatter = DateFormatter()
+                                                formatter.dateFormat = "dd.MM.yyyy"
+                                                return formatter
+                                            }()
+                                            Text(selectedDate, formatter: dateFormatter)
                                                 .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                                .font(
+                                                    Font.custom("HelveticaNeue", size: 14)
+                                                        .weight(.light)
+                                                )
                                             Spacer()
                                         })
                                     }
