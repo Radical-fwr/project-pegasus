@@ -58,38 +58,46 @@ struct CalendarScreen: View {
                                             if (activity.day == calendar.component(.day, from: date)) {
                                                 let index = activites.firstIndex(where: { $0.id == activity.id }) ?? 0
                                                 let totalActivities = min(4, activites.filter({ $0.day == calendar.component(.day, from: date) }).count)
-                                                let xOffset = (geometry.size.width / CGFloat(totalActivities + 5)) * CGFloat(index + 1 )
+                                                let xOffset = (geometry.size.width / CGFloat(totalActivities + 1)) * CGFloat(index + 1 )
                                                 
-                                                Circle()
-                                                    .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
-                                                    .frame(width: 8, height: 8)
-                                                    .position(x: xOffset, y: geometry.size.height - 1)
-                                                Circle()
-                                                    .fill(Color.black)
-                                                    .frame(width: 3, height: 3)
-                                                    .position(x: xOffset, y: geometry.size.height - 1)
+                                                VStack {
+                                                    Spacer(minLength: geometry.size.height - 20)
+                                                    Circle()
+                                                        .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                                        .frame(width: 8, height: 8)
+                                                    Circle()
+                                                        .fill(Color.black)
+                                                        .frame(width: 3, height: 3)
+                                                }
+                                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                                .position(x: xOffset, y: geometry.size.height)
                                             }
                                         }
-                                        /*
-                                        Circle()
-                                            .fill(.red)
-                                            .frame(width: 8, height: 8)
-                                            .position(x: geometry.size.width / 2, y: geometry.size.height - 1)
-                                        Circle()
-                                            .fill(Color.black)
-                                            .frame(width: 3, height: 3)
-                                            .position(x: geometry.size.width / 2, y: geometry.size.height - 1)
-                                        */
                                     }
                                 }
                                 .frame(width: 35, height: 35)
                             )
                             .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                                    .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
-                                    .cornerRadius(10)
-                                    .frame(width: 45, height: 45)
+                                content: {
+                                    if (calendar.component(.day, from: date) >= calendar.component(.day,from: Date())){
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                            .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
+                                            .cornerRadius(10)
+                                            .frame(width: 50, height: 50)
+                                    }
+                                    ForEach(activites) { activity in
+                                        if calendar.component(.day, from: date) < calendar.component(.day, from: Date()) {
+                                                    let activitiesForDate = activites.filter { $0.day == calendar.component(.day, from: date) }
+                                                    if !activitiesForDate.isEmpty {
+                                                        Circle()
+                                                            .fill(Color(hex: activitiesForDate[0].category.color))
+                                                            .frame(width: 50, height: 50)
+                                                    }
+                                                }
+                                    }
+                                    
+                                }
                             )
                             .frame(height: 50)
                             .accessibilityHidden(true)
@@ -136,7 +144,6 @@ struct CalendarScreen: View {
                                 Text(yearFormatter.string(from: date))
                                     .font(.system(size: 16,weight: .light))
                                 
-                                
                             }
 
                             Spacer()
@@ -172,7 +179,6 @@ struct CalendarScreen: View {
                 .equatable()
                 .font(.system(size: 24, weight: .medium))
                 //lista attività della giornata
-                ScrollView(showsIndicators: false) {
                     ForEach(activites) { activity in
                         if (activity.day == calendar.component(.day, from: selectedDate))
                         {
@@ -202,8 +208,7 @@ struct CalendarScreen: View {
                                 .padding(5)
                         }
                     }
-                }
-                Spacer()
+
             }
             .foregroundColor(colorScheme == .dark ? .white : .black)
             .padding()
@@ -266,13 +271,14 @@ public struct CalendarView<Day: View, Header: View, Title: View, Trailing: View>
         return LazyVGrid(columns: Array(repeating: GridItem(), count: daysInWeek)) {
             Section(header: title(month)) {
                 ForEach(days.prefix(daysInWeek), id: \.self, content: header)
-                    .padding(.bottom,30)
+                    .padding(.bottom,5)
                 ForEach(days, id: \.self) { date in
                     if calendar.isDate(date, equalTo: month, toGranularity: .month) {
                         content(date)
+                            .padding(-5)
                     } else {
                         trailing(date)
-                        
+                            .padding(-5)
                     }
                 }
             }
