@@ -36,17 +36,6 @@ struct CalendarScreen: View {
             colorScheme == .dark ? Color.black.ignoresSafeArea() : Color.white.ignoresSafeArea()
             
             VStack(spacing:17){
-                HStack(alignment:.bottom){
-                    Text("CALENDAR")
-                        .font(Font.custom("Montserrat", size: 36).weight(.bold))
-                    
-                    Spacer()
-                    R_button()
-                        .foregroundColor(colorScheme == .dark ? .white : .black)
-                        .onTapGesture {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                }
                 CalendarView(
                     calendar: calendar,
                     date: $selectedDate,
@@ -54,26 +43,56 @@ struct CalendarScreen: View {
                         Button(action: { selectedDate = date }) {
                             VStack(alignment: .center, content: {
                                 Text(dayFormatter.string(from: date))
-                                    .foregroundColor(
-                                        (calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
-                               //Circle().size(width: 6, height: 6)
-                                    //.padding(.leading,20)
-                                    
+                                    .foregroundColor((calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
                             })
                             .background(
-                                    Color.init(hex: "#D3D3D3").frame(width: 35,height: 35)
-                                        .opacity(calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
-                                        .cornerRadius(10)
-                                )
-                                .background(content: {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
-                                        .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
-                                        .cornerRadius(10)
-                                        .frame(width: 45,height: 45)
-                            })
-                            .frame(height:50)
-                        .accessibilityHidden(true)
+                                Color.init(hex: "#D3D3D3")
+                                    .frame(width: 35, height: 35)
+                                    .opacity(calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
+                                    .cornerRadius(10)
+                            )
+                            .overlay(
+                                GeometryReader { geometry in
+                                    ZStack {
+                                        ForEach(activites.prefix(4)) { activity in
+                                            if (activity.day == calendar.component(.day, from: date)) {
+                                                let index = activites.firstIndex(where: { $0.id == activity.id }) ?? 0
+                                                let totalActivities = min(4, activites.filter({ $0.day == calendar.component(.day, from: date) }).count)
+                                                let xOffset = (geometry.size.width / CGFloat(totalActivities + 5)) * CGFloat(index + 1 )
+                                                
+                                                Circle()
+                                                    .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                                    .frame(width: 8, height: 8)
+                                                    .position(x: xOffset, y: geometry.size.height - 1)
+                                                Circle()
+                                                    .fill(Color.black)
+                                                    .frame(width: 3, height: 3)
+                                                    .position(x: xOffset, y: geometry.size.height - 1)
+                                            }
+                                        }
+                                        /*
+                                        Circle()
+                                            .fill(.red)
+                                            .frame(width: 8, height: 8)
+                                            .position(x: geometry.size.width / 2, y: geometry.size.height - 1)
+                                        Circle()
+                                            .fill(Color.black)
+                                            .frame(width: 3, height: 3)
+                                            .position(x: geometry.size.width / 2, y: geometry.size.height - 1)
+                                        */
+                                    }
+                                }
+                                .frame(width: 35, height: 35)
+                            )
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(LinearGradient(gradient: Gradient(colors: [.white, .white, .white.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+                                    .opacity(calendar.isDate(date, inSameDayAs: selectedDate) ? 1 : 0)
+                                    .cornerRadius(10)
+                                    .frame(width: 45, height: 45)
+                            )
+                            .frame(height: 50)
+                            .accessibilityHidden(true)
                         }
                     },
                     trailing: { date in
@@ -111,15 +130,15 @@ struct CalendarScreen: View {
                             Spacer()
                             
                             VStack(spacing:0){
-                                Text(monthFormatter.string(from: date))
-                                    .font(.system(size: 20,weight: .medium))
+                                Text(monthFormatter.string(from: date).uppercased())
+                                    .font(.system(size: 32,weight: .bold))
                                 
                                 Text(yearFormatter.string(from: date))
-                                    .font(.system(size: 14,weight: .light))
+                                    .font(.system(size: 16,weight: .light))
                                 
                                 
                             }
-                            
+
                             Spacer()
                             
                             Button {
@@ -152,20 +171,19 @@ struct CalendarScreen: View {
                 )
                 .equatable()
                 .font(.system(size: 24, weight: .medium))
-                
+                //lista attività della giornata
                 ScrollView(showsIndicators: false) {
                     ForEach(activites) { activity in
                         if (activity.day == calendar.component(.day, from: selectedDate))
                         {
                             Rectangle()
-                                .fill(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
+                                .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.5)]), startPoint: .leading, endPoint: .trailing))
                                 .frame(width: 330, height: 70)
                                 .overlay(
                                     HStack {
                                         VStack(alignment: .leading, content: {
-                                            Text(activity.category.name)
-                                                //.foregroundStyle(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
-                                                .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                            Text(activity.category.name.uppercased())
+                                                .foregroundStyle(Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor))
                                                 .bold()
                                             Text(activity.title)
                                                 .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
@@ -336,7 +354,7 @@ private extension DateFormatter {
 }
 
 // MARK: - Previews
-
+/*
 #if DEBUG
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
@@ -345,6 +363,19 @@ struct CalendarView_Previews: PreviewProvider {
             CalendarScreen(calendar: Calendar(identifier: .islamicUmmAlQura))
             CalendarScreen(calendar: Calendar(identifier: .hebrew))
             CalendarScreen(calendar: Calendar(identifier: .indian))
+        }
+    }
+}
+#endif
+ */
+
+
+#if DEBUG
+struct CalendarScreen_Preview: PreviewProvider{
+    
+    static var previews: some View{
+        Group{
+            CalendarScreen(calendar: Calendar(identifier: .gregorian))
         }
     }
 }
