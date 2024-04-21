@@ -214,6 +214,7 @@ struct ToDo: View {
                             ZStack {
                                 Image(.toDoBackground)
                                     .resizable()
+                                
                                 ScrollView {
                                     ForEach(sessions.filter({!$0.isCompleted && $0.progress < 1})){session in
                                         VStack{
@@ -234,6 +235,11 @@ struct ToDo: View {
                                                 
                                             }
                                         }
+                                    }
+                                }
+                                .onAppear {
+                                    if(sessions.filter({!$0.isCompleted && $0.progress < 1}).count == 0) {
+                                        viewSessions = true
                                     }
                                 }
                                 .padding()

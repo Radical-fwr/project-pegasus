@@ -22,7 +22,7 @@ struct DarkLightModeSelector: View {
                 }
                 ZStack {
                     Circle()
-                        .stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 2) // Add border to circle
+                        .stroke(colorScheme == .dark ? Color.white.opacity(0.5) : Color.black.opacity(0.5), lineWidth: 2) // Add border to circle
                         .frame(width: 30, height: 30) // Set circle size
                     Circle()
                         .fill(Color.clear) // Make circle empty inside

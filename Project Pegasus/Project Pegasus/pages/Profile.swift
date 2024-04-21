@@ -61,36 +61,7 @@ struct Profile: View {
                         Spacer().frame(height: 30)
                         
                         
-                        Text("Efficienza".uppercased())
-                            .font(Font.custom("Montserrat", size: 32).weight(.bold))
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading])
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
-                        
-                        Text(daysSelected() ?? "Data non disponibile")
-                            .font(Font.custom("HelveticaNeue", size: 16))
-                            .foregroundColor(colorScheme == .dark ? .white.opacity(0.5) : .black.opacity(0.5))
-                            .frame(maxWidth: .infinity,alignment: .leading)
-                            .padding([.leading])
-                        
-                        ZStack {
-                            CustomHistogramView(sessions: sessions)
-                                .frame(maxWidth: UIScreen.main.bounds.size.width*0.90)
-                                .padding(10)
-                            
-                            Rectangle()
-                                .fill(
-                                    LinearGradient(colors: [
-                                        colorScheme == .dark ? .black : Color(hex: "F2EFE9"),
-                                        colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
-                                        .clear,
-                                        colorScheme == .dark ? .black.opacity(0.3) : Color(hex: "F2EFE9").opacity(0.3),
-                                        colorScheme == .dark ? .black : Color(hex: "F2EFE9")
-                                    ], startPoint: .leading, endPoint: .trailing)
-                                )
-                            
-                        }
+                        AIAnalysis()
                         /*
                         Text("Categorie".uppercased())
                             .font(Font.custom("Montserrat", size: 32).weight(.bold))
