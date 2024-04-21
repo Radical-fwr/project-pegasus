@@ -20,20 +20,18 @@ struct SubCategoriesButton: View {
             Button(action: {
                 opened.toggle()
             }) {
-                ZStack{
-                    HStack{
+                ZStack {
+                    HStack {
                         Text(selectedActivity?.title.uppercased() ??  category.name.uppercased())
                             .font(Font.custom("HelveticaNeue", size: 22))
                             .foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
                             .fontWeight(.light)
                             .padding()
                         
-                        
                         Spacer()
                         
-                        HStack{
-                            
-                            Text("All")
+                        HStack {
+                            Text(selectedActivity == nil ? "All" : "")
                                 .font(Font.custom("HelveticaNeue", size: 22))
                                 .foregroundColor(colorScheme == .dark ? .white : .black)
                             
@@ -53,19 +51,12 @@ struct SubCategoriesButton: View {
                         .foregroundColor(colorScheme == .dark ? .white : .black)
                         .padding()
                     }
-                    HStack{
-                        
-                    }
+                    
                     .frame(height: 40)
-                    .background(LinearGradient(colors: [Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.1), Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
                 }
                 .frame(height: 40)
-                .cornerRadius(5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(opened ? 0 : 0.6), lineWidth: 1)
-                        
-                )
+                
+                
             }
         } else {
             HStack {
@@ -84,6 +75,7 @@ struct SubCategoriesButton: View {
         }
     }
 }
+
 
 //#Preview {
 //    let container = try! ModelContainer(for: Category.self, User.self, Session.self, SubCategory.self)

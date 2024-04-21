@@ -18,18 +18,6 @@ struct ActivitiesDisplay: View {
     @Query var activities: [Activity]
     @Binding var selectedActivity: Activity?
     
-    func createNewSubCategory() {
-        print("test")
-        let newSubCategory = SubCategory(name: newSubcategoryName, parentCategory: category)
-        context.insert(newSubCategory)
-        do {
-            try context.save()
-            newSubcategoryName = ""
-        } catch {
-            print("Error saving context: \(error)")
-        }
-    }
-    
     var body: some View {
         if let category = category {
             
@@ -37,9 +25,29 @@ struct ActivitiesDisplay: View {
                 SubCategoriesButton(category: category, opened: $opened, selectedActivity: $selectedActivity)
                 if opened{
                     VStack(alignment:.leading){
+                        
+                        Button {
+                            selectedActivity = nil
+                            opened = false
+                        } label: {
+                            HStack{
+                                Text("ALL")
+                                    .font(Font.custom("HelveticaNeue", size: 16))
+                                    .fontWeight(.bold)
+                                    .frame(height: 22)
+                                    .foregroundColor(.white)
+                                //.padding(.vertical,8)
+                                Spacer()
+                                
+                            }
+                        }
+                        
+                        Divider().foregroundColor(Color(hex: colorScheme == .dark ? category.color : category.darkColor))
+                        
                         ForEach(activities.filter({$0.category.id == category.id})){activity in
                             Button {
                                 selectedActivity = activity
+                                opened = false
                             } label: {
                                 HStack{
                                     Text(activity.title)
@@ -62,9 +70,8 @@ struct ActivitiesDisplay: View {
                 }
             }
             .padding(.vertical, opened ? 8: 0)
-            
             .background(LinearGradient(colors: [Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.1), Color(hex: colorScheme == .dark ? category.color : category.darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing))
-            .cornerRadius(opened ? 10 : 0)
+            .cornerRadius(5)
             .padding(.trailing, opened ? 30 : 0)
             //.offset(y: 70)
            // .opacity(opened ? 1.00 : 0.00)
