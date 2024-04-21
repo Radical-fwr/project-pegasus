@@ -38,6 +38,7 @@
 		1680A6C22B90CCC400C95B0C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1680A6C12B90CCC400C95B0C /* Settings.swift */; };
 		168C06462B407D7500BEE44F /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168C06452B407D7500BEE44F /* StartButton.swift */; };
 		168C06482B40807600BEE44F /* HomeWheelSelectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168C06472B40807600BEE44F /* HomeWheelSelectors.swift */; };
+		168F51AE2BD2AD52005F96C2 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168F51AD2BD2AD52005F96C2 /* Graph.swift */; };
 		16A67EC32B03BA6E00E57C65 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC22B03BA6E00E57C65 /* Profile.swift */; };
 		16A67EC52B03BD6B00E57C65 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC42B03BD6B00E57C65 /* user.swift */; };
 		16A67EC72B03BE3D00E57C65 /* session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A67EC62B03BE3D00E57C65 /* session.swift */; };
@@ -150,6 +151,7 @@
 		1680A6C12B90CCC400C95B0C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		168C06452B407D7500BEE44F /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		168C06472B40807600BEE44F /* HomeWheelSelectors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWheelSelectors.swift; sourceTree = "<group>"; };
+		168F51AD2BD2AD52005F96C2 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		16A67EC22B03BA6E00E57C65 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		16A67EC42B03BD6B00E57C65 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		16A67EC62B03BE3D00E57C65 /* session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = session.swift; sourceTree = "<group>"; };
@@ -255,6 +257,13 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
+		167293532BD444B6003F58CA /* new blobs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "new blobs";
+			sourceTree = "<group>";
+		};
 		1680A6BE2B90C6D300C95B0C /* transitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +313,7 @@
 		16A9E0302AED51AB000C8EA8 /* Project Pegasus */ = {
 			isa = PBXGroup;
 			children = (
+				167293532BD444B6003F58CA /* new blobs */,
 				1680A6BE2B90C6D300C95B0C /* transitions */,
 				16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */,
 				16547B5B2B213FE500C2E67B /* timer */,
@@ -358,6 +368,7 @@
 				E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */,
 				E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */,
 				E6A9C25F2B92226200EC13B5 /* CategoryNameAndColor.swift */,
+				168F51AD2BD2AD52005F96C2 /* Graph.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -562,6 +573,7 @@
 				16D6AC822B2B223100F66DB8 /* RunningTimer.swift in Sources */,
 				E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */,
 				162E6E4F2B5152C200BB9F0F /* Triangle.swift in Sources */,
+				168F51AE2BD2AD52005F96C2 /* Graph.swift in Sources */,
 				E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */,
 				162E6E5B2B5568CF00BB9F0F /* subcategory.swift in Sources */,
 				163284802AFD592F00D94C32 /* category.swift in Sources */,

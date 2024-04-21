@@ -42,6 +42,39 @@ struct CategoryDetail: View {
         }
     }
     
+    private var getWeekDayEfficency: [Double] {
+        // Get the current calendar and today's date
+        let calendar = Calendar.current
+        let today = Date()
+        // Get the start and end dates of the current week
+        let startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+        let endDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
+        // get sessions
+        let thisCatSessions = sessions.filter{ session in session.category!.id == categoryId }
+        
+        var result: [Double] = []
+        
+        for i in 0...6 {
+            // find sessions of each day of week
+            let dayOfWeek = calendar.date(byAdding: .day, value: i, to: startDate)!
+            let sessionsOfDay = thisCatSessions.filter{ session in
+                calendar.isDate(session.startDate, inSameDayAs: dayOfWeek)
+            }
+            if !sessionsOfDay.isEmpty {
+                // calc average progress of day
+                let sessionsOfDayLength = Double(sessionsOfDay.count)
+                var total: Double = 0
+                for session in sessionsOfDay {
+                    total += session.progress
+                }
+                result.append(total / sessionsOfDayLength)
+            } else {
+                result.append(0)
+            }
+        }
+        return result
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -90,6 +123,9 @@ struct CategoryDetail: View {
                     }
                     
                     ScrollView(showsIndicators: false){
+                        
+                        Graph(color: categoryColor, data: getWeekDayEfficency)
+                        
                         ForEach(filteredSessions){ session in
                                 CategoryDetailSession(
                                     name: session.activity != nil ? session.activity!.title.uppercased() : "Nessuna sottocategoria",
@@ -162,6 +198,7 @@ struct CategoryDetail: View {
         }
     }
 }
+
 
 
 #Preview {
