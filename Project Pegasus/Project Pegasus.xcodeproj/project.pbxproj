@@ -84,6 +84,7 @@
 		9FFDE7262BB8B60A00CAAE6E /* ActivitySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7252BB8B60A00CAAE6E /* ActivitySelection.swift */; };
 		9FFDE7282BB8E09900CAAE6E /* HomeCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7272BB8E09800CAAE6E /* HomeCalendar.swift */; };
 		9FFDE72A2BB8E15500CAAE6E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFDE7292BB8E15500CAAE6E /* CalendarView.swift */; };
+		E6024C1D2BD5E7AB007FA3DE /* CategoryBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6024C1C2BD5E7AB007FA3DE /* CategoryBox.swift */; };
 		E6347A332B9130AD00C51E6C /* AddNewCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6347A322B9130AD00C51E6C /* AddNewCategory.swift */; };
 		E6A9C25C2B92170F00EC13B5 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */; };
 		E6A9C25E2B92187000EC13B5 /* CircleChoseColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */; };
@@ -202,6 +203,7 @@
 		9FFDE7252BB8B60A00CAAE6E /* ActivitySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelection.swift; sourceTree = "<group>"; };
 		9FFDE7272BB8E09800CAAE6E /* HomeCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCalendar.swift; sourceTree = "<group>"; };
 		9FFDE7292BB8E15500CAAE6E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E6024C1C2BD5E7AB007FA3DE /* CategoryBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryBox.swift; sourceTree = "<group>"; };
 		E6347A322B9130AD00C51E6C /* AddNewCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategory.swift; sourceTree = "<group>"; };
 		E6A9C25B2B92170F00EC13B5 /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		E6A9C25D2B92187000EC13B5 /* CircleChoseColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleChoseColorButton.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				168F51AD2BD2AD52005F96C2 /* Graph.swift */,
 				167293742BD53A52003F58CA /* DarkLightModeSelector.swift */,
 				167293762BD55E9D003F58CA /* AIAnalysis.swift */,
+				E6024C1C2BD5E7AB007FA3DE /* CategoryBox.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				168C06482B40807600BEE44F /* HomeWheelSelectors.swift in Sources */,
 				163284822AFE84B900D94C32 /* AddCategory.swift in Sources */,
 				160F330A2B8F35260053EF6E /* EndOFSession.swift in Sources */,
+				E6024C1D2BD5E7AB007FA3DE /* CategoryBox.swift in Sources */,
 				9FFDE7282BB8E09900CAAE6E /* HomeCalendar.swift in Sources */,
 				160F33132B8F9A890053EF6E /* SessionWStats.swift in Sources */,
 				162E6E552B516A8A00BB9F0F /* FadingCircleView.swift in Sources */,

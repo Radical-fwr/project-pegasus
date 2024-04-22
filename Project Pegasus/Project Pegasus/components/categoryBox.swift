@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct categoryBox: View {
+struct CategoryBox: View {
     @Environment(\.colorScheme) var colorScheme
     @Query var categories: [Category] = []
     @State private var selectedItem = 0

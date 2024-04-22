@@ -49,7 +49,7 @@ struct ToDo: View {
                             }
                         
                     }
-                    categoryBox()
+                    CategoryBox()
                         .padding(.bottom,20)
                     
                     Divider()
