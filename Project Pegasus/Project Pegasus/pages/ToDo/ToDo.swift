@@ -49,6 +49,13 @@ struct ToDo: View {
                             }
                         
                     }
+                    categoryBox()
+                        .padding(.bottom,20)
+                    
+                    Divider()
+                        .frame(height: 1)
+                        .overlay(Color(colorScheme == .dark ? .white : .black))
+                    
                     Spacer().frame(height: 30)
                     HStack{
                         
@@ -201,8 +208,9 @@ struct ToDo: View {
                             }
                         }
                         .tabViewStyle(.page)
+                        .accentColor(colorScheme == .dark ? .white : .black)
                         .frame(height:240)
-                        .background(LinearGradient(colors: [Color(hex: categories[selectedItem].color).opacity(0.09), Color(hex: categories[selectedItem].color).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
+                        .background(LinearGradient(colors: colorScheme == .dark ? [Color(hex: categories[selectedItem].color).opacity(0.09), Color(hex: categories[selectedItem].color).opacity(0.6)] : [Color(hex: categories[selectedItem].darkColor).opacity(0.09), Color(hex: categories[selectedItem].darkColor).opacity(0.6)], startPoint: .leading, endPoint: .trailing).cornerRadius(10)
                                     
                         )
                     }

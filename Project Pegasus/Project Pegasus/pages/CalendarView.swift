@@ -33,7 +33,7 @@ struct CalendarScreen: View {
     
     var body: some View {
         ZStack{
-            colorScheme == .dark ? Color.black.ignoresSafeArea() : Color.white.ignoresSafeArea()
+            colorScheme == .dark ? Color.black.edgesIgnoringSafeArea(.all) : Color(hex: "F2EFE9").edgesIgnoringSafeArea(.all)
             
             VStack(spacing:17){
                 CalendarView(
@@ -43,8 +43,8 @@ struct CalendarScreen: View {
                         Button(action: { selectedDate = date }) {
                             VStack(alignment: .center, content: {
                                 Text(dayFormatter.string(from: date))
-                                    .foregroundColor((calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
-                                    //.foregroundStyle(Color(colorScheme == .dark ? .white : .black))
+                                    //.foregroundColor((calendar.isDateInToday(date) && !calendar.isDate(date, inSameDayAs: selectedDate))  ? .black : .white)
+                                    .foregroundStyle(Color(colorScheme == .dark ? .white : .black))
                             })
                             .background(
                                 Color.init(hex: "#D3D3D3")
@@ -88,7 +88,7 @@ struct CalendarScreen: View {
                                                 if !activitiesForDate.isEmpty && !activiiesForMonth.isEmpty{
                                                             Circle()
                                                                 .fill(Color(hex: activitiesForDate[0].category.color))
-                                                                .frame(width: 50, height: 50)
+                                                                .frame(width: 35, height: 35)
                                                         }
                                                     }
                                         }
@@ -179,7 +179,7 @@ struct CalendarScreen: View {
                         if (activity.day == calendar.component(.day, from: selectedDate) && activity.month == calendar.component(.month, from: selectedDate))
                         {
                             Rectangle()
-                                .fill(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.5)]), startPoint: .leading, endPoint: .trailing))
+                                .fill(LinearGradient(gradient: Gradient(colors: [colorScheme == .dark ? Color.black.opacity(0.3) : Color.white.opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.3),Color(hex: colorScheme == .dark ? activity.category.color : activity.category.darkColor).opacity(0.5)]), startPoint: .leading, endPoint: .trailing))
                                 .frame(width: 330, height: 70)
                                 .overlay(
                                     HStack {
@@ -228,22 +228,8 @@ struct CalendarScreen: View {
         .navigationBarBackButtonHidden()
         
     }
-    func deleteItem(at offsets: IndexSet) {
-        items.remove(atOffsets: offsets)
-    }
-
 }
 
-struct Item: Identifiable {
-    let id = UUID()
-    let name: String
-}
-
-var items: [Item] = [
-    Item(name: "Item 1"),
-    Item(name: "Item 2"),
-    Item(name: "Item 3")
-]
 
 
 // MARK: - Component

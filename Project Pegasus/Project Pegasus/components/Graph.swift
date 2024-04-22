@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 
 struct Graph: View {
+    @Environment(\.colorScheme) var colorScheme
     var color: Color
     var data: [Double]
     
@@ -62,7 +63,7 @@ struct Graph: View {
                     //AxisTick(length: 15, stroke: StrokeStyle(lineWidth: 1, dash: [7]))
                     AxisValueLabel(anchor: .topLeading) {
                         Text("\(WeekdayAbbreviation(weekdayNumber: value).rawValue)")
-                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0))
                     }
                 }
