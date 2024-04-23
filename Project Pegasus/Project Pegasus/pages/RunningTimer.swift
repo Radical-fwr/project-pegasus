@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import SwiftUIGIF
+import AVKit
 
 struct RunningTimer: View {
     @Environment(\.colorScheme) var colorScheme
@@ -31,7 +32,9 @@ struct RunningTimer: View {
     @State private var gifName : String? = nil
     
     @State private var position: CGSize = .zero
-       @State private var isDragging = false
+    @State private var isDragging = false
+    
+    @State var player = AVPlayer()
     
     func changeCategoryName(_ categoryName: String) {
         self.categoryName = categoryName
@@ -77,11 +80,27 @@ struct RunningTimer: View {
                        isHoldingCircle = true
                        let height = value.translation.height > 200 ? 200 :  value.translation.height < -200 ? -200 : value.translation.height
                        position = CGSize(width: position.width, height: height)
-                       print("position",position)
                    }
                    .onEnded { value in
                        if value.translation.height < -200{
-                           endSession(isCompleted: true)
+                           stopped = true
+                            if let identifier = timerManager.identifier {
+                                if let session = sessions.first(where: { $0.id == identifier }) {
+                                    activeSession = session
+                                    session.stopDate = Date()
+                                    print(Date())
+                                    do {
+                                        try context.save()
+                                        timerManager.deleteFirstPendingTimer(completion: { _ in })
+                                        blockManager.stopMonitoring()
+                                        isSessionFinished = true
+                                    } catch {
+                                        print("Error saving context: \(error)")
+                                    }
+                                } else {
+                                    print("errore nell'aggiornare la sessione")
+                                }
+                            }
                            print("Task Complete")
                        }
                        else if value.translation.height > 200{
@@ -126,38 +145,11 @@ struct RunningTimer: View {
                                 Image(.cross).resizable().renderingMode(.template).foregroundColor(colorScheme == .dark ? Color(hex: "F2EFE9") : .black).scaledToFill().frame(width: 18, height: 18)
                             }
                         }
+                        
+                        
                         GIFImage(name: name)
                             .offset(position)
                             .gesture(dragGesture)
-                                  
-//                                    .onEnded { finished in
-//                                        stopped = true
-//                                        if let identifier = timerManager.identifier {
-//                                            if let session = sessions.first(where: { $0.id == identifier }) {
-//                                                activeSession = session
-//                                                session.stopDate = Date()
-//                                                print(Date())
-//                                                do {
-//                                                    try context.save()
-//                                                    timerManager.deleteFirstPendingTimer(completion: { _ in })
-//                                                    blockManager.stopMonitoring()
-//                                                    isSessionFinished = true
-//                                                } catch {
-//                                                    print("Error saving context: \(error)")
-//                                                }
-//                                            } else {
-//                                                print("errore nell'aggiornare la sessione")
-//                                            }
-//                                        }
-//                                    }
-                            
-//                            .onChange(of: isHoldingCircle) {
-//                                if isHoldingCircle {
-//                                    startTimer()
-//                                } else {
-//                                    stopTimer()
-//                                }
-//                            }
                     }
                     
                     ZStack {

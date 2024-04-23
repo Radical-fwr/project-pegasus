@@ -103,16 +103,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		160D90682B1FD215002D61A0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		16B6EECB2B976251006988FF /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,13 +253,6 @@
 			path = timer;
 			sourceTree = "<group>";
 		};
-		167293532BD444B6003F58CA /* new blobs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "new blobs";
-			sourceTree = "<group>";
-		};
 		1680A6BE2B90C6D300C95B0C /* transitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,7 +302,6 @@
 		16A9E0302AED51AB000C8EA8 /* Project Pegasus */ = {
 			isa = PBXGroup;
 			children = (
-				167293532BD444B6003F58CA /* new blobs */,
 				1680A6BE2B90C6D300C95B0C /* transitions */,
 				16EDE3DD2B333299002AAB31 /* Project Pegasus.entitlements */,
 				16547B5B2B213FE500C2E67B /* timer */,
@@ -452,7 +434,6 @@
 				16A9E02A2AED51AB000C8EA8 /* Sources */,
 				16A9E02B2AED51AB000C8EA8 /* Frameworks */,
 				16A9E02C2AED51AB000C8EA8 /* Resources */,
-				160D90682B1FD215002D61A0 /* Embed Frameworks */,
 				16B6EECB2B976251006988FF /* Embed Foundation Extensions */,
 			);
 			buildRules = (

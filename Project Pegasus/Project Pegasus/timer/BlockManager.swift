@@ -35,22 +35,35 @@ class BlockManager: ObservableObject {
             let applications = newValue.applicationTokens
             let categories = newValue.categoryTokens
             let web = newValue.webDomainTokens
-            store.shield.applications = applications.isEmpty ? nil : applications
-            store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
-            store.shield.webDomainCategories = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
+//            store.shield.applications = applications.isEmpty ? nil : applications
+//            store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
+//            store.shield.webDomainCategories = ShieldSettings.ActivityCategoryPolicy.specific(categories, except: Set())
         }
     }
     
     func initiateMonitoring(timeInterval: TimeInterval) {
+        store.shield.applications = selectionToDiscourage.applicationTokens
+        store.shield.applicationCategories = ShieldSettings.ActivityCategoryPolicy.specific(selectionToDiscourage.categoryTokens, except: Set())
+        store.shield.webDomainCategories = ShieldSettings.ActivityCategoryPolicy.specific(selectionToDiscourage.categoryTokens, except: Set())
+        
+        
         let startComponents = Calendar.current.dateComponents([.hour, .minute], from: Date())
         let end = Date().addingTimeInterval(timeInterval)
         let endComponents = Calendar.current.dateComponents([.hour, .minute], from: end)
         print(endComponents)
         let schedule = DeviceActivitySchedule(intervalStart: DateComponents(hour: 0, minute: 0), intervalEnd: endComponents, repeats: false, warningTime: nil)
+        let event = DeviceActivityEvent(
+            applications: selectionToDiscourage.applicationTokens,
+            categories: selectionToDiscourage.categoryTokens,
+            webDomains: selectionToDiscourage.webDomainTokens,
+            threshold: DateComponents(second: Int(timeInterval))
+        )
+        let eventName = DeviceActivityEvent.Name("Radical.end")
+        let name = DeviceActivityName("Radical.start")
         
         let center = DeviceActivityCenter()
         do {
-            try center.startMonitoring(.once, during: schedule)
+            try center.startMonitoring(name, during: schedule, events: [eventName: event])
         }
         catch {
             print ("Could not start monitoring \(error)")
@@ -69,5 +82,5 @@ class BlockManager: ObservableObject {
 }
 
 extension DeviceActivityName {
-    static let once = Self("once")
+    static let once = Self("Radical.start")
 }
